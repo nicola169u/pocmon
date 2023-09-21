@@ -3,8 +3,8 @@ public abstract class Personnage {
     protected int posY;
 
     public Personnage() {
-        posX = 0;
-        posY = 0;
+        posX = 5;
+        posY = 5;
     }
 
     public abstract void avancer(Direction direction, Labyrinthe lab);
