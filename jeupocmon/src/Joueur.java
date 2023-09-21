@@ -3,24 +3,39 @@ public class Joueur extends Personnage {
         super();
     }
 
-    // Il faudrait que je récupère les cases du labyrinthe et dessus je vérifie si c'est un mur ou pas
-    // ou soit il faudrait que qqn fasse ça dans la classe Labyrinthe comme ça je l'appelle juste
-    // et ensuite je fais le switch
+
     public void avancer(Direction direction, Labyrinthe lab){
-        switch(direction){
-            case HAUT:
-                System.out.println("vers le haut");
-                break;
-            case BAS:
-                System.out.println("vers le bas");
+        switch (direction){
+            case GAUCHE:
+                if(!lab.getCase(this.posX, this.posY - 1).estMur()){
+                    this.posY -= 1;
+                }else{
+                    System.out.println("On fonce droit dans un mur inconscient !!");
+                }
                 break;
             case DROITE:
-                System.out.println("vers la droite");
+                if(!lab.getCase(this.posX, this.posY + 1).estMur()){
+                    this.posY += 1;
+                }else{
+                    System.out.println("On fonce droit dans un mur inconscient !!");
+                }
                 break;
-            case GAUCHE:
-                System.out.println("vers la gauche");
+            case BAS:
+                if(!lab.getCase(this.posX, this.posX + 1).estMur()){
+                    this.posX += 1;
+                }else{
+                    System.out.println("On fonce droit dans un mur inconscient !!");
+                }
+                break;
+            case HAUT:
+                if(!lab.getCase(this.posX, this.posX - 1).estMur()){
+                    this.posX -= 1;
+                }else{
+                    System.out.println("On fonce droit dans un mur inconscient !!");
+                }
                 break;
         }
+
 
     }
 
