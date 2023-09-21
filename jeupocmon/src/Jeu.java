@@ -21,7 +21,15 @@ public class Jeu {
             lab.printLab(joueur);
             inputStream = new InputStreamReader(System.in);
             bufferedReader = new BufferedReader(inputStream);
-            System.out.println("Voulez-vous continuer la partie");
+            System.out.println("Quelle est votre prochaine action (zqsd)");
+            try {
+                test = bufferedReader.readLine();
+                joueur.avancer(joueur.choisirDirection(test),lab);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }inputStream = new InputStreamReader(System.in);
+            bufferedReader = new BufferedReader(inputStream);
+            System.out.println("Voulez vous continuer la partie ?");
             try {
                 test = bufferedReader.readLine();
             } catch (IOException e) {
