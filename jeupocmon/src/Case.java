@@ -6,4 +6,8 @@ public abstract class Case {
         this.posX = posX;
         this.posY = posY;
     }
+
+    public boolean estMur(){
+        return false;
+    }
 }
