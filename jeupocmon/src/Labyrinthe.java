@@ -37,4 +37,8 @@ public class Labyrinthe {
             System.out.println("");
         }
     }
+
+    public int getSize(){
+        return this.size;
+    }
 }

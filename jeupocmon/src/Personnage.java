@@ -7,5 +7,8 @@ public abstract class Personnage {
         posY = 5;
     }
 
-    public abstract void avancer(Direction direction, Labyrinthe lab);
+    public void avancer(Direction direction, Labyrinthe lab){
+
+
+    }
 }
