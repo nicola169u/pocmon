@@ -4,5 +4,6 @@ public class Jeu {
         Joueur joueur = new Joueur();
         Labyrinthe lab = new Labyrinthe();
         System.out.println("hello world");
+        System.out.println(Direction.HAUT);
     }
 }
