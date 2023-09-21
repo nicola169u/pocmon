@@ -3,6 +3,22 @@ public class Joueur extends Personnage {
         super();
     }
 
+    public Direction choisirDirection(String lettre)
+    {
+        switch (lettre){
+            case "z":
+                return Direction.HAUT;
+            case "q":
+                return Direction.GAUCHE;
+            case "s":
+                return Direction.BAS;
+            case "d":
+                return Direction.DROITE;
+        }
+
+        return null;
+
+    }
 
     public void avancer(Direction direction, Labyrinthe lab){
         switch (direction){
