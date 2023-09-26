@@ -1,41 +1,39 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Jeu {
     public static void main(String[] args) {
         Joueur joueur = new Joueur();
         Labyrinthe lab = new Labyrinthe();
-        System.out.println("Bienvenu sur pocmon/nAppuyer sur entree pour démarer le jeu ");
-        InputStreamReader inputStream = new InputStreamReader(System.in);
-        BufferedReader bufferedReader = new BufferedReader(inputStream);
-        System.out.println("Voulez-vous demarer la partie");
-        String test = null;
-        try {
-            test = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.println("Bienvenue sur Pocmon !");
+        System.out.println("Voulez-vous démarrer la partie (o pour continuer) ?");
+
+        boolean jouer;
+
+        String response = scanner.nextLine();
+        if(response.equals("o")){
+            jouer = true;
+        } else {
+            jouer = false;
         }
-        while (test.equals("o"))
-        {
+
+        while(jouer){
             lab.printLab(joueur);
-            inputStream = new InputStreamReader(System.in);
-            bufferedReader = new BufferedReader(inputStream);
-            System.out.println("Quelle est votre prochaine action (zqsd)");
-            try {
-                test = bufferedReader.readLine();
-                joueur.avancer(joueur.choisirDirection(test),lab);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }inputStream = new InputStreamReader(System.in);
-            bufferedReader = new BufferedReader(inputStream);
-            System.out.println("Voulez vous continuer la partie ?");
-            try {
-                test = bufferedReader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
+            System.out.println("Quelle est votre prochaine action (zqsd) ? (Entrez quit pour quitter la partie)");
+            response = scanner.nextLine();
+            if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
+                joueur.avancer(joueur.choisirDirection(response), lab);
+            } else if (response.equals("quit")) {
+                jouer = false;
+            }else{
+                System.out.println("Commande non reconnue !");
             }
         }
+
+        System.out.println("Au revoir !");
 
     }
 }

@@ -27,11 +27,11 @@ public class Labyrinthe {
         for(int i=0; i<size; i++){
             for(int j=0; j<size; j++){
                 if(getCase(i, j).estMur()){
-                    System.out.print("#");
+                    System.out.print(" # ");
                 } else if (joueur.getPosX()==i && joueur.getPosY()==j) {
-                    System.out.print("&");
+                    System.out.print(" & ");
                 }else{
-                    System.out.print(" ");
+                    System.out.print("   ");
                 }
             }
             System.out.println("");
