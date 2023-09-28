@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Labyrinthe {
     protected int size;
     protected Case[][] cases;
@@ -6,6 +8,7 @@ public class Labyrinthe {
         size = 10;
         cases = new Case[size][size];
         //créer le plateau
+        /*
         for (int i=0; i<size; i++){
             for(int j=0; j<size; j++){
                 if(i==0 || i==size-1){
@@ -17,7 +20,39 @@ public class Labyrinthe {
                 }
             }
         }
+
+         */
+        lire_lab();
     }
+
+    public void lire_lab(){
+
+        //On charge le fichier
+        File file = new File("jeupocmon/src/main/resources/labyrinthe.txt");
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            int ligne = 0;
+            // Lire ligne par ligne
+            while ((line = br.readLine()) != null) {
+                char[] l = line.toCharArray();
+                for (int i = 0; i < line.length(); i++) {
+                    char c = l[i];
+                    if (c == 35) {
+                        cases[i][ligne] = new Mur(i, ligne);
+                    } else {
+                        cases[i][ligne] = new CaseVide(i, ligne);
+                    }
+                }
+                ligne++;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public Case getCase(int i, int j){
         return cases[i][j];
@@ -26,9 +61,9 @@ public class Labyrinthe {
     public void printLab(Joueur joueur){
         for(int i=0; i<size; i++){
             for(int j=0; j<size; j++){
-                if(getCase(i, j).estMur()){
+                if(getCase(j, i).estMur()){
                     System.out.print(" # ");
-                } else if (joueur.getPosX()==i && joueur.getPosY()==j) {
+                } else if (joueur.getPosX()==j && joueur.getPosY()==i) {
                     System.out.print(" & ");
                 }else{
                     System.out.print("   ");
@@ -36,5 +71,9 @@ public class Labyrinthe {
             }
             System.out.println("");
         }
+    }
+
+    public int getSize(){
+        return size;
     }
 }
