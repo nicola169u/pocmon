@@ -65,7 +65,7 @@ public class Labyrinthe {
                     System.out.print(" # ");
                 } else if (joueur.getPosX()==j && joueur.getPosY()==i) {
                     System.out.print(" & ");
-                }else if(monstre.getX() == i && monstre.getY() == j){
+                }else if(monstre.getX() == j && monstre.getY() == i){
                     System.out.print(" M ");
 
                 }else{
