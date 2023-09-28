@@ -1,8 +1,8 @@
 public class Joueur extends Personnage {
     public Joueur() {
         super();
-        posX = 5;
-        posY = 5;
+        posX = 1;
+        posY = 1;
     }
 
     public Direction choisirDirection(String lettre)
