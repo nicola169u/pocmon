@@ -58,13 +58,16 @@ public class Labyrinthe {
         return cases[i][j];
     }
 
-    public void printLab(Joueur joueur){
+    public void printLab(Joueur joueur, Monstre monstre){
         for(int i=0; i<size; i++){
             for(int j=0; j<size; j++){
                 if(getCase(j, i).estMur()){
                     System.out.print(" # ");
                 } else if (joueur.getPosX()==j && joueur.getPosY()==i) {
                     System.out.print(" & ");
+                }else if(monstre.getX() == i && monstre.getY() == j){
+                    System.out.print(" M ");
+
                 }else{
                     System.out.print("   ");
                 }

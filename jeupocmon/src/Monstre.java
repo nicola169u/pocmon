@@ -3,11 +3,10 @@ import java.util.Random;
 public class Monstre extends Personnage{
 
 
-    public Monstre(){
+    public Monstre(int x, int y){
         super();
-        Random random = new Random();
-        this.posX = random.nextInt((8 - 2) + 1) + 2;
-        this.posY = random.nextInt((8 - 2) + 1) + 2;;
+        this.posX = x;
+        this.posY = y;
     }
 
     public Direction getOrientation(int nb){
