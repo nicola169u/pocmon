@@ -41,6 +41,12 @@ public class Jeu {
             }else{
                 System.out.println("Commande non reconnue !");
             }
+
+            if(lab.aGagne(joueur)){
+                jouer = false;
+                lab.printLab(joueur, monstre);
+                System.out.println("Félicitations, vous avez gagné et vous êtes riche maintenant !");
+            }
         }
 
         System.out.println("Au revoir !");

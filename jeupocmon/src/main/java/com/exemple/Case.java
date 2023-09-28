@@ -9,6 +9,20 @@ public abstract class Case {
         this.posY = posY;
     }
 
+    public int getPosX(){
+        return posX;
+    }
+
+    public int getPosY(){
+        return posY;
+    }
+
+
+    public boolean estTresor(){
+        return false;
+    }
+
+
     public boolean estMur(){
         return false;
     }

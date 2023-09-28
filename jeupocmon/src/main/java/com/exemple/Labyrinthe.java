@@ -5,6 +5,7 @@ import java.io.*;
 public class Labyrinthe {
     protected int size;
     protected Case[][] cases;
+    protected Tresor tresor;
 
     public Labyrinthe() {
         size = 10;
@@ -42,7 +43,10 @@ public class Labyrinthe {
                     char c = l[i];
                     if (c == 35) {
                         cases[i][ligne] = new Mur(i, ligne);
-                    } else {
+                    } else  if(c == 84){
+                        tresor = new Tresor(i, ligne);
+                        cases[i][ligne] = tresor;
+                    }else {
                         cases[i][ligne] = new CaseVide(i, ligne);
                     }
                 }
@@ -67,7 +71,10 @@ public class Labyrinthe {
                     System.out.print(" # ");
                 } else if (joueur.getPosX()==j && joueur.getPosY()==i) {
                     System.out.print(" & ");
-                }else if(monstre.getX() == j && monstre.getY() == i){
+                }else if(getCase(j, i).estTresor()){
+                    System.out.print(" € ");
+                }
+                else if(monstre.getX() == j && monstre.getY() == i){
                     System.out.print(" M ");
 
                 }else{
@@ -78,7 +85,14 @@ public class Labyrinthe {
         }
     }
 
+    public boolean aGagne(Joueur joueur){
+        return joueur.getPosX() == tresor.getPosX() && joueur.getPosY() == tresor.getPosY();
+    }
+
+
     public int getSize(){
         return size;
     }
+
+
 }
