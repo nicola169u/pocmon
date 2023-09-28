@@ -1,3 +1,5 @@
+package main.java.com.exemple;
+
 import java.io.*;
 
 public class Labyrinthe {

@@ -1,3 +1,5 @@
+package main.java.com.exemple;
+
 public abstract class Personnage {
     protected int posX;
     protected int posY;

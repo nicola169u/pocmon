@@ -1,3 +1,5 @@
+package main.java.com.exemple;
+
 public class Joueur extends Personnage {
     public Joueur() {
         super();

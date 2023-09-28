@@ -1,3 +1,5 @@
+package main.java.com.exemple;
+
 public enum Direction {
     HAUT, BAS, GAUCHE, DROITE;
 

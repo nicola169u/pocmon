@@ -1,3 +1,5 @@
+package main.java.com.exemple;
+
 import java.util.Random;
 import java.util.Scanner;
 
