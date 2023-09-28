@@ -29,9 +29,7 @@ public class Jeu {
             response = scanner.nextLine();
             Random random = new Random();
             int dirM = random.nextInt(4);
-            System.out.println(dirM);
             Direction directionMonstre = monstre.getOrientation(dirM);
-            System.out.println(directionMonstre);
             monstre.avancer(directionMonstre, lab);
             if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
                 joueur.avancer(joueur.choisirDirection(response), lab);
