@@ -3,10 +3,16 @@ import java.util.Random;
 public class Monstre extends Personnage{
 
 
-    public Monstre(int x, int y){
+    public Monstre(Labyrinthe lab, Joueur joueur){
+
         super();
-        this.posX = x;
-        this.posY = y;
+        Random rand = new Random();
+        posX = rand.nextInt(lab.size);
+        posY = rand.nextInt(lab.size);
+        while(lab.getCase(posX,posY).estMur() || (joueur.getPosX() == posX && joueur.getPosY() == posY)){
+            posX = rand.nextInt(lab.size);
+            posY = rand.nextInt(lab.size);
+        }
     }
 
     public Direction getOrientation(int nb){
@@ -44,5 +50,8 @@ public class Monstre extends Personnage{
         this.posX = x;
     }
 
-
+    @Override
+    public boolean estMonstre() {
+        return true;
+    }
 }

@@ -38,4 +38,9 @@ public class Joueur extends Personnage {
     public void setPosY(int posY){
         this.posY = posY;
     }
+
+    @Override
+    public boolean estMonstre() {
+        return false;
+    }
 }
