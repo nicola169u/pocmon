@@ -19,7 +19,7 @@ public class Labyrinthe {
         //On charge le fichier
         File file = new File("jeupocmon/src/main/resources/"+niveau+".txt");
 
-        //On test si on recupere le fichier (lancement via intellij ou si on est en jar (et donc file null
+        //On test si on recupere le fichier (lancement via intellij ou si on est en jar (et donc file null))
 
         if(file.exists()){
             lire_lab_local(file);
