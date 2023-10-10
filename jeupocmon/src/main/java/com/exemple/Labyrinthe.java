@@ -31,9 +31,8 @@ public class Labyrinthe {
     public void lire_lab(){
 
         //On charge le fichier
-        File file = new File("jeupocmon/src/main/resources/labyrinthe.txt");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (InputStream in = getClass().getResourceAsStream("/labyrinthe.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(in))){
             String line;
             int ligne = 0;
             // Lire ligne par ligne
