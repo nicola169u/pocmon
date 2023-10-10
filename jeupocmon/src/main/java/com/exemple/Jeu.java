@@ -12,18 +12,12 @@ public class Jeu {
 
         Scanner scanner = new Scanner(System.in);
 
-
         System.out.println("Bienvenue sur Pocmon !");
         System.out.println("Voulez-vous démarrer la partie (o pour continuer) ?");
 
-        boolean jouer;
-
         String response = scanner.nextLine();
-        if(response.equals("o")){
-            jouer = true;
-        } else {
-            jouer = false;
-        }
+
+        boolean jouer = response.equals("o");
 
         while(jouer){
             lab.printLab(joueur, monstre);
@@ -35,7 +29,6 @@ public class Jeu {
             monstre.avancer(directionMonstre, lab);
             if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
                 joueur.avancer(joueur.choisirDirection(response), lab);
-
             } else if (response.equals("quit")) {
                 jouer = false;
             }else{

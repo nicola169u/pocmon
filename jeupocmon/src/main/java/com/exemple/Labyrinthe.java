@@ -31,8 +31,44 @@ public class Labyrinthe {
     public void lire_lab(){
 
         //On charge le fichier
-        try (InputStream in = getClass().getResourceAsStream("/labyrinthe.txt");
-             BufferedReader br = new BufferedReader(new InputStreamReader(in))){
+        File file = new File("jeupocmon/src/main/resources/labyrinthe.txt");
+
+        //On test si on recupere le fichier (lancement via intellij ou si on est en jar (et donc file null
+
+        if(file.exists()){
+            lire_lab_local(file);
+        }else{
+            try (InputStream in = getClass().getResourceAsStream("/labyrinthe.txt");
+                 BufferedReader br = new BufferedReader(new InputStreamReader(in))){
+                String line;
+                int ligne = 0;
+                // Lire ligne par ligne
+                while ((line = br.readLine()) != null) {
+                    char[] l = line.toCharArray();
+                    for (int i = 0; i < line.length(); i++) {
+                        char c = l[i];
+                        if (c == 35) {
+                            cases[i][ligne] = new Mur(i, ligne);
+                        } else  if(c == 84){
+                            tresor = new Tresor(i, ligne);
+                            cases[i][ligne] = tresor;
+                        }else {
+                            cases[i][ligne] = new CaseVide(i, ligne);
+                        }
+                    }
+                    ligne++;
+                }
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void lire_lab_local(File file){
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             int ligne = 0;
             // Lire ligne par ligne
@@ -42,10 +78,7 @@ public class Labyrinthe {
                     char c = l[i];
                     if (c == 35) {
                         cases[i][ligne] = new Mur(i, ligne);
-                    } else  if(c == 84){
-                        tresor = new Tresor(i, ligne);
-                        cases[i][ligne] = tresor;
-                    }else {
+                    } else {
                         cases[i][ligne] = new CaseVide(i, ligne);
                     }
                 }
@@ -57,7 +90,6 @@ public class Labyrinthe {
             throw new RuntimeException(e);
         }
     }
-
 
     public Case getCase(int i, int j){
         return cases[i][j];
