@@ -6,9 +6,13 @@ import java.util.Scanner;
 public class Jeu {
     public static void main(String[] args) {
         Joueur joueur = new Joueur();
+        int niveau = 1;
         Labyrinthe lab = new Labyrinthe();
+        //On créé le plateau
+        lab.lire_lab(niveau+"");
 
         Monstre monstre = new Monstre(lab, joueur);
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -36,9 +40,27 @@ public class Jeu {
             }
 
             if(lab.aGagne(joueur)){
-                jouer = false;
                 lab.printLab(joueur, monstre);
                 System.out.println("Félicitations, vous avez gagné et vous êtes riche maintenant !");
+
+                if(niveau < 2){
+                    //On demande si le joueur veut continuer ou quitter la partie
+                    System.out.println("Voulez-vous quitter le jeu (quit) ou continuer au prochain niveau (next) ?");
+                    response = scanner.nextLine();
+                    if(response.equals("next")){
+                        niveau++;
+                        lab.lire_lab(niveau + "");
+                        //On repositionne le joueur
+                        joueur.setPosX(1);
+                        joueur.setPosY(1);
+                    }else{
+                        jouer = false;
+                    }
+                }else{
+                    System.out.println("Vous avez terminé tous les niveaux !");
+                    jouer = false;
+                }
+
             }
         }
 
