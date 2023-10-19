@@ -38,7 +38,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>main.java.com.exemple.Jeu</mainClass>
+                <mainClass>main.java.com.exemple.Main</mainClass>
               </manifest>
             </archive>
           </configuration>
