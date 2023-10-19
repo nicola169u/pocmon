@@ -1,6 +1,9 @@
-package main.java.com.exemple;
+package main.java.com.exemple.Model;
 
 import java.io.*;
+
+import main.java.com.exemple.Mur;
+import main.java.com.exemple.Tresor;
 
 public class Labyrinthe {
     protected int size;
