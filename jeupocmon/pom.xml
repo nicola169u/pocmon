@@ -18,6 +18,11 @@
       <version>5.7.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.swinglabs</groupId>
+      <artifactId>swingx</artifactId>
+      <version>1.6.1</version>
+    </dependency>
   </dependencies>
 
 
@@ -33,7 +38,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>com.exemple.Jeu</mainClass>
+                <mainClass>main.java.com.exemple.Jeu</mainClass>
               </manifest>
             </archive>
           </configuration>
