@@ -4,16 +4,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Jeu {
-    public static void main(String[] args) {
-        Joueur joueur = new Joueur();
-        int niveau = 1;
-        Labyrinthe lab = new Labyrinthe();
+    protected Joueur joueur;
+    protected int niveau;
+    protected Labyrinthe lab;
+    protected Monstre monstre;
+
+    public Jeu() {
+        this.joueur = new Joueur();
+        this.niveau = 1;
+        this.lab = new Labyrinthe();
         //On créé le plateau
         lab.lire_lab(niveau+"");
+        this.monstre = new Monstre(lab, joueur);
+    }
 
-        Monstre monstre = new Monstre(lab, joueur);
-
-
+    public void lancer() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Bienvenue sur Pocmon !");
