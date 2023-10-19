@@ -1,5 +1,10 @@
 package main.java.com.exemple;
 
+import main.java.com.exemple.Model.Direction;
+import main.java.com.exemple.Model.Joueur;
+import main.java.com.exemple.Model.Labyrinthe;
+import main.java.com.exemple.Model.Monstre;
+
 import java.util.Random;
 import java.util.Scanner;
 
