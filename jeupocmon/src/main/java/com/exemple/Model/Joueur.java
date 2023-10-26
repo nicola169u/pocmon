@@ -1,10 +1,13 @@
 package main.java.com.exemple.Model;
 
 public class Joueur extends Personnage {
-    public Joueur() {
-        super();
-        posX = 1;
-        posY = 1;
+
+    protected boolean attaque;
+    public Joueur(int x, int y) {
+        super(x, y);
+        this.attaque=false;
+//        posX = 1;
+//        posY = 1;
     }
 
     public Direction choisirDirection(String lettre)
@@ -21,6 +24,10 @@ public class Joueur extends Personnage {
         }
 
         return null;
+
+    }
+
+    public void attaquer(Monstre m){
 
     }
 
