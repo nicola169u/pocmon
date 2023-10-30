@@ -49,4 +49,6 @@ public class MonstreAleatoire extends Monstre{
     public int getTimer() {
         return timer;
     }
+
+
 }

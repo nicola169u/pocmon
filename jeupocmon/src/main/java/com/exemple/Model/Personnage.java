@@ -78,6 +78,7 @@ public abstract class Personnage {
 
     public abstract boolean estMonstre();
 
+    public abstract boolean estFantome();
 
     public int getPosX() {
         return posX;

@@ -72,5 +72,10 @@ public abstract class Monstre extends Personnage{
         this.degat = degat;
     }
 
+    @Override
+    public boolean estFantome() {
+        return false;
+    }
+
 
 }
