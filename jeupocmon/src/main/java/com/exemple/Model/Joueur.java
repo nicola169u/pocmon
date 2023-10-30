@@ -3,8 +3,8 @@ package main.java.com.exemple.Model;
 public class Joueur extends Personnage {
 
     protected boolean attaque;
-    public Joueur(int x, int y) {
-        super(x, y);
+    public Joueur(int x, int y, int pv) {
+        super(x, y, pv);
         this.attaque=false;
 //        posX = 1;
 //        posY = 1;

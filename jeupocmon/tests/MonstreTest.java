@@ -10,8 +10,8 @@ public class MonstreTest {
 
     @Test
     public void comportementMonstreAlea(){
-        Joueur j = new Joueur(6,7);
-        MonstreAleatoire m = new MonstreAleatoire(5,5);
+        Joueur j = new Joueur(6,7, 10);
+        MonstreAleatoire m = new MonstreAleatoire(5,5, 5);
         m.setJoueurCible(j);
         Labyrinthe labyrinthe = new Labyrinthe();
         labyrinthe.lire_lab(1+"");
@@ -28,8 +28,8 @@ public class MonstreTest {
 
     @Test
     public void attaquerMonstre(){
-        Joueur j = new Joueur(5,5);
-        Monstre m = new MonstreAleatoire(5,5);
+        Joueur j = new Joueur(5,5, 10);
+        Monstre m = new MonstreAleatoire(5,5, 5);
         m.setJoueurCible(j);
         assertEquals(m.getX(), j.getPosX(), "Coordonnées similaires");
         assertEquals(m.getY(), j.getPosY(), "Coordonnées similaires");
