@@ -27,28 +27,28 @@ public abstract class Personnage {
     public void avancer(Direction direction){
         switch (direction){
             case GAUCHE:
-                if(!labyrinthe.getCase(this.posX - 1, this.posY).estMur()){
+                if(!labyrinthe.getCase(this.posX - 1, this.posY).estMur() && vivant){
                     this.posX--;
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case DROITE:
-                if(!labyrinthe.getCase(this.posX + 1, this.posY).estMur()){
+                if(!labyrinthe.getCase(this.posX + 1, this.posY).estMur() && vivant){
                     this.posX++;
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case BAS:
-                if(!labyrinthe.getCase(this.posX, this.posY + 1).estMur()){
+                if(!labyrinthe.getCase(this.posX, this.posY + 1).estMur() && vivant){
                     this.posY++;
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case HAUT:
-                if(!labyrinthe.getCase(this.posX, this.posY - 1).estMur()){
+                if(!labyrinthe.getCase(this.posX, this.posY - 1).estMur() && vivant){
                     this.posY--;
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");

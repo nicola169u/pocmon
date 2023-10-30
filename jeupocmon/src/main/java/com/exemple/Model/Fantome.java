@@ -40,10 +40,10 @@ public class Fantome extends MonstreIntelligent {
 
     public void deplacerFantome(Direction direction){
         switch (direction){
-            case GAUCHE: this.posX--; break;
-            case DROITE: this.posX++; break;
-            case BAS: this.posY++; break;
-            case HAUT: this.posY--; break;
+            case GAUCHE: if(vivant) this.posX--; break;
+            case DROITE: if(vivant) this.posX++; break;
+            case BAS:  if(vivant) this.posY++; break;
+            case HAUT: if(vivant) this.posY--; break;
         }
 
     }

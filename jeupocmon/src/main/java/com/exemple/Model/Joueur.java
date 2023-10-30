@@ -8,26 +8,8 @@ public class Joueur extends Personnage {
         super(x, y, pv);
         this.attaque=false;
         this.degat = 1;
-//        posX = 1;
-//        posY = 1;
     }
 
-    public Direction choisirDirection(String lettre)
-    {
-        switch (lettre){
-            case "z":
-                return Direction.HAUT;
-            case "q":
-                return Direction.GAUCHE;
-            case "s":
-                return Direction.BAS;
-            case "d":
-                return Direction.DROITE;
-        }
-
-        return null;
-
-    }
 
     public void attaquer(Monstre m){
         if(vivant){
