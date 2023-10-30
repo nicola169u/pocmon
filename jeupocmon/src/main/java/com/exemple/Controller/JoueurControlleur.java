@@ -35,7 +35,9 @@ public class JoueurControlleur implements KeyListener {
             joueur.avancer(Direction.DROITE);
         }
 
-        jeuView.rafraichirAffichage();
+        jeuView.getJeu().boucler();
+
+        //jeuView.rafraichirAffichage();
     }
 
     @Override

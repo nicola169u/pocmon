@@ -13,6 +13,7 @@ public class Jeu {
 
     private Monstre monstre;
     private int sizeLab;
+    private volatile char prochaineAction = ' ';
 
 
     public Jeu() {
@@ -30,68 +31,49 @@ public class Jeu {
     }
 
     public void lancer() {
-        jeuView.start();
+        jeuView.afficherMessage("Bienvenue sur Pocmon !");
+        if(jeuView.ask("Voulez-vous démarrer la partie ?")){
+            jeuView.start();
+        }else{
+            jeuView.afficherMessage("Au revoir !");
+        }
+    }
+
+
+    public void boucler(){
+        monstre.comportement();
+
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bienvenue sur Pocmon !");
-        System.out.println("Voulez-vous démarrer la partie (o pour continuer) ?");
+        if(lab.aGagne(joueur)) {
+            jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
 
-        String response = scanner.nextLine();
-
-        boolean jouer = response.equals("o");
-
-        while(jouer){
-            lab.printLab(joueur, monstre);
-            System.out.println("Quelle est votre prochaine action (zqsd) ? (Entrez quit pour quitter la partie)");
-            response = scanner.nextLine();
-            monstre.comportement();
-//            Random random = new Random();
-//            int dirM = random.nextInt(4);
-//            Direction directionMonstre = monstre.getOrientation(dirM);
-//            monstre.avancer(directionMonstre, lab);
-            if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
-                joueur.avancer(joueur.choisirDirection(response));
-            } else if (response.equals("quit")) {
-                jouer = false;
-            }else{
-                System.out.println("Commande non reconnue !");
-            }
-
-            //On met à jour l'interface graphique
-            jeuView.rafraichirAffichage();
-
-            if(lab.aGagne(joueur)){
-                lab.printLab(joueur, monstre);
-                System.out.println("Félicitations, vous avez gagné et vous êtes riche maintenant !");
-
-                if(niveau < 2){
-                    //On demande si le joueur veut continuer ou quitter la partie
-                    System.out.println("Voulez-vous quitter le jeu (quit) ou continuer au prochain niveau (next) ?");
-                    response = scanner.nextLine();
-                    if(response.equals("next")){
-                        niveau++;
-                        lab.lire_lab(niveau + "");
-                        //On repositionne le joueur
-                        joueur.setPosX(1);
-                        joueur.setPosY(1);
-                        jeuView.rafraichirAffichage();
-                    }else{
-                        jouer = false;
-                    }
-                }else{
-                    System.out.println("Vous avez terminé tous les niveaux !");
-                    jouer = false;
+            if (niveau < 2) {
+                //On demande si le joueur veut continuer ou quitter la partie
+                if (jeuView.ask("Voulez-vous continuer au prochain niveau ?")) {
+                    niveau++;
+                    lab.lire_lab(niveau + "");
+                    //On repositionne le joueur
+                    joueur.setPosX(1);
+                    joueur.setPosY(1);
+                    jeuView.rafraichirAffichage();
+                } else {
+                    fin("Au revoir !");
                 }
-
+            } else {
+                fin("Vous avez terminé tous les niveaux !\nAu revoir !");
             }
         }
 
-        System.out.println("Au revoir !");
-        jeuView.dispose();
-
+        //On met à jour l'interface graphique
+        jeuView.rafraichirAffichage();
     }
 
+    private void fin(String message){
+        jeuView.afficherMessage(message);
+        jeuView.dispose();
+    }
 
 
     public Joueur getJoueur() {

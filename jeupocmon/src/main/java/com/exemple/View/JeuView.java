@@ -6,6 +6,8 @@ import main.java.com.exemple.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -41,6 +43,7 @@ public class JeuView extends JFrame {
         labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
 
         this.addKeyListener(new JoueurControlleur(joueur, this));
+        this.setFocusable(true);
     }
 
     public void start(){
@@ -67,5 +70,20 @@ public class JeuView extends JFrame {
 
         this.revalidate();
         this.repaint();
+    }
+
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public void afficherMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Message", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public boolean ask(String message){
+        int choix = JOptionPane.showOptionDialog(null, message, "Confirmation",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+        return choix == JOptionPane.YES_OPTION;
     }
 }
