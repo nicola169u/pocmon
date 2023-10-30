@@ -23,7 +23,7 @@ public class Jeu {
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        this.monstre = new Fantome(8, 8, 5, 0);
+        this.monstre = new Fantome(8, 8, 5, 1);
         this.joueur.setLabyrinthe(lab);
         this.monstre.setLabyrinthe(lab);
         this.monstre.setJoueurCible(joueur);
@@ -42,7 +42,9 @@ public class Jeu {
 
     public void boucler(){
         monstre.comportement();
-
+        if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()){
+            joueur.attaquer(monstre);
+        }
 
         Scanner scanner = new Scanner(System.in);
 

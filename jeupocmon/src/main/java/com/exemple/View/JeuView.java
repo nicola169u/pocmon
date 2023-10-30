@@ -65,8 +65,21 @@ public class JeuView extends JFrame {
         Monstre monstre = jeu.getMonstre();
 
         //On affiche le joueur et le monstre
-        labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
-        labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
+        if(joueur.isMort()){
+            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.red);
+        }else{
+            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
+
+        }
+
+        if(monstre.isMort()){
+            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.magenta);
+
+        }else{
+            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
+
+        }
+
 
         this.revalidate();
         this.repaint();
