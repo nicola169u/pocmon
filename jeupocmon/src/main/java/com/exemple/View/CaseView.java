@@ -44,4 +44,5 @@ public class CaseView extends JPanel {
     public void setColor(Color color) {
         this.color = color;
     }
+
 }
