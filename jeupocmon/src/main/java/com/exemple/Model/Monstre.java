@@ -6,41 +6,30 @@ public abstract class Monstre extends Personnage{
 
     protected Joueur joueurCible;
 
-    protected int id;
 
-    public Monstre(int x, int y, int pv){
+    protected int degat;
+
+    public Monstre(int x, int y, int pv, int degat){
 
         super(x, y, pv);
-//        Random rand = new Random();
-//        posX = rand.nextInt(lab.size);
-//        posY = rand.nextInt(lab.size);
-//        while(lab.getCase(posX,posY).estMur() || (joueur.getPosX() == posX && joueur.getPosY() == posY)){
-//            posX = rand.nextInt(lab.size);
-//            posY = rand.nextInt(lab.size);
-//        }
-//        this.joueurCible = joueur;
+
+        if(degat < 0){
+            degat = 0;
+        }
+        this.degat = degat;
     }
 
     public boolean attaquer(){
-        return (this.posX == joueurCible.getPosX() && this.posY == joueurCible.getPosY());
+        // plus tard verifier en rajoutant une portée du monstre et aussi avec la distance entre le monstre et le joueur
+        if(this.posX == joueurCible.getPosX() && this.posY == joueurCible.getPosY()){
+            joueurCible.subirDegat(this.degat);
+            return true;
+
+        }
+        return false;
+
     }
 
-//    public Direction getOrientation(int nb){
-//        switch(nb){
-//            case 0:
-//                return Direction.HAUT;
-//            case 1:
-//                return Direction.DROITE;
-//            case 2:
-//                return Direction.BAS;
-//            case 3:
-//                return Direction.GAUCHE;
-//
-//
-//        }
-//
-//        return null;
-//    }
 
     public abstract void comportement();
 
@@ -74,4 +63,14 @@ public abstract class Monstre extends Personnage{
     public void setJoueurCible(Joueur joueurCible) {
         this.joueurCible = joueurCible;
     }
+
+    public int getDegat() {
+        return degat;
+    }
+
+    public void setDegat(int degat) {
+        this.degat = degat;
+    }
+
+
 }
