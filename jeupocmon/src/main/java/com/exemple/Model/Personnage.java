@@ -24,7 +24,7 @@ public abstract class Personnage {
 
     }
 
-    public void avancer(Direction direction, Labyrinthe lab){
+    public void avancer(Direction direction){
         switch (direction){
             case GAUCHE:
                 if(!labyrinthe.getCase(this.posX - 1, this.posY).estMur()){

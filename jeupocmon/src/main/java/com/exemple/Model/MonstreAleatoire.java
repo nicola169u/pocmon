@@ -18,7 +18,7 @@ public class MonstreAleatoire extends Monstre{
     @Override
     public void comportement() {
         //timer--;
-        avancer(deplacement, this.labyrinthe);
+        avancer(deplacement);
         deplacement = randomDir();
 //        if (timer <= 0) {
 //            deplacement = randomDir();

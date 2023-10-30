@@ -1,12 +1,8 @@
 package main.java.com.exemple;
 
 import main.java.com.exemple.Model.*;
-import main.java.com.exemple.View.CaseView;
 import main.java.com.exemple.View.JeuView;
-import main.java.com.exemple.View.LabyrintheView;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
 
 public class Jeu {
@@ -55,7 +51,7 @@ public class Jeu {
 //            Direction directionMonstre = monstre.getOrientation(dirM);
 //            monstre.avancer(directionMonstre, lab);
             if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
-                joueur.avancer(joueur.choisirDirection(response), lab);
+                joueur.avancer(joueur.choisirDirection(response));
             } else if (response.equals("quit")) {
                 jouer = false;
             }else{
