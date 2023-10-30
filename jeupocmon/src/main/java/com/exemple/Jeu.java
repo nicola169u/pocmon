@@ -1,29 +1,41 @@
 package main.java.com.exemple;
 
 import main.java.com.exemple.Model.*;
+import main.java.com.exemple.View.CaseView;
+import main.java.com.exemple.View.JeuView;
+import main.java.com.exemple.View.LabyrintheView;
 
-import java.util.Random;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class Jeu {
-    protected Joueur joueur;
-    protected int niveau;
-    protected Labyrinthe lab;
-    protected Monstre monstre;
+    private JeuView jeuView;
+    private Joueur joueur;
+    private int niveau;
+    private Labyrinthe lab;
+
+    private Monstre monstre;
+    private int sizeLab;
+
 
     public Jeu() {
         this.joueur = new Joueur(1, 1, 10);
         this.niveau = 1;
-        this.lab = new Labyrinthe();
+        this.sizeLab = 10;
+        this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
         this.monstre = new MonstreAleatoire(8, 8, 5);
         this.joueur.setLabyrinthe(lab);
         this.monstre.setLabyrinthe(lab);
         this.monstre.setJoueurCible(joueur);
+        jeuView = new JeuView(this);
     }
 
     public void lancer() {
+        jeuView.start();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Bienvenue sur Pocmon !");
@@ -50,6 +62,9 @@ public class Jeu {
                 System.out.println("Commande non reconnue !");
             }
 
+            //On met à jour l'interface graphique
+            jeuView.rafraichirAffichage();
+
             if(lab.aGagne(joueur)){
                 lab.printLab(joueur, monstre);
                 System.out.println("Félicitations, vous avez gagné et vous êtes riche maintenant !");
@@ -64,6 +79,7 @@ public class Jeu {
                         //On repositionne le joueur
                         joueur.setPosX(1);
                         joueur.setPosY(1);
+                        jeuView.rafraichirAffichage();
                     }else{
                         jouer = false;
                     }
@@ -76,6 +92,25 @@ public class Jeu {
         }
 
         System.out.println("Au revoir !");
+        jeuView.dispose();
 
+    }
+
+
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public Labyrinthe getLab() {
+        return lab;
+    }
+
+    public Monstre getMonstre() {
+        return monstre;
+    }
+
+    public int getSizeLab() {
+        return sizeLab;
     }
 }

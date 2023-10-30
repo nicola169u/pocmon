@@ -1,7 +1,7 @@
 package main.java.com.exemple.Model;
 
+
 import main.java.com.exemple.Mur;
-import main.java.com.exemple.Tresor;
 
 import java.io.*;
 
@@ -10,8 +10,8 @@ public class Labyrinthe {
     protected Case[][] cases;
     protected Tresor tresor;
 
-    public Labyrinthe() {
-        size = 10;
+    public Labyrinthe(int size) {
+        this.size = size;
         cases = new Case[size][size];
     }
 
