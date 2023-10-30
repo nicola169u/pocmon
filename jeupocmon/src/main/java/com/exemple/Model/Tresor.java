@@ -1,4 +1,4 @@
-package main.java.com.exemple;
+package main.java.com.exemple.Model;
 
 import main.java.com.exemple.Model.Case;
 

@@ -38,7 +38,7 @@ class JoueurTest {
 
     @Test
     public void testSubirDegat(){
-        Labyrinthe labyrinthe = new Labyrinthe();
+        Labyrinthe labyrinthe = new Labyrinthe(10);
         Joueur j = new Joueur(1, 1, 10);
         j.subirDegat(5);
         assertEquals(5, j.getPv(), "Le joueur devrait perdre 5pv.");
