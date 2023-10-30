@@ -57,4 +57,9 @@ public class Joueur extends Personnage {
     public boolean estMonstre() {
         return false;
     }
+
+    @Override
+    public boolean estFantome() {
+        return false;
+    }
 }
