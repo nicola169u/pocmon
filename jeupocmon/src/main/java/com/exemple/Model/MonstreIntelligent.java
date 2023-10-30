@@ -7,8 +7,8 @@ public class MonstreIntelligent extends Monstre{
 
 
 
-    public MonstreIntelligent(int x, int y) {
-        super(x,y);
+    public MonstreIntelligent(int x, int y, int pv) {
+        super(x,y, pv);
     }
 
     @Override

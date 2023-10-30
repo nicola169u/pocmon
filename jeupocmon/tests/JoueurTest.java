@@ -1,3 +1,6 @@
+import main.java.com.exemple.Model.Joueur;
+import main.java.com.exemple.Model.Labyrinthe;
+import main.java.com.exemple.Model.Personnage;
 import org.junit.jupiter.api.Test;
 
 
@@ -31,5 +34,13 @@ class JoueurTest {
         assertEquals(x, joueur.getPosX(), "Le joueur n'est pas allé à droite..");
         assertEquals(y+1, joueur.getPosY(), "Le joueur n'est pas allé à droite..");
 */
+    }
+
+    @Test
+    public void testSubirDegat(){
+        Labyrinthe labyrinthe = new Labyrinthe();
+        Joueur j = new Joueur(1, 1, 10);
+        j.subirDegat(5);
+        assertEquals(5, j.getPv(), "Le joueur devrait perdre 5pv.");
     }
 }

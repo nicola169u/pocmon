@@ -8,9 +8,9 @@ public abstract class Monstre extends Personnage{
 
     protected int id;
 
-    public Monstre(int x, int y){
+    public Monstre(int x, int y, int pv){
 
-        super(x, y);
+        super(x, y, pv);
 //        Random rand = new Random();
 //        posX = rand.nextInt(lab.size);
 //        posY = rand.nextInt(lab.size);

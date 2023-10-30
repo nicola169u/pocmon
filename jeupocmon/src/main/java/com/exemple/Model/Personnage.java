@@ -11,10 +11,15 @@ public abstract class Personnage {
 
     protected boolean vivant;
 
-    public Personnage(int x, int y) {
+    protected int pv;
+
+
+    public Personnage(int x, int y, int pv) {
         this.posX = x;
         this.posY = y;
         this.vivant = true;
+        this.pv = pv;
+
 
 
     }
@@ -90,7 +95,7 @@ public abstract class Personnage {
         this.posY = posY;
     }
 
-    public void mort(){
+    public void estMort(){
         // plus tard vérifier que pv == 0 ou non et hop
         vivant = false;
     }
@@ -103,5 +108,24 @@ public abstract class Personnage {
     public double distanceEntite(int px, int py, int dx, int dy) {
         return Math.sqrt(Math.pow((px - dx),2)+Math.pow((py - dy),2));
 
+    }
+
+    public void subirDegat(int degat){
+        pv -= degat;
+        if(pv < 0){
+            pv = 0;
+        }
+        mort();
+
+    }
+
+    public int getPv() {
+        return pv;
+    }
+
+    public void mort(){
+        if(pv==0){
+            vivant = false;
+        }
     }
 }

@@ -8,8 +8,8 @@ public class MonstreAleatoire extends Monstre{
 
 
 
-    public MonstreAleatoire(int x, int y) {
-        super(x,y);
+    public MonstreAleatoire(int x, int y, int pv) {
+        super(x,y, pv);
         deplacement = randomDir();
         timer = (int) (Math.random() * 100);
 

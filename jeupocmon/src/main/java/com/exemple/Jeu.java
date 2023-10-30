@@ -1,9 +1,6 @@
 package main.java.com.exemple;
 
-import main.java.com.exemple.Model.Direction;
-import main.java.com.exemple.Model.Joueur;
-import main.java.com.exemple.Model.Labyrinthe;
-import main.java.com.exemple.Model.Monstre;
+import main.java.com.exemple.Model.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,12 +12,15 @@ public class Jeu {
     protected Monstre monstre;
 
     public Jeu() {
-        this.joueur = new Joueur();
+        this.joueur = new Joueur(1, 1, 10);
         this.niveau = 1;
         this.lab = new Labyrinthe();
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        this.monstre = new Monstre(lab, joueur);
+        this.monstre = new MonstreAleatoire(8, 8, 5);
+        this.joueur.setLabyrinthe(lab);
+        this.monstre.setLabyrinthe(lab);
+        this.monstre.setJoueurCible(joueur);
     }
 
     public void lancer() {
@@ -37,10 +37,11 @@ public class Jeu {
             lab.printLab(joueur, monstre);
             System.out.println("Quelle est votre prochaine action (zqsd) ? (Entrez quit pour quitter la partie)");
             response = scanner.nextLine();
-            Random random = new Random();
-            int dirM = random.nextInt(4);
-            Direction directionMonstre = monstre.getOrientation(dirM);
-            monstre.avancer(directionMonstre, lab);
+            monstre.comportement();
+//            Random random = new Random();
+//            int dirM = random.nextInt(4);
+//            Direction directionMonstre = monstre.getOrientation(dirM);
+//            monstre.avancer(directionMonstre, lab);
             if(response.equals("z") || response.equals("q") || response.equals("s") || response.equals("d")){
                 joueur.avancer(joueur.choisirDirection(response), lab);
             } else if (response.equals("quit")) {
