@@ -1,11 +1,16 @@
 package main.java.com.exemple;
 
+import main.java.com.exemple.Controller.Observateur;
 import main.java.com.exemple.Model.*;
 import main.java.com.exemple.View.JeuView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Jeu {
+
+    private List<Observateur> observateurs;
     private JeuView jeuView;
     private Joueur joueur;
     private int niveau;
@@ -17,6 +22,7 @@ public class Jeu {
 
 
     public Jeu() {
+        this.observateurs = new ArrayList<>();
         this.joueur = new Joueur(1, 1, 10);
         this.niveau = 1;
         this.sizeLab = 10;
@@ -28,6 +34,17 @@ public class Jeu {
         this.monstre.setLabyrinthe(lab);
         this.monstre.setJoueurCible(joueur);
         jeuView = new JeuView(this);
+    }
+
+    public void ajouterObservateur(Observateur v){
+        v.setJeu(this);
+        observateurs.add(v);
+    }
+
+    public void notifierObservateur(){
+        for(Observateur ob : observateurs){
+            ob.reagir();
+        }
     }
 
     public void lancer() {

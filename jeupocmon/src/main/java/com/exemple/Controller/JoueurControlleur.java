@@ -6,11 +6,12 @@ import main.java.com.exemple.Model.Joueur;
 import main.java.com.exemple.Model.Direction;
 import main.java.com.exemple.View.JeuView;
 
-public class JoueurControlleur implements KeyListener {
+public class JoueurControlleur extends Observateur implements KeyListener {
     private Joueur joueur;
     private JeuView jeuView;
 
     public JoueurControlleur(Joueur joueur, JeuView jeuView) {
+        super();
         this.joueur = joueur;
         this.jeuView = jeuView;
     }
@@ -43,5 +44,10 @@ public class JoueurControlleur implements KeyListener {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         // Ne rien faire ici
+    }
+
+    @Override
+    public void reagir() {
+
     }
 }
