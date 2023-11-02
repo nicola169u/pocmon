@@ -99,4 +99,5 @@ public class JeuView extends JFrame {
 
         return choix == JOptionPane.YES_OPTION;
     }
+
 }
