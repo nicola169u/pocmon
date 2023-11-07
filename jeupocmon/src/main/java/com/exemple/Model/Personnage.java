@@ -7,11 +7,11 @@ public abstract class Personnage {
     protected int posX;
     protected int posY;
 
-    protected Labyrinthe labyrinthe;
+    private Labyrinthe labyrinthe;
 
     protected boolean vivant;
 
-    protected int pv;
+    private int pv;
 
 
     public Personnage(int x, int y, int pv) {
@@ -76,9 +76,13 @@ public abstract class Personnage {
     }
 
 
-    public abstract boolean estMonstre();
+    public boolean estMonstre(){
+        return false;
+    }
 
-    public abstract boolean estFantome();
+    public boolean estFantome(){
+        return false;
+    }
 
     public int getPosX() {
         return posX;

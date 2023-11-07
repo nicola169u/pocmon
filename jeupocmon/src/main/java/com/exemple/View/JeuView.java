@@ -1,15 +1,10 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.JoueurControlleur;
-import main.java.com.exemple.Jeu;
 import main.java.com.exemple.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class JeuView extends JFrame {
     private Jeu jeu;

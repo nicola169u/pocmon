@@ -1,6 +1,8 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.View.JeuView;
+
 public abstract class Monstre extends Personnage{
 
 
@@ -72,10 +74,6 @@ public abstract class Monstre extends Personnage{
         this.degat = degat;
     }
 
-    @Override
-    public boolean estFantome() {
-        return false;
-    }
 
 
 }

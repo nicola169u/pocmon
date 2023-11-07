@@ -6,9 +6,9 @@ import main.java.com.exemple.Mur;
 import java.io.*;
 
 public class Labyrinthe {
-    protected int size;
-    protected Case[][] cases;
-    protected Tresor tresor;
+    private int size;
+    private Case[][] cases;
+    private Tresor tresor;
 
     public Labyrinthe(int size) {
         this.size = size;
@@ -53,7 +53,7 @@ public class Labyrinthe {
     }
 
 
-    public void lire_lab_local(File file){
+    private void lire_lab_local(File file){
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;

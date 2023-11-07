@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 
 public class OptionView extends JFrame implements ActionListener {
 
-    MenuView menuView;
-    JPanel panel = new JPanel();
-    JPanel stages = new JPanel();
-    JPanel difficulty = new JPanel();
-    JButton exit = new JButton("Menu");
-    LayoutManager layout = new FlowLayout();
+    private MenuView menuView;
+    private JPanel panel = new JPanel();
+    private JPanel stages = new JPanel();
+    private JPanel difficulty = new JPanel();
+    private JButton exit = new JButton("Menu");
+    private LayoutManager layout = new FlowLayout();
 
     public OptionView(int width,int height) {
         panel.setLayout(layout);
