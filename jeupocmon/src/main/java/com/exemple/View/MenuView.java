@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class MenuView extends JFrame implements ActionListener {
 
-    int width, height;
     Jeu jeu;
+    OptionView optionView;
     JButton play = new JButton("Jouer");
     JButton settings = new JButton("Option");
     JButton exit = new JButton("Quitter");
@@ -21,9 +21,6 @@ public class MenuView extends JFrame implements ActionListener {
 
     public MenuView(int width,int height)
     {
-        this.width = width;
-        this.height = height;
-
         panel.setLayout(layout);
         layout.addLayoutComponent(panel, "Menu");
         addButtons();
@@ -61,10 +58,9 @@ public class MenuView extends JFrame implements ActionListener {
             jeu = new Jeu();
             jeu.lancer();
             //TODO voir la logique
-            setVisible(true);
         } else if (source == settings) {
-            //TODO Choix niveau
-            //TODO Choix difficulte
+            setVisible(false);
+            optionView = new OptionView(300,200);
             //TODO Autres options
         }
     }
