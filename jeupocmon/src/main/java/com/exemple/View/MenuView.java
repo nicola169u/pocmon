@@ -1,6 +1,7 @@
 package main.java.com.exemple.View;
 
-import main.java.com.exemple.Jeu;
+import main.java.com.exemple.Model.Jeu;
+import main.java.com.exemple.Model.Monstre;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,15 +10,15 @@ import java.awt.event.ActionListener;
 
 public class MenuView extends JFrame implements ActionListener {
 
-    Jeu jeu;
-    OptionView optionView;
-    JButton play = new JButton("Jouer");
-    JButton settings = new JButton("Option");
-    JButton exit = new JButton("Quitter");
-    CardLayout layout = new CardLayout();
+    private Jeu jeu;
+    private OptionView optionView;
+    private JButton play = new JButton("Jouer");
+    private JButton settings = new JButton("Option");
+    private JButton exit = new JButton("Quitter");
+    private CardLayout layout = new CardLayout();
 
-    JPanel panel = new JPanel();
-    JPanel menu = new JPanel();
+    private JPanel panel = new JPanel();
+    private JPanel menu = new JPanel();
 
     public MenuView(int width,int height)
     {

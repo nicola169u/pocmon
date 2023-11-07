@@ -35,13 +35,5 @@ public class Joueur extends Personnage {
         this.posY = posY;
     }
 
-    @Override
-    public boolean estMonstre() {
-        return false;
-    }
 
-    @Override
-    public boolean estFantome() {
-        return false;
-    }
 }

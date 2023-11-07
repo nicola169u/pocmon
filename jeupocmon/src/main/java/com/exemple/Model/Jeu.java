@@ -1,19 +1,14 @@
-package main.java.com.exemple;
+package main.java.com.exemple.Model;
 
-import main.java.com.exemple.Model.*;
 import main.java.com.exemple.View.JeuView;
-
-import java.util.Scanner;
 
 public class Jeu {
     private JeuView jeuView;
     private Joueur joueur;
     private int niveau;
     private Labyrinthe lab;
-
     private Monstre monstre;
     private int sizeLab;
-    private volatile char prochaineAction = ' ';
 
 
     public Jeu() {
@@ -45,8 +40,6 @@ public class Jeu {
         if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()){
             joueur.attaquer(monstre);
         }
-
-        Scanner scanner = new Scanner(System.in);
 
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
