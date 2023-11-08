@@ -18,7 +18,7 @@ public class Jeu {
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        this.monstre = new Fantome(8, 8, 5, 1);
+        this.monstre = new MonstreIntelligent(8, 8, 5, 5);
         this.joueur.setLabyrinthe(lab);
         this.monstre.setLabyrinthe(lab);
         this.monstre.setJoueurCible(joueur);
@@ -62,8 +62,13 @@ public class Jeu {
             }
         }
 
+
         //On met à jour l'interface graphique
         jeuView.rafraichirAffichage();
+        if(joueur.isMort()){
+            fin("Le joueur s'est fait piétiner par le monstre !!");
+            System.exit(0);
+        }
     }
 
     private void fin(String message){
