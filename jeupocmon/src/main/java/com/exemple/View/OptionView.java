@@ -1,14 +1,18 @@
 package main.java.com.exemple.View;
 
+import main.java.com.exemple.Controller.MenuController;
+import main.java.com.exemple.Controller.OptionController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OptionView extends JFrame implements ActionListener {
+public class OptionView extends JFrame {
 
     private MenuView menuView;
+    private OptionController optionController;
     private JPanel panel = new JPanel();
     private JPanel stages = new JPanel();
     private JPanel difficulty = new JPanel();
@@ -19,7 +23,8 @@ public class OptionView extends JFrame implements ActionListener {
         panel.setLayout(layout);
         addStageLevels();
         addDifficulty();
-        exit.addActionListener(this);
+        optionController = new OptionController(this);
+        exit.addActionListener(optionController);
         panel.add(exit,BorderLayout.CENTER);
         setSize(width, height);
         setResizable(false);
@@ -89,14 +94,12 @@ public class OptionView extends JFrame implements ActionListener {
         getContentPane().add(panel,BorderLayout.CENTER);
 
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //TODO logique des options
-        Object source = e.getSource();
-        if (source == exit) {
-            setVisible(false);
-            menuView = new MenuView(300,80);
-        }
 
+    public void launchMenuView() {
+        menuView = new MenuView(300,80);
+    }
+
+    public JButton getExit() {
+        return exit;
     }
 }
