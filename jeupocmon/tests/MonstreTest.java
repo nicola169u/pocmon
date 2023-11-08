@@ -15,8 +15,8 @@ public class MonstreTest {
         m.setLabyrinthe(labyrinthe);
         while(!m.attaquer()){
             m.comportement();
-            System.out.println("Monstre : " + m.getPosX() + " " + m.getPosY());
-            System.out.println("Joueur : " + j.getPosX() + " " + j.getPosY());
+//            System.out.println("Monstre : " + m.getPosX() + " " + m.getPosY());
+//            System.out.println("Joueur : " + j.getPosX() + " " + j.getPosY());
         }
 
 
