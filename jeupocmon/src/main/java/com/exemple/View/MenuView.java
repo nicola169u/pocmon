@@ -1,5 +1,6 @@
 package main.java.com.exemple.View;
 
+import main.java.com.exemple.Controller.MenuController;
 import main.java.com.exemple.Model.Jeu;
 import main.java.com.exemple.Model.Monstre;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuView extends JFrame implements ActionListener {
+public class MenuView extends JFrame {
 
     private Jeu jeu;
     private OptionView optionView;
@@ -19,11 +20,14 @@ public class MenuView extends JFrame implements ActionListener {
 
     private JPanel panel = new JPanel();
     private JPanel menu = new JPanel();
+    private MenuController menuController;
 
     public MenuView(int width,int height)
     {
         panel.setLayout(layout);
         layout.addLayoutComponent(panel, "Menu");
+
+        menuController = new MenuController(this, jeu);
         addButtons();
 
         setSize(width, height);
@@ -38,9 +42,9 @@ public class MenuView extends JFrame implements ActionListener {
 
     private void addButtons() {
 
-        play.addActionListener(this);
-        settings.addActionListener(this);
-        exit.addActionListener(this);
+        play.addActionListener(menuController);
+        settings.addActionListener(menuController);
+        exit.addActionListener(menuController);
         menu.add(play);
         menu.add(settings);
         menu.add(exit);
@@ -50,19 +54,19 @@ public class MenuView extends JFrame implements ActionListener {
 
     }
 
-    public void actionPerformed(ActionEvent event) {
-        Object source = event.getSource();
-        if (source == exit) {
-            System.exit(0);
-        } else if (source == play) {
-            setVisible(false);
-            jeu = new Jeu();
-            jeu.lancer();
-            //TODO voir la logique
-        } else if (source == settings) {
-            setVisible(false);
-            optionView = new OptionView(300,200);
-            //TODO Autres options
-        }
+    public JButton getExit() {
+        return exit;
+    }
+
+    public JButton getPlay() {
+        return play;
+    }
+
+    public JButton getSettings() {
+        return settings;
+    }
+
+    public void launchOptionView() {
+        optionView = new OptionView(300,200);
     }
 }

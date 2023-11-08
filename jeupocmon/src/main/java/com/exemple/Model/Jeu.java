@@ -58,6 +58,7 @@ public class Jeu {
                 }
             } else {
                 fin("Vous avez terminé tous les niveaux !\nAu revoir !");
+                System.exit(0);
             }
         }
 
