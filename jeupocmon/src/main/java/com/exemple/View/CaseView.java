@@ -15,10 +15,11 @@ public class CaseView extends JPanel {
             this.color = Color.black;
         } else if (c.estTresor()) {
             this.color = Color.yellow;
+        } else if (c.estTeleporteur()) {
+            this.color = Color.pink;
         } else {
             this.color = Color.white;
         }
-        //this.color = Color.blue;  //A changer en fonction du type de case
         this.c = c;
         setPreferredSize(new Dimension(30, 30));
     }
@@ -36,6 +37,8 @@ public class CaseView extends JPanel {
             this.color = Color.black;
         } else if (c.estTresor()) {
             this.color = Color.yellow;
+        } else if (c.estTeleporteur()) {
+            this.color = Color.pink;
         } else {
             this.color = Color.white;
         }
