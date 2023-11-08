@@ -2,7 +2,6 @@ package main.java.com.exemple.Controller;
 
 import main.java.com.exemple.Model.Jeu;
 import main.java.com.exemple.View.MenuView;
-import main.java.com.exemple.View.OptionView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +9,12 @@ import java.awt.event.ActionListener;
 public class MenuController implements ActionListener {
     private MenuView menuView;
     private Jeu jeu;
+    private int niveau;
 
 
-    public MenuController(MenuView menuView, Jeu jeu) {
+    public MenuController(MenuView menuView, int lvl) {
         this.menuView = menuView;
-        this.jeu = jeu;
+        this.niveau = lvl;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class MenuController implements ActionListener {
             System.exit(0);
         } else if (source == menuView.getPlay()) {
             menuView.setVisible(false);
-            jeu = new Jeu();
+            jeu = new Jeu(niveau);
             jeu.lancer();
             //TODO voir la logique
         } else if (source == menuView.getSettings()) {

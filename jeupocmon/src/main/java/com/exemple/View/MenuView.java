@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class MenuView extends JFrame {
 
-    private Jeu jeu;
+    private int niveau;
     private OptionView optionView;
     private JButton play = new JButton("Jouer");
     private JButton settings = new JButton("Option");
@@ -27,7 +27,7 @@ public class MenuView extends JFrame {
         panel.setLayout(layout);
         layout.addLayoutComponent(panel, "Menu");
 
-        menuController = new MenuController(this, jeu);
+        menuController = new MenuController(this,niveau);
         addButtons();
 
         setSize(width, height);
@@ -43,10 +43,10 @@ public class MenuView extends JFrame {
     private void addButtons() {
 
         play.addActionListener(menuController);
-        //settings.addActionListener(menuController);
+        settings.addActionListener(menuController);
         exit.addActionListener(menuController);
         menu.add(play);
-        //menu.add(settings);
+        menu.add(settings);
         menu.add(exit);
         panel.add(menu,"Menu");
         add(panel);
@@ -68,5 +68,9 @@ public class MenuView extends JFrame {
 
     public void launchOptionView() {
         optionView = new OptionView(300,200);
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
     }
 }

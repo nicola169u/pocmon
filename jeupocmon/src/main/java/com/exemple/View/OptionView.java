@@ -8,22 +8,32 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 public class OptionView extends JFrame {
 
     private MenuView menuView;
     private OptionController optionController;
+
     private JPanel panel = new JPanel();
     private JPanel stages = new JPanel();
     private JPanel difficulty = new JPanel();
+
+    private ButtonGroup groupLevels = new ButtonGroup();
+    private ButtonGroup groupDifficulty = new ButtonGroup();
+
+
+
     private JButton exit = new JButton("Menu");
+    private JButton save = new JButton("Sauvegarder");
+
     private LayoutManager layout = new FlowLayout();
 
     public OptionView(int width,int height) {
         panel.setLayout(layout);
         addStageLevels();
         addDifficulty();
-        optionController = new OptionController(this);
+        optionController = new OptionController(this,menuView);
         exit.addActionListener(optionController);
         panel.add(exit,BorderLayout.CENTER);
         setSize(width, height);
@@ -38,25 +48,24 @@ public class OptionView extends JFrame {
     private void addStageLevels()
     {
         Border blackline = BorderFactory.createTitledBorder("Choix du niveau");
-        ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem("1");
-        group.add(menuItem);
+        groupLevels.add(menuItem);
         stages.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("2");
-        group.add(menuItem);
+        groupLevels.add(menuItem);
         stages.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("3");
-        group.add(menuItem);
+        groupLevels.add(menuItem);
         stages.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("4");
-        group.add(menuItem);
+        groupLevels.add(menuItem);
         stages.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("5");
-        group.add(menuItem);
+        groupLevels.add(menuItem);
         stages.add(menuItem);
 
         stages.setBorder(blackline);
@@ -68,25 +77,24 @@ public class OptionView extends JFrame {
     private void addDifficulty()
     {
         Border blackline = BorderFactory.createTitledBorder("Choix de la difficulte");
-        ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem("1");
-        group.add(menuItem);
+        groupDifficulty.add(menuItem);
         difficulty.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("2");
-        group.add(menuItem);
+        groupDifficulty.add(menuItem);
         difficulty.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("3");
-        group.add(menuItem);
+        groupDifficulty.add(menuItem);
         difficulty.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("4");
-        group.add(menuItem);
+        groupDifficulty.add(menuItem);
         difficulty.add(menuItem);
 
         menuItem = new JRadioButtonMenuItem("5");
-        group.add(menuItem);
+        groupDifficulty.add(menuItem);
         difficulty.add(menuItem);
 
         difficulty.setBorder(blackline);
@@ -101,5 +109,29 @@ public class OptionView extends JFrame {
 
     public JButton getExit() {
         return exit;
+    }
+
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+    }
+
+    public ButtonGroup getGroupLevels() {
+        return groupLevels;
+    }
+
+    public ButtonGroup getGroupDifficulty() {
+        return groupDifficulty;
+    }
+
+    public JButton getSave() {
+        return save;
     }
 }

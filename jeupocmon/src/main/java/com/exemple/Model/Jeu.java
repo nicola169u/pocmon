@@ -11,9 +11,9 @@ public class Jeu {
     private int sizeLab;
 
 
-    public Jeu() {
+    public Jeu(int lvl) {
         this.joueur = new Joueur(1, 1, 10);
-        this.niveau = 1;
+        this.niveau = lvl;
         this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
