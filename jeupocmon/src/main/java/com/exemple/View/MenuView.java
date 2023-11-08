@@ -43,10 +43,10 @@ public class MenuView extends JFrame {
     private void addButtons() {
 
         play.addActionListener(menuController);
-        settings.addActionListener(menuController);
+        //settings.addActionListener(menuController);
         exit.addActionListener(menuController);
         menu.add(play);
-        menu.add(settings);
+        //menu.add(settings);
         menu.add(exit);
         panel.add(menu,"Menu");
         add(panel);
