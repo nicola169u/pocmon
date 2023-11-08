@@ -1,7 +1,5 @@
 package main.java.com.exemple.Model;
 
-import main.java.com.exemple.Model.Direction;
-import main.java.com.exemple.Model.Labyrinthe;
 
 public abstract class Personnage {
     protected int posX;
