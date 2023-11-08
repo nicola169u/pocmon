@@ -14,14 +14,11 @@ public class Jeu {
     public Jeu() {
         this.joueur = new Joueur(1, 1, 10);
         this.niveau = 1;
-        this.sizeLab = 10;
+        this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        this.monstre = new MonstreIntelligent(8, 8, 5, 5);
-        this.joueur.setLabyrinthe(lab);
-        this.monstre.setLabyrinthe(lab);
-        this.monstre.setJoueurCible(joueur);
+        createMonstre();
         jeuView = new JeuView(this);
     }
 
@@ -32,8 +29,12 @@ public class Jeu {
 
 
     public void boucler(){
+        //On verifie si le joueur est sur un teleporteur
+        lab.isOnTp(joueur);
+
+
         monstre.comportement();
-        if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()){
+        if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()) {
             joueur.attaquer(monstre);
         }
 
@@ -49,7 +50,7 @@ public class Jeu {
                     //On repositionne le joueur
                     joueur.setPosX(1);
                     joueur.setPosY(1);
-                    jeuView.majNiveau();  //Appelle rafraichirAffichage et maj le numero de niveau
+                    jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");
                 }
@@ -74,7 +75,7 @@ public class Jeu {
     }
 
     private void createMonstre(){
-        this.monstre = new MonstreIntelligent(8, 8, 5, 5);
+        this.monstre = new MonstreAleatoire(8, 8, 5, 5);
         this.joueur.setLabyrinthe(lab);
         this.monstre.setLabyrinthe(lab);
         this.monstre.setJoueurCible(joueur);

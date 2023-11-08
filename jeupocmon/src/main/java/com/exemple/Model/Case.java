@@ -26,4 +26,7 @@ public abstract class Case {
     public boolean estMur(){
         return false;
     }
+    public boolean estTeleporteur(){
+        return false;
+    }
 }
