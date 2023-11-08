@@ -34,9 +34,7 @@ public class Jeu {
 
 
         monstre.comportement();
-        if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()) {
-            joueur.attaquer(monstre);
-        }
+        joueur.attaquer(monstre);
 
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");

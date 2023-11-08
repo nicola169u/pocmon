@@ -127,7 +127,7 @@ public class Labyrinthe {
                 }else if(getCase(j, i).estTresor()){
                     System.out.print(" € ");
                 }
-                else if(monstre.getX() == j && monstre.getY() == i){
+                else if(monstre.getPosX() == j && monstre.getPosY() == i){
                     System.out.print(" M ");
 
                 }else{
