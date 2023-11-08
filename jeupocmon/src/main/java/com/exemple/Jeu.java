@@ -63,8 +63,6 @@ public class Jeu {
             joueur.attaquer(monstre);
         }
 
-        Scanner scanner = new Scanner(System.in);
-
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
 
