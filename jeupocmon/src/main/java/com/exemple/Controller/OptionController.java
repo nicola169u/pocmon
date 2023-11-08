@@ -1,7 +1,4 @@
 package main.java.com.exemple.Controller;
-
-import main.java.com.exemple.Model.Jeu;
-import main.java.com.exemple.View.MenuView;
 import main.java.com.exemple.View.OptionView;
 
 import java.awt.event.ActionEvent;

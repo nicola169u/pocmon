@@ -27,11 +27,7 @@ public class Jeu {
 
     public void lancer() {
         jeuView.afficherMessage("Bienvenue sur Pocmon !");
-        if(jeuView.ask("Voulez-vous démarrer la partie ?")){
-            jeuView.start();
-        }else{
-            jeuView.afficherMessage("Au revoir !");
-        }
+        jeuView.start();
     }
 
 
@@ -49,10 +45,11 @@ public class Jeu {
                 if (jeuView.ask("Voulez-vous continuer au prochain niveau ?")) {
                     niveau++;
                     lab.lire_lab(niveau + "");
+                    createMonstre();
                     //On repositionne le joueur
                     joueur.setPosX(1);
                     joueur.setPosY(1);
-                    jeuView.rafraichirAffichage();
+                    jeuView.majNiveau();  //Appelle rafraichirAffichage et maj le numero de niveau
                 } else {
                     fin("Au revoir !");
                 }
@@ -76,6 +73,13 @@ public class Jeu {
         jeuView.dispose();
     }
 
+    private void createMonstre(){
+        this.monstre = new MonstreIntelligent(8, 8, 5, 5);
+        this.joueur.setLabyrinthe(lab);
+        this.monstre.setLabyrinthe(lab);
+        this.monstre.setJoueurCible(joueur);
+    }
+
 
     public Joueur getJoueur() {
         return joueur;
@@ -91,5 +95,9 @@ public class Jeu {
 
     public int getSizeLab() {
         return sizeLab;
+    }
+
+    public int getNiveau() {
+        return niveau;
     }
 }

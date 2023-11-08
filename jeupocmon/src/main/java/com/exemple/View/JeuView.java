@@ -17,7 +17,7 @@ public class JeuView extends JFrame {
 
         labView = new LabyrintheView(sizeLab);
 
-        setTitle("Jeu Pocmon");
+        setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(sizeLab, sizeLab));
 
@@ -44,6 +44,11 @@ public class JeuView extends JFrame {
     public void start(){
         this.pack();
         this.setVisible(true);
+    }
+
+    public void majNiveau(){
+        setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
+        rafraichirAffichage();
     }
 
     public void rafraichirAffichage() {
