@@ -53,4 +53,41 @@ class JoueurTest {
         j.attaquer(monstre);
         assertEquals(4, monstre.getPv(), "Le monstre devrait perdre 1pv.");
     }
+
+    @Test
+    public void TestAcote(){
+        Joueur j = new Joueur(5, 5, 10);
+        Monstre m = new MonstreIntelligent(5, 6, 10, 2);
+        Monstre m2 = new MonstreIntelligent(5, 4, 10, 2);
+        Monstre m3 = new MonstreIntelligent(4, 5, 10, 2);
+        Monstre m4 = new MonstreIntelligent(6, 5, 10, 2);
+        assertEquals(true, j.monstreACote(m), "Le monstre est en dessous du joueur");
+        assertEquals(true, j.monstreACote(m2), "Le monstre est au dessus du joueur");
+        assertEquals(true, j.monstreACote(m3), "Le monstre est à gauche du joueur");
+        assertEquals(true, j.monstreACote(m4), "Le monstre est à droite du joueur");
+    }
+
+    @Test
+    public void invulnerable(){
+        Joueur j = new Joueur(1, 1, 10);
+        j.setInvulnerable(true);
+        Monstre m = new Fantome(1, 1, 10, 10);
+        m.setJoueurCible(j);
+        boolean attaque = m.attaquer();
+        assertEquals(true, attaque, "Le monstre attaque pas !!");
+        assertEquals(10, j.getPv(), "Le joueur n'a pas perdu de pv comme il est invulnérable");
+
+
+    }
+
+    @Test
+    public void soin(){
+        Joueur j = new Joueur(1, 1, 10);
+        Monstre m = new MonstreIntelligent(1,1, 10, 5);
+        m.setJoueurCible(j);
+        m.attaquer();
+        assertEquals(5, j.getPv(), "Le joueur a bien perdu des pvs.");
+        j.soigner(2);
+        assertEquals(7, j.getPv(), "Le joueur s'est heal de 2 pv");
+    }
 }

@@ -13,12 +13,19 @@ public abstract class Personnage {
 
     private int pv;
 
+    private int vitesse;
+    private int pvMax;
+
+    private boolean invulnerable;
+
 
     public Personnage(int x, int y, int pv) {
         this.posX = x;
         this.posY = y;
         this.vivant = true;
         this.pv = pv;
+        this.invulnerable = false;
+        this.pvMax = pv;
 
 
 
@@ -116,11 +123,15 @@ public abstract class Personnage {
     }
 
     public void subirDegat(int degat){
-        pv -= degat;
-        if(pv < 0){
-            pv = 0;
+        if(!invulnerable){
+            pv -= degat;
+            if(pv < 0){
+                pv = 0;
+            }
+            mort();
+
         }
-        mort();
+
 
     }
 
@@ -133,4 +144,32 @@ public abstract class Personnage {
             vivant = false;
         }
     }
+
+    public void setVitesse(int vitesse){
+        this.vitesse = vitesse;
+    }
+
+    public int getVitesse(){
+        return vitesse;
+    }
+
+    public void soigner(int soin){
+        pv += soin;
+        if(this.pv > this.pvMax) {
+            this.pv = pvMax;
+        }
+        mort();
+
+    }
+
+    public int getPvMax() {
+        return this.pvMax;
+    }
+
+    public void setInvulnerable(boolean a)
+    {
+        this.invulnerable = a;
+    }
+
+
 }
