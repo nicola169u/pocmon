@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class JeuView extends JFrame {
+public class JeuView extends JFrame implements Runnable{
     private Jeu jeu;
     private LabyrintheView labView;
 
@@ -98,5 +98,13 @@ public class JeuView extends JFrame {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
         return choix == JOptionPane.YES_OPTION;
+    }
+
+    @Override
+    public void run(){
+        while(true) {
+            this.rafraichirAffichage();
+
+        }
     }
 }

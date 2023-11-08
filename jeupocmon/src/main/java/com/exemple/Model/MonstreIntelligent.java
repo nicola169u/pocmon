@@ -69,9 +69,4 @@ public class MonstreIntelligent extends Monstre{
         avancer(deplacementEnCours);
         attaquer();
     }
-
-
-
-
-
 }

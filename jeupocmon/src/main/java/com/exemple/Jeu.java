@@ -110,4 +110,8 @@ public class Jeu {
     public int getSizeLab() {
         return sizeLab;
     }
+
+    public JeuView getJeuView(){
+        return jeuView;
+    }
 }

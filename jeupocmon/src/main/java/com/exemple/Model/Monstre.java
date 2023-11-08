@@ -1,7 +1,7 @@
 package main.java.com.exemple.Model;
 
 
-public abstract class Monstre extends Personnage{
+public abstract class Monstre extends Personnage implements Runnable{
 
 
     protected Joueur joueurCible;
@@ -77,5 +77,15 @@ public abstract class Monstre extends Personnage{
         return false;
     }
 
-
+    @Override
+    public void run(){
+        while(joueurCible.isVivant()) {
+            System.out.println("La position du monstre est : x =" + this.getX() + "y =" + this.posY);
+            this.comportement();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
 }
