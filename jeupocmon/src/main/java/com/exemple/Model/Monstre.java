@@ -1,14 +1,8 @@
 package main.java.com.exemple.Model;
 
 
-import main.java.com.exemple.View.JeuView;
-
-public abstract class Monstre extends Personnage{
-
-
+public abstract class Monstre extends Personnage implements Runnable{
     protected Joueur joueurCible;
-
-
     protected int degat;
 
     public Monstre(int x, int y, int pv, int degat){
@@ -75,5 +69,15 @@ public abstract class Monstre extends Personnage{
     }
 
 
-
+    @Override
+    public void run(){
+        while(joueurCible.isVivant()) {
+            System.out.println("La position du monstre est : x =" + this.getX() + "y =" + this.posY);
+            this.comportement();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
 }

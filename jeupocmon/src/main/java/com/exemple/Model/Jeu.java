@@ -1,8 +1,17 @@
 package main.java.com.exemple.Model;
 
+import main.java.com.exemple.Controller.Observateur;
+import main.java.com.exemple.Model.*;
 import main.java.com.exemple.View.JeuView;
 
+import java.util.ArrayList;
+import java.util.List;
+import main.java.com.exemple.View.JeuView;
+
+
 public class Jeu {
+
+    private List<Observateur> observateurs;
     private JeuView jeuView;
     private Joueur joueur;
     private int niveau;
@@ -10,9 +19,9 @@ public class Jeu {
     private Monstre monstre;
     private int sizeLab;
 
-
     public Jeu(int lvl) {
         this.joueur = new Joueur(1, 1, 10);
+        this.observateurs = new ArrayList<>();
         this.niveau = lvl;
         this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
@@ -20,6 +29,18 @@ public class Jeu {
         lab.lire_lab(niveau+"");
         createMonstre();
         jeuView = new JeuView(this);
+    }
+
+    public void ajouterObservateur(Observateur v){
+        for(Observateur ob : observateurs) {
+            observateurs.add(v);
+        }
+    }
+
+    public void notifierObservateur(){
+        for(Observateur ob : observateurs){
+            ob.reagir();
+        }
     }
 
     public void lancer() {
@@ -31,7 +52,6 @@ public class Jeu {
     public void boucler(){
         //On verifie si le joueur est sur un teleporteur
         lab.isOnTp(joueur);
-
 
         monstre.comportement();
         joueur.attaquer(monstre);
@@ -96,7 +116,12 @@ public class Jeu {
         return sizeLab;
     }
 
+    public JeuView getJeuView() {
+        return jeuView;
+    }
+
     public int getNiveau() {
         return niveau;
+
     }
 }

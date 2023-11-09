@@ -51,4 +51,8 @@ public class MonstreAleatoire extends Monstre{
     }
 
 
+    @Override
+    public void run(){
+
+    }
 }

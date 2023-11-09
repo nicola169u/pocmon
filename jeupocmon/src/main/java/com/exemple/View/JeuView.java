@@ -6,7 +6,7 @@ import main.java.com.exemple.Model.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class JeuView extends JFrame {
+public class JeuView extends JFrame implements Runnable{
     private Jeu jeu;
     private LabyrintheView labView;
 
@@ -99,5 +99,11 @@ public class JeuView extends JFrame {
 
         return choix == JOptionPane.YES_OPTION;
     }
+    @Override
+    public void run(){
+        while(true) {
+            this.rafraichirAffichage();
 
+        }
+    }
 }
