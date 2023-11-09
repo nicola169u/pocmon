@@ -1,6 +1,6 @@
 package main.java.com.exemple.Controller;
 
-import main.java.com.exemple.Jeu;
+import main.java.com.exemple.Model.Jeu;
 
 public abstract class Observateur {
     protected Jeu jeu;
