@@ -27,3 +27,4 @@ public abstract class Case {
         return false;
     }
 }
+

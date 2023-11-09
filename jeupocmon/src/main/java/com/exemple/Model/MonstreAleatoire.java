@@ -2,9 +2,9 @@ package main.java.com.exemple.Model;
 
 public class MonstreAleatoire extends Monstre{
 
-    protected Direction deplacement;
+    private Direction deplacement;
 
-    protected int timer;
+    private int timer;
 
 
 

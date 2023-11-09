@@ -1,15 +1,10 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.JoueurControlleur;
-import main.java.com.exemple.Jeu;
 import main.java.com.exemple.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class JeuView extends JFrame implements Runnable{
     private Jeu jeu;
@@ -22,7 +17,7 @@ public class JeuView extends JFrame implements Runnable{
 
         labView = new LabyrintheView(sizeLab);
 
-        setTitle("Jeu Pocmon");
+        setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(sizeLab, sizeLab));
 
@@ -49,6 +44,11 @@ public class JeuView extends JFrame implements Runnable{
     public void start(){
         this.pack();
         this.setVisible(true);
+    }
+
+    public void majNiveau(){
+        setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
+        rafraichirAffichage();
     }
 
     public void rafraichirAffichage() {
@@ -99,7 +99,6 @@ public class JeuView extends JFrame implements Runnable{
 
         return choix == JOptionPane.YES_OPTION;
     }
-
     @Override
     public void run(){
         while(true) {

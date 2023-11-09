@@ -2,11 +2,7 @@ package main.java.com.exemple.Model;
 
 
 public abstract class Monstre extends Personnage implements Runnable{
-
-
     protected Joueur joueurCible;
-
-
     protected int degat;
 
     public Monstre(int x, int y, int pv, int degat){
@@ -72,10 +68,6 @@ public abstract class Monstre extends Personnage implements Runnable{
         this.degat = degat;
     }
 
-    @Override
-    public boolean estFantome() {
-        return false;
-    }
 
     @Override
     public void run(){

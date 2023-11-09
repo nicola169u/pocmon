@@ -1,4 +1,4 @@
-package main.java.com.exemple;
+package main.java.com.exemple.Model;
 
 import main.java.com.exemple.Controller.Observateur;
 import main.java.com.exemple.Model.*;
@@ -6,7 +6,8 @@ import main.java.com.exemple.View.JeuView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import main.java.com.exemple.View.JeuView;
+
 
 public class Jeu {
 
@@ -15,30 +16,25 @@ public class Jeu {
     private Joueur joueur;
     private int niveau;
     private Labyrinthe lab;
-
     private Monstre monstre;
     private int sizeLab;
-    private volatile char prochaineAction = ' ';
 
-
-    public Jeu() {
-        this.observateurs = new ArrayList<>();
+    public Jeu(int lvl) {
         this.joueur = new Joueur(1, 1, 10);
-        this.niveau = 1;
-        this.sizeLab = 10;
+        this.observateurs = new ArrayList<>();
+        this.niveau = lvl;
+        this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        this.monstre = new Fantome(8, 8, 5, 1);
-        this.joueur.setLabyrinthe(lab);
-        this.monstre.setLabyrinthe(lab);
-        this.monstre.setJoueurCible(joueur);
+        createMonstre();
         jeuView = new JeuView(this);
     }
 
     public void ajouterObservateur(Observateur v){
-        v.setJeu(this);
-        observateurs.add(v);
+        for(Observateur ob : observateurs) {
+            observateurs.add(v);
+        }
     }
 
     public void notifierObservateur(){
@@ -49,19 +45,16 @@ public class Jeu {
 
     public void lancer() {
         jeuView.afficherMessage("Bienvenue sur Pocmon !");
-        if(jeuView.ask("Voulez-vous démarrer la partie ?")){
-            jeuView.start();
-        }else{
-            jeuView.afficherMessage("Au revoir !");
-        }
+        jeuView.start();
     }
 
 
     public void boucler(){
+        //On verifie si le joueur est sur un teleporteur
+        lab.isOnTp(joueur);
+
         monstre.comportement();
-        if(joueur.getPosX() == monstre.getPosX() && monstre.getPosY() == joueur.getPosY()){
-            joueur.attaquer(monstre);
-        }
+        joueur.attaquer(monstre);
 
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
@@ -71,25 +64,39 @@ public class Jeu {
                 if (jeuView.ask("Voulez-vous continuer au prochain niveau ?")) {
                     niveau++;
                     lab.lire_lab(niveau + "");
+                    createMonstre();
                     //On repositionne le joueur
                     joueur.setPosX(1);
                     joueur.setPosY(1);
-                    jeuView.rafraichirAffichage();
+                    jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");
                 }
             } else {
                 fin("Vous avez terminé tous les niveaux !\nAu revoir !");
+                System.exit(0);
             }
         }
 
+
         //On met à jour l'interface graphique
         jeuView.rafraichirAffichage();
+        if(joueur.isMort()){
+            fin("Le joueur s'est fait piétiner par le monstre !!");
+            System.exit(0);
+        }
     }
 
     private void fin(String message){
         jeuView.afficherMessage(message);
         jeuView.dispose();
+    }
+
+    private void createMonstre(){
+        this.monstre = new MonstreAleatoire(8, 8, 5, 5);
+        this.joueur.setLabyrinthe(lab);
+        this.monstre.setLabyrinthe(lab);
+        this.monstre.setJoueurCible(joueur);
     }
 
 
@@ -109,7 +116,12 @@ public class Jeu {
         return sizeLab;
     }
 
-    public JeuView getJeuView(){
+    public JeuView getJeuView() {
         return jeuView;
+    }
+
+    public int getNiveau() {
+        return niveau;
+
     }
 }
