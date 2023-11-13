@@ -35,6 +35,8 @@ public class OptionView extends JFrame {
         addDifficulty();
         optionController = new OptionController(this,menuView);
         exit.addActionListener(optionController);
+        save.addActionListener(optionController);
+        panel.add(save,BorderLayout.CENTER);
         panel.add(exit,BorderLayout.CENTER);
         setSize(width, height);
         setResizable(false);
@@ -103,8 +105,8 @@ public class OptionView extends JFrame {
 
     }
 
-    public void launchMenuView() {
-        menuView = new MenuView(300,80);
+    public void launchMenuView(int niveau) {
+        menuView = new MenuView(300,80,niveau);
     }
 
     public JButton getExit() {
@@ -114,7 +116,6 @@ public class OptionView extends JFrame {
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
-
             if (button.isSelected()) {
                 return button.getText();
             }

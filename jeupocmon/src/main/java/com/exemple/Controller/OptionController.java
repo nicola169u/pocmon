@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class OptionController implements ActionListener {
     private OptionView optionView;
+    private int niveau = 1;
     private MenuView menuView;
 
     public OptionController(OptionView optionView,MenuView menuView) {
@@ -20,10 +21,10 @@ public class OptionController implements ActionListener {
         Object source = actionEvent.getSource();
         if (source == optionView.getExit()) {
             optionView.setVisible(false);
-            optionView.launchMenuView();
+            optionView.launchMenuView(niveau);
         }else if(source == optionView.getSave()){
-            optionView.getSelectedButtonText(optionView.getGroupLevels());
-            System.out.println(optionView.getSelectedButtonText(optionView.getGroupLevels()));
+             this.niveau = Integer.parseInt(optionView.getSelectedButtonText(optionView.getGroupLevels()));
+
         }
     }
 }

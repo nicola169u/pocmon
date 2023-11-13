@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class MenuView extends JFrame {
 
-    private int niveau;
+    private int niveau = 1;
     private OptionView optionView;
     private JButton play = new JButton("Jouer");
     private JButton settings = new JButton("Option");
@@ -22,8 +22,9 @@ public class MenuView extends JFrame {
     private JPanel menu = new JPanel();
     private MenuController menuController;
 
-    public MenuView(int width,int height)
+    public MenuView(int width,int height,int lvl)
     {
+        this.niveau = lvl;
         panel.setLayout(layout);
         layout.addLayoutComponent(panel, "Menu");
 
