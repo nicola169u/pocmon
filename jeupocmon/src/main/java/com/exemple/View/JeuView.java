@@ -9,6 +9,8 @@ import java.awt.*;
 public class JeuView extends JFrame implements Runnable{
     private Jeu jeu;
     private LabyrintheView labView;
+    private PersonnageView p;
+    private PersonnageView m;
 
     public JeuView(Jeu jeu) throws HeadlessException {
         this.jeu = jeu;
@@ -16,6 +18,13 @@ public class JeuView extends JFrame implements Runnable{
         int sizeLab = jeu.getSizeLab();
 
         labView = new LabyrintheView(sizeLab);
+        Joueur joueur = jeu.getJoueur();
+        Monstre monstre = jeu.getMonstre();
+
+         p = new PersonnageView(joueur);
+         m = new PersonnageView(monstre);
+
+
 
         setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,19 +32,33 @@ public class JeuView extends JFrame implements Runnable{
 
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
-                Case currentCase = jeu.getLab().getCase(j, i);
-                CaseView panel = new CaseView(currentCase);
-                labView.setCase(i, j, panel);
-                this.add(panel);
+
+                if(j == joueur.getPosY() && i == joueur.getPosX()){
+                    this.add(p);
+                }else if(j == monstre.getPosY() && i == monstre.getPosX()){
+                    this.add(m);
+                }else{
+
+                    Case currentCase = jeu.getLab().getCase(j, i);
+                    CaseView panel = new CaseView(currentCase);
+                    labView.setCase(i, j, panel);
+                    this.add(panel);
+                }
+
+
+
+
             }
         }
 
-        Joueur joueur = jeu.getJoueur();
-        Monstre monstre = jeu.getMonstre();
+
+
 
         //On affiche le joueur et le monstre
-        labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
-        labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
+//        this.add(p);
+//        this.add(m);
+//        labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
+//        labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
 
         this.addKeyListener(new JoueurControlleur(joueur, this));
         this.setFocusable(true);
@@ -64,21 +87,28 @@ public class JeuView extends JFrame implements Runnable{
         Joueur joueur = jeu.getJoueur();
         Monstre monstre = jeu.getMonstre();
 
+        // On met à jour la position des personnages
+        this.remove(p);
+        this.remove(m);
+        this.add(p, joueur.getPosY() * sizeLab + joueur.getPosX());
+        this.add(m, monstre.getPosY() * sizeLab + monstre.getPosX());
+
+
         //On affiche le joueur et le monstre
-        if(joueur.isMort()){
-            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.red);
-        }else{
-            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
-
-        }
-
-        if(monstre.isMort()){
-            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.magenta);
-
-        }else{
-            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
-
-        }
+//        if(joueur.isMort()){
+//            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.red);
+//        }else{
+//            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
+//
+//        }
+//
+//        if(monstre.isMort()){
+//            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.magenta);
+//
+//        }else{
+//            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
+//
+//        }
 
 
         this.revalidate();

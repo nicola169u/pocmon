@@ -89,6 +89,9 @@ public abstract class Personnage {
         return false;
     }
 
+    public boolean isMonstreAleatoire(){return false;}
+    public boolean isMonstreIntelligent(){return false;}
+
     public int getPosX() {
         return posX;
     }

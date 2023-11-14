@@ -69,4 +69,10 @@ public class MonstreIntelligent extends Monstre{
         avancer(deplacementEnCours);
         attaquer();
     }
+
+
+    @Override
+    public boolean isMonstreIntelligent() {
+        return true;
+    }
 }

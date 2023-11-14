@@ -27,6 +27,20 @@ public abstract class Monstre extends Personnage implements Runnable{
     }
 
 
+
+    @Override
+    public void run(){
+        while(joueurCible.isVivant()) {
+            System.out.println("La position du monstre est : x =" + this.getX() + "y =" + this.posY);
+            this.comportement();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+
     public abstract void comportement();
 
     public int getX(){
@@ -69,15 +83,5 @@ public abstract class Monstre extends Personnage implements Runnable{
     }
 
 
-    @Override
-    public void run(){
-        while(joueurCible.isVivant()) {
-            System.out.println("La position du monstre est : x =" + this.getX() + "y =" + this.posY);
-            this.comportement();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-        }
-    }
+
 }

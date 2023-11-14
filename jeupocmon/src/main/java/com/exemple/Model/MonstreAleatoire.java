@@ -28,6 +28,12 @@ public class MonstreAleatoire extends Monstre{
 
     }
 
+    @Override
+    public boolean isMonstreAleatoire() {
+        return true;
+    }
+
+
     public Direction randomDir() {
         switch ((int) (Math.random() * 4)) {
             case 0:
