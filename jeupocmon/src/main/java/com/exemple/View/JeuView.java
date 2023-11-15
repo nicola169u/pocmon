@@ -55,6 +55,7 @@ public class JeuView extends JFrame implements Runnable{
 
 
         this.setFocusable(true);
+        this.addKeyListener(new JoueurControlleur(joueur, this));
     }
 
     public void start(){
