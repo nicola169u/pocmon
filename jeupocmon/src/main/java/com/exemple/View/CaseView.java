@@ -58,8 +58,6 @@ public class CaseView extends JPanel {
     public void setC(Case c) {
         this.c = c;
         try {
-
-
             if (c.estMur()) {
                 //this.color = Color.black;
                 test = ImageIO.read(getClass().getResourceAsStream("/wall.png"));

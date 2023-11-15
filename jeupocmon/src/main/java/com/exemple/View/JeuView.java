@@ -32,7 +32,6 @@ public class JeuView extends JFrame implements Runnable{
 
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
-
                     Case currentCase = jeu.getLab().getCase(j, i);
                     CaseView panel = new CaseView(currentCase);
                     if(j == monstre.getPosX() && i == monstre.getPosY()){
@@ -42,13 +41,6 @@ public class JeuView extends JFrame implements Runnable{
                     }
                     labView.setCase(i, j, panel);
                     this.add(panel);
-
-
-
-
-
-
-
             }
         }
 
@@ -65,7 +57,21 @@ public class JeuView extends JFrame implements Runnable{
 
     public void majNiveau(){
         setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
+        rafraichirLab();
         rafraichirAffichage();
+    }
+
+    public void rafraichirLab(){
+        for (int i = 0; i < jeu.getSizeLab(); i++) {
+            for (int j = 0; j < jeu.getSizeLab(); j++) {
+                this.remove(labView.getCase(i, j));
+                Case currentCase = jeu.getLab().getCase(j, i);
+                CaseView panel = new CaseView(currentCase);
+
+                labView.setCase(i, j, panel);
+                this.add(panel);
+            }
+        }
     }
 
     public void rafraichirAffichage() {
@@ -89,11 +95,11 @@ public class JeuView extends JFrame implements Runnable{
                 labView.setCase(i, j, caseView);
                 this.add(caseView);
 
-                //Case currentCase = jeu.getLab().getCase(j, i);
 
-                //labView.getCase(i, j).setC(currentCase);
             }
         }
+        p.revalidate();
+        p.repaint();
 
         this.revalidate();
         this.repaint();
