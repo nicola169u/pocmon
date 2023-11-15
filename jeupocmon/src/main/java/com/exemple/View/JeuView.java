@@ -33,17 +33,18 @@ public class JeuView extends JFrame implements Runnable{
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
 
-                if(j == joueur.getPosY() && i == joueur.getPosX()){
-                    this.add(p);
-                }else if(j == monstre.getPosY() && i == monstre.getPosX()){
-                    this.add(m);
-                }else{
-
                     Case currentCase = jeu.getLab().getCase(j, i);
                     CaseView panel = new CaseView(currentCase);
+                    if(j == monstre.getPosX() && i == monstre.getPosY()){
+                        panel.add(m);
+                    }else if(j == joueur.getPosX() && i == joueur.getPosY()){
+                        panel.add(p);
+                    }
                     labView.setCase(i, j, panel);
                     this.add(panel);
-                }
+
+
+
 
 
 
@@ -53,14 +54,6 @@ public class JeuView extends JFrame implements Runnable{
 
 
 
-
-        //On affiche le joueur et le monstre
-//        this.add(p);
-//        this.add(m);
-//        labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
-//        labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
-
-        this.addKeyListener(new JoueurControlleur(joueur, this));
         this.setFocusable(true);
     }
 
@@ -77,39 +70,29 @@ public class JeuView extends JFrame implements Runnable{
     public void rafraichirAffichage() {
         int sizeLab = jeu.getSizeLab();
 
-        for (int i = 0; i < sizeLab; i++) {
-            for (int j = 0; j < sizeLab; j++) {
-                Case currentCase = jeu.getLab().getCase(j, i);
-                labView.getCase(i, j).setC(currentCase);
-            }
-        }
-
         Joueur joueur = jeu.getJoueur();
         Monstre monstre = jeu.getMonstre();
 
-        // On met à jour la position des personnages
-        this.remove(p);
-        this.remove(m);
-        this.add(p, joueur.getPosY() * sizeLab + joueur.getPosX());
-        this.add(m, monstre.getPosY() * sizeLab + monstre.getPosX());
 
+        for (int i = 0; i < sizeLab; i++) {
+            for (int j = 0; j < sizeLab; j++) {
+                CaseView caseView = labView.getCase(i,j);
+                caseView.remove(p);
+                caseView.remove(m);
+                this.remove(caseView);
+                if(joueur.getPosX() == j && joueur.getPosY() == i){
+                    caseView.add(p);
+                }else if(j == monstre.getPosX() && i == monstre.getPosY()){
+                    caseView.add(m);
+                }
+                labView.setCase(i, j, caseView);
+                this.add(caseView);
 
-        //On affiche le joueur et le monstre
-//        if(joueur.isMort()){
-//            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.red);
-//        }else{
-//            labView.getCase(joueur.getPosY(), joueur.getPosX()).setColor(Color.blue);
-//
-//        }
-//
-//        if(monstre.isMort()){
-//            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.magenta);
-//
-//        }else{
-//            labView.getCase(monstre.getPosY(), monstre.getPosX()).setColor(Color.green);
-//
-//        }
+                //Case currentCase = jeu.getLab().getCase(j, i);
 
+                //labView.getCase(i, j).setC(currentCase);
+            }
+        }
 
         this.revalidate();
         this.repaint();

@@ -2,7 +2,9 @@ package main.java.com.exemple.View;
 
 import main.java.com.exemple.Model.Case;
 
-public class LabyrintheView {
+import javax.swing.*;
+
+public class LabyrintheView{
     private CaseView[][] casesView;
 
     public LabyrintheView(int size) {

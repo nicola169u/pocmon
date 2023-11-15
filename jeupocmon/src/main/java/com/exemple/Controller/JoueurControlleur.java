@@ -36,7 +36,7 @@ public class JoueurControlleur extends Observateur implements KeyListener {
             joueur.avancer(Direction.DROITE);
         }
 
-        //jeuView.getJeu().boucler();
+        jeuView.getJeu().boucler();
 
         //jeuView.rafraichirAffichage();
     }
