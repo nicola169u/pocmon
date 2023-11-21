@@ -5,24 +5,26 @@ import main.java.com.exemple.Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class JeuView extends JFrame implements Runnable{
     private Jeu jeu;
     private LabyrintheView labView;
     private PersonnageView p;
-    private PersonnageView m;
+    private ArrayList<PersonnageView> viewmonstres;
 
     public JeuView(Jeu jeu) throws HeadlessException {
         this.jeu = jeu;
 
         int sizeLab = jeu.getSizeLab();
+        this.viewmonstres = new ArrayList<>();
 
         labView = new LabyrintheView(sizeLab);
         Joueur joueur = jeu.getJoueur();
-        Monstre monstre = jeu.getMonstre();
+        ArrayList<Monstre> monstre = jeu.getMonstre();
 
          p = new PersonnageView(joueur);
-         m = new PersonnageView(monstre);
+         //m = new PersonnageView(monstre);
 
 
 
@@ -34,11 +36,16 @@ public class JeuView extends JFrame implements Runnable{
             for (int j = 0; j < sizeLab; j++) {
                     Case currentCase = jeu.getLab().getCase(j, i);
                     CaseView panel = new CaseView(currentCase);
-                    if(j == monstre.getPosX() && i == monstre.getPosY()){
-                        panel.add(m);
-                    }else if(j == joueur.getPosX() && i == joueur.getPosY()){
-                        panel.add(p);
+                    for(Monstre m : monstre){
+                        if(j == m.getPosX() && i == m.getPosY()){
+                            PersonnageView vm = new PersonnageView(m);
+                            viewmonstres.add(vm);
+                            panel.add(vm);
+                        }else if(j == joueur.getPosX() && i == joueur.getPosY()){
+                            panel.add(p);
+                        }
                     }
+
                     labView.setCase(i, j, panel);
                     this.add(panel);
             }
@@ -78,19 +85,25 @@ public class JeuView extends JFrame implements Runnable{
         int sizeLab = jeu.getSizeLab();
 
         Joueur joueur = jeu.getJoueur();
-        Monstre monstre = jeu.getMonstre();
+        ArrayList<Monstre> monstre = jeu.getMonstre();
 
 
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
                 CaseView caseView = labView.getCase(i,j);
                 caseView.remove(p);
-                caseView.remove(m);
+                for(PersonnageView pv : viewmonstres){
+                    caseView.remove(pv);
+                }
                 this.remove(caseView);
-                if(joueur.getPosX() == j && joueur.getPosY() == i){
-                    caseView.add(p);
-                }else if(j == monstre.getPosX() && i == monstre.getPosY()){
-                    caseView.add(m);
+                for(Monstre m : monstre){
+                    if(j == m.getPosX() && i == m.getPosY()){
+                        PersonnageView vm = new PersonnageView(m);
+                        viewmonstres.add(vm);
+                        caseView.add(vm);
+                    }else if(j == joueur.getPosX() && i == joueur.getPosY()){
+                        caseView.add(p);
+                    }
                 }
                 labView.setCase(i, j, caseView);
                 this.add(caseView);

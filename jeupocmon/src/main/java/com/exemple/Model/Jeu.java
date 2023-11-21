@@ -16,12 +16,15 @@ public class Jeu {
     private Joueur joueur;
     private int niveau;
     private Labyrinthe lab;
-    private Monstre monstre;
+    private ArrayList<Monstre> monstres;
     private int sizeLab;
+
+    private int compteurPas;
 
     public Jeu(int lvl) {
         this.joueur = new Joueur(1, 1, 10);
         this.observateurs = new ArrayList<>();
+        this.monstres = new ArrayList<>();
         this.niveau = lvl;
         this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
@@ -29,6 +32,7 @@ public class Jeu {
         lab.lire_lab(niveau+"");
         createMonstre();
         jeuView = new JeuView(this);
+        this.compteurPas = 0;
     }
 
     public void ajouterObservateur(Observateur v){
@@ -52,9 +56,15 @@ public class Jeu {
     public void boucler(){
         //On verifie si le joueur est sur un teleporteur
         lab.isOnTp(joueur);
+        for(Monstre m : monstres){
+            m.comportement();
+            joueur.attaquer(m);
+        }
 
-        monstre.comportement();
-        joueur.attaquer(monstre);
+        this.compteurPas++;
+        if(this.compteurPas > 15){
+            compteurPas = 0;
+        }
 
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
@@ -64,6 +74,7 @@ public class Jeu {
                 if (jeuView.ask("Voulez-vous continuer au prochain niveau ?")) {
                     niveau++;
                     lab.lire_lab(niveau + "");
+                    this.monstres.clear();
                     createMonstre();
                     //On repositionne le joueur
                     joueur.setPosX(1);
@@ -93,10 +104,15 @@ public class Jeu {
     }
 
     private void createMonstre(){
-        this.monstre = new MonstreAleatoire(8, 8, 5, 5);
+        this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
+        this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
+        this.monstres.add(new Fantome(1, 9, 10, 2));
+        for(Monstre m : monstres){
+            m.setLabyrinthe(lab);
+            m.setJoueurCible(joueur);
+        }
         this.joueur.setLabyrinthe(lab);
-        this.monstre.setLabyrinthe(lab);
-        this.monstre.setJoueurCible(joueur);
+
     }
 
 
@@ -108,8 +124,8 @@ public class Jeu {
         return lab;
     }
 
-    public Monstre getMonstre() {
-        return monstre;
+    public ArrayList<Monstre> getMonstre() {
+        return monstres;
     }
 
     public int getSizeLab() {
@@ -123,5 +139,9 @@ public class Jeu {
     public int getNiveau() {
         return niveau;
 
+    }
+
+    public int getCompteurPas(){
+        return compteurPas;
     }
 }

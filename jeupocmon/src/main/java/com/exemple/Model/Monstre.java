@@ -17,7 +17,7 @@ public abstract class Monstre extends Personnage implements Runnable{
 
     public boolean attaquer(){
         // plus tard verifier en rajoutant une portée du monstre et aussi avec la distance entre le monstre et le joueur
-        if(this.posX == joueurCible.getPosX() && this.posY == joueurCible.getPosY()){
+        if(this.posX == joueurCible.getPosX() && this.posY == joueurCible.getPosY() && this.isVivant()){
             joueurCible.subirDegat(this.degat);
             return true;
 

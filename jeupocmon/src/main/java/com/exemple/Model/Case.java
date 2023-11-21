@@ -4,6 +4,8 @@ public abstract class Case {
     protected int posX;
     protected int posY;
 
+    public static int TAILLE = 30;
+
     public Case(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;

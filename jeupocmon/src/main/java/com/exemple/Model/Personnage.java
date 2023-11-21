@@ -140,6 +140,10 @@ public abstract class Personnage {
         return pv;
     }
 
+    public void setPv(int pv){
+        this.pv = pv;
+    }
+
     public void mort(){
         if(pv==0){
             vivant = false;

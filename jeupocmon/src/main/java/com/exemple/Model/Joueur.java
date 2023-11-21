@@ -8,7 +8,7 @@ public class Joueur extends Personnage {
     public Joueur(int x, int y, int pv) {
         super(x, y, pv);
         this.attaque=false;
-        this.degat = 1;
+        this.degat = 5;
         setVitesse(5);
     }
 
@@ -44,5 +44,17 @@ public class Joueur extends Personnage {
         this.posY = posY;
     }
 
+    public void setAttaque(boolean attaque){
+        this.attaque = attaque;
+    }
 
+
+    public void revivre() {
+        setPv(getPvMax());
+        this.vivant = true;
+    }
+
+    public void resetDegat() {
+        this.degat = 1;
+    }
 }
