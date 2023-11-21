@@ -1,16 +1,36 @@
 package main.java.com.exemple.Model;
 
+
+/**
+ * Classe représentant un MonstreIntelligent c'est-à-dire qui cherche à atteindre le joueur
+ */
 public class MonstreIntelligent extends Monstre{
 
+    /**
+     * Le nombre de pas
+     */
     private int nombrePas = 0;
+    /**
+     * La direction du MonstreIntelligent
+     */
     protected Direction deplacementEnCours;
 
 
-
+    /**
+     * Constructeur de MonstreIntelligent en fonction de sa position initiale dans le labyrinthe, de ses points de vie et du nombre de dégât à infliger par attaque
+     * @param x la position en x
+     * @param y la position en y
+     * @param pv le nombre de points de vie
+     * @param degat le nombre dégât
+     */
     public MonstreIntelligent(int x, int y, int pv, int degat) {
         super(x,y, pv, degat);
     }
 
+
+    /**
+     * Procédure qui gère le comportement d'un MonstreIntelligent
+     */
     @Override
     public void comportement() {
         Labyrinthe lab = this.getLabyrinthe();
@@ -71,6 +91,10 @@ public class MonstreIntelligent extends Monstre{
     }
 
 
+    /**
+     * Fonction qui indique si le MonstreIntelligent est un MonstreIntelligent
+     * @return true
+     */
     @Override
     public boolean isMonstreIntelligent() {
         return true;

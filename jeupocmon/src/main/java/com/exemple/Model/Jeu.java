@@ -9,18 +9,49 @@ import java.util.List;
 import main.java.com.exemple.View.JeuView;
 
 
+/**
+ * Classe principale du projet, qui gère tout ce que doit connaître le jeu
+ */
 public class Jeu {
 
+    /**
+     * Liste des observateurs, utile si on voudra implémenter le DP Observer
+     */
     private List<Observateur> observateurs;
+    /**
+     * Vue du jeu
+     */
     private JeuView jeuView;
+    /**
+     * Le joueur
+     */
     private Joueur joueur;
+    /**
+     * Le numéro de niveau
+     */
     private int niveau;
+    /**
+     * Le labyrinthe
+     */
     private Labyrinthe lab;
+    /**
+     * La liste des monstres
+     */
     private ArrayList<Monstre> monstres;
+    /**
+     * La taille du labyrinthe (nombre de case en largeur et hauteur)
+     */
     private int sizeLab;
-
+    /**
+     * Compte le nombre de pas modulo 15, utile pour le changement de sprite pour le déplacement
+     */
     private int compteurPas;
 
+
+    /**
+     * Constructeur de Jeu en fonction du niveau
+     * @param lvl le niveau à lancer
+     */
     public Jeu(int lvl) {
         this.joueur = new Joueur(1, 1, 10);
         this.observateurs = new ArrayList<>();
@@ -35,24 +66,38 @@ public class Jeu {
         this.compteurPas = 0;
     }
 
+    /**
+     * Fonction permettant d'ajouter un observateur v à la liste d'observateurs, utile si on voudra implémenter le DP Observer
+     * @param v l'observateur
+     */
     public void ajouterObservateur(Observateur v){
         for(Observateur ob : observateurs) {
             observateurs.add(v);
         }
     }
 
+    /**
+     * Procédure qui notifie un changement du jeu aux observateurs, utile si on voudra implémenter le DP Observer
+     */
     public void notifierObservateur(){
         for(Observateur ob : observateurs){
             ob.reagir();
         }
     }
 
+
+    /**
+     * Fonction qui permet de lancer le jeu
+     */
     public void lancer() {
         jeuView.afficherMessage("Bienvenue sur Pocmon !");
         jeuView.start();
     }
 
 
+    /**
+     * Fonction qui permet de boucler (un déplacement du joueur et des monstres par boucle)
+     */
     public void boucler(){
         //On verifie si le joueur est sur un teleporteur
         lab.isOnTp(joueur);
@@ -79,6 +124,8 @@ public class Jeu {
                     //On repositionne le joueur
                     joueur.setPosX(1);
                     joueur.setPosY(1);
+                    //On lui redonne ses points de vie
+                    joueur.revivre();
                     jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");
@@ -98,11 +145,19 @@ public class Jeu {
         }
     }
 
+    /**
+     * Fonctsion qui gère la fin du jeu en fonction du message que l'on souhaiterait faire passer au joueur
+     * @param message le message à afficher
+     */
     private void fin(String message){
         jeuView.afficherMessage(message);
         jeuView.dispose();
     }
 
+
+    /**
+     * Fonction qui créé des nouveaux monstres et les ajoutent à la liste de monstres
+     */
     private void createMonstre(){
         this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
         this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
@@ -116,32 +171,45 @@ public class Jeu {
     }
 
 
+    /**
+     * Getter du joueur
+     * @return le joueur
+     */
     public Joueur getJoueur() {
         return joueur;
     }
 
+    /**
+     * Getter du labyrinthe
+     * @return le labyrinthe
+     */
     public Labyrinthe getLab() {
         return lab;
     }
 
+    /**
+     * Getter de la liste de monstres
+     * @return la liste de monstres
+     */
     public ArrayList<Monstre> getMonstre() {
         return monstres;
     }
 
+    /**
+     * Fonction qui retourne la taille du labyrinthe (nombre de case en largeur et en hauteur)
+     * @return la taille du labyrinthe
+     */
     public int getSizeLab() {
         return sizeLab;
     }
 
-    public JeuView getJeuView() {
-        return jeuView;
-    }
 
+    /**
+     * Getter du numéro de niveau
+     * @return le numéro de niveau en cours
+     */
     public int getNiveau() {
         return niveau;
 
-    }
-
-    public int getCompteurPas(){
-        return compteurPas;
     }
 }

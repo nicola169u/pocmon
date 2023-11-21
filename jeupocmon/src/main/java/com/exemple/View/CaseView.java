@@ -8,15 +8,29 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+
+/**
+ * Classe représentant la vue d'une case
+ */
 public class CaseView extends JPanel {
-
+    /**
+     * La case concernée par la vue
+     */
     private Case c;
+    /**
+     * La couleur de cette case
+     */
     private Color color;
-
+    /**
+     * L'image de cette case
+     */
     private BufferedImage test;
 
 
-
+    /**
+     * Constructeur de CaseView en fonction de la case c à représenter
+     * @param c
+     */
     public CaseView(Case c) {
         try {
             if(c.estMur()){
@@ -44,6 +58,11 @@ public class CaseView extends JPanel {
         setPreferredSize(new Dimension(30, 30));
     }
 
+
+    /**
+     * Procédure héritée de JPanel, permet d'afficher la case
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,6 +74,11 @@ public class CaseView extends JPanel {
 //        g.fillRect(0, 0, getWidth(), getHeight());
     }
 
+
+    /**
+     * Setter de la case c
+     * @param c
+     */
     public void setC(Case c) {
         this.c = c;
         try {
@@ -75,6 +99,11 @@ public class CaseView extends JPanel {
         }
     }
 
+
+    /**
+     * Setter de la couleur color de la case
+     * @param color
+     */
     public void setColor(Color color) {
         this.color = color;
     }

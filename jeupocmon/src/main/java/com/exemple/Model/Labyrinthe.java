@@ -8,18 +8,44 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+/**
+ * Classe représentant le labyrinthe du jeu
+ */
 public class Labyrinthe {
+    /**
+     * La taille du labyrinthe (nombre de case en largeur et hauteur)
+     */
     private int size;
+    /**
+     * Les cases du labyrinthe
+     */
     private Case[][] cases;
+    /**
+     * Le trésor du labyrinthe
+     */
     private Tresor tresor;
+    /**
+     * La liste des téléporteurs
+     */
     private HashMap<Teleporteur, Teleporteur> teleporteurs;
 
+
+    /**
+     * Constructeur de Labyrinthe en fonction de sa taille
+     * @param size la taille du labyrinthe (nombre de case en largeur et hauteur)
+     */
     public Labyrinthe(int size) {
         this.size = size;
         cases = new Case[size][size];
         teleporteurs = new HashMap<>();
     }
 
+
+    /**
+     * Procédure qui lit le fichier dans lequel est représenté le labyrinthe de niveau niveau et qui créé les case du labyrinthe
+     * @param niveau le niveau à lancer
+     */
     public void lire_lab(String niveau){
         //On nettoie le labyrinthe
         clearLab();
@@ -74,6 +100,10 @@ public class Labyrinthe {
     }
 
 
+    /**
+     * Procédure appelée dans le cas où on exécute le programme avec les .java et .class et pas en lancant le Maven
+     * @param file le fichier de type File
+     */
     private void lire_lab_local(File file){
         Teleporteur tp1 = null;
         Teleporteur tp2 = null;
@@ -113,10 +143,23 @@ public class Labyrinthe {
         teleporteurs.put(tp2, tp1);
     }
 
+
+    /**
+     * Fonction qui renvoie la case située à la postion (i, j) dans le labyrinthe
+     * @param i la position en x
+     * @param j la position en y
+     * @return la case à la position (i, j) du labyrinthe
+     */
     public Case getCase(int i, int j){
         return cases[i][j];
     }
 
+
+    /**
+     * Procédure permettant d'afficher le labyrinthe sur un terminal
+     * @param joueur le joueur
+     * @param monstre le monstre
+     */
     public void printLab(Joueur joueur, Monstre monstre){
         for(int i=0; i<size; i++){
             for(int j=0; j<size; j++){
@@ -138,20 +181,30 @@ public class Labyrinthe {
         }
     }
 
+
+    /**
+     * Fonction qui indique si le joueur a gagné
+     * @param joueur le joueur
+     * @return true si le joueua gagné, false sinon
+     */
     public boolean aGagne(Joueur joueur){
         return joueur.getPosX() == tresor.getPosX() && joueur.getPosY() == tresor.getPosY();
     }
 
 
-    public int getSize(){
-        return size;
-    }
-
+    /**
+     * Procédure qui permet de reset le labyrinthe, c'est-à-dire vider les cases
+     */
     private void clearLab(){
         cases = new Case[size][size];
         teleporteurs.clear();
     }
 
+
+    /**
+     * Procédure qui gère le cas où le joueur est sur un téléporteur
+     * @param joueur le joueur
+     */
     public void isOnTp(Joueur joueur){
         for(Teleporteur tp : teleporteurs.keySet()){
             if(tp.getPosX() == joueur.getPosX() && tp.getPosY() == joueur.getPosY()){

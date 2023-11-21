@@ -11,13 +11,29 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PersonnageView extends JPanel {
 
+/**
+ * Classe représentant la vue du Personnage
+ */
+public class PersonnageView extends JPanel {
+    /**
+     * Lsite des images du Personnage
+     */
     private ArrayList<BufferedImage> images = new ArrayList<>();
+    /**
+     * Le Personnage
+     */
     private Personnage p;
+    /**
+     * Le compteur pour alterner les sprites
+     */
     private int compteur = 0;
 
 
+    /**
+     * Constructeur de PersonnageView en fonction du Personnage p
+     * @param p
+     */
     public PersonnageView(Personnage p){
         this.p = p;
         try {
@@ -48,6 +64,10 @@ public class PersonnageView extends JPanel {
     }
 
 
+    /**
+     * procédure permettant d'afficher le Personnage
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -64,6 +84,11 @@ public class PersonnageView extends JPanel {
         this.gestionVie(g);
     }
 
+
+    /**
+     * Procédure qui gère l'affichage de la vie (points de vie) du Personnage
+     * @param g
+     */
     public void gestionVie(Graphics g){
         int pvMax = p.getPvMax();
         int pv = p.getPv();
@@ -84,6 +109,15 @@ public class PersonnageView extends JPanel {
 
     }
 
+
+    /**
+     * Procédure qui centre le texte text à la position (posx, posy) et avec la police d'écriture font
+     * @param g
+     * @param text
+     * @param posx
+     * @param posy
+     * @param font
+     */
     public void centrerTexte(Graphics g, String text, int posx, int posy , Font font) {
 
         Rectangle rect = new Rectangle(0,0,posx,posy);
