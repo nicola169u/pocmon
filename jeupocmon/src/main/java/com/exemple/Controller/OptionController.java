@@ -18,6 +18,10 @@ public class OptionController implements ActionListener {
      */
     private int niveau = 1;
     /**
+     * Le niveau de difficulte
+     */
+    private int difficulte = 1;
+    /**
      * La vue du menu
      */
     private MenuView menuView;
@@ -43,10 +47,10 @@ public class OptionController implements ActionListener {
         Object source = actionEvent.getSource();
         if (source == optionView.getExit()) {
             optionView.setVisible(false);
-            optionView.launchMenuView(niveau);
+            optionView.launchMenuView(niveau,difficulte);
         }else if(source == optionView.getSave()){
              this.niveau = Integer.parseInt(optionView.getSelectedButtonText(optionView.getGroupLevels()));
-
+             this.difficulte = Integer.parseInt(optionView.getSelectedButtonText(optionView.getGroupDifficulty()));
         }
     }
 }

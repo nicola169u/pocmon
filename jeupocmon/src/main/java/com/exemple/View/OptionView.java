@@ -62,7 +62,8 @@ public class OptionView extends JFrame {
      * @param width
      * @param height
      */
-    public OptionView(int width,int height) {
+    public OptionView(int width,int height , MenuView m) {
+        menuView = m;
         panel.setLayout(layout);
         addStageLevels();
         addDifficulty();
@@ -150,9 +151,13 @@ public class OptionView extends JFrame {
     /**
      * Procédure qui lance la vue du menu en fonction du niveau choisi
      * @param niveau
+     * @param difficulte
      */
-    public void launchMenuView(int niveau) {
-        menuView = new MenuView(300,80,niveau);
+    public void launchMenuView(int niveau, int difficulte) {
+
+        this.menuView.setNiveau(niveau);
+        this.menuView.setDifficulte(difficulte);
+        this.menuView.setVisible(true);
     }
 
 

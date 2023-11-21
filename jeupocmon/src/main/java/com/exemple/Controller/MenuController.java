@@ -18,20 +18,13 @@ public class MenuController implements ActionListener {
      * Le jeu
      */
     private Jeu jeu;
-    /**
-     * Le numéro de niveau
-     */
-    private int niveau;
-
 
     /**
      * Constructeur de MenuController avec la vue du Menu et le numero de niveau
      * @param menuView la vue du menu
-     * @param lvl le niveau actuel
      */
-    public MenuController(MenuView menuView, int lvl) {
+    public MenuController(MenuView menuView) {
         this.menuView = menuView;
-        this.niveau = lvl;
     }
 
     /**
@@ -45,7 +38,7 @@ public class MenuController implements ActionListener {
             System.exit(0);
         } else if (source == menuView.getPlay()) {
             menuView.setVisible(false);
-            jeu = new Jeu(niveau);
+            jeu = new Jeu(menuView.getNiveau(),menuView.getDifficulte());
             jeu.lancer();
             //TODO voir la logique
         } else if (source == menuView.getSettings()) {

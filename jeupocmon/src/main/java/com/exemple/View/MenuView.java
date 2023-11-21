@@ -19,6 +19,10 @@ public class MenuView extends JFrame {
      */
     private int niveau = 1;
     /**
+     * La difficulte choisie
+     */
+    private int difficulte = 1;
+    /**
      * La vue du menu des options
      */
     private OptionView optionView;
@@ -64,7 +68,7 @@ public class MenuView extends JFrame {
         panel.setLayout(layout);
         layout.addLayoutComponent(panel, "Menu");
 
-        menuController = new MenuController(this,niveau);
+        menuController = new MenuController(this);
         addButtons();
 
 
@@ -128,7 +132,23 @@ public class MenuView extends JFrame {
      * Procédure qui lance le menu des options
      */
     public void launchOptionView() {
-        optionView = new OptionView(300,200);
+        optionView = new OptionView(300,200,this);
+    }
+
+    /**
+     * Getter du niveau
+     * @return le niveau
+     */
+    public int getNiveau() {
+        return niveau;
+    }
+
+    /**
+     * Getter de la difficulte
+     * @return la difficulte
+     */
+    public int getDifficulte() {
+        return difficulte;
     }
 
     /**
@@ -137,5 +157,13 @@ public class MenuView extends JFrame {
      */
     public void setNiveau(int niveau) {
         this.niveau = niveau;
+    }
+
+    /**
+     * Setter de la difficulte
+     * @param difficulte
+     */
+    public void setDifficulte(int difficulte) {
+        this.difficulte = difficulte;
     }
 }

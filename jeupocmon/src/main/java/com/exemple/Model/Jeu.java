@@ -1,12 +1,10 @@
 package main.java.com.exemple.Model;
 
 import main.java.com.exemple.Controller.Observateur;
-import main.java.com.exemple.Model.*;
 import main.java.com.exemple.View.JeuView;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.java.com.exemple.View.JeuView;
 
 
 /**
@@ -31,6 +29,10 @@ public class Jeu {
      */
     private int niveau;
     /**
+     * La difficulte du jeu
+     */
+    private int difficulte;
+    /**
      * Le labyrinthe
      */
     private Labyrinthe lab;
@@ -51,17 +53,19 @@ public class Jeu {
     /**
      * Constructeur de Jeu en fonction du niveau
      * @param lvl le niveau à lancer
+     * @param difficulte
      */
-    public Jeu(int lvl) {
+    public Jeu(int lvl, int difficulte) {
         this.joueur = new Joueur(1, 1, 10);
         this.observateurs = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.niveau = lvl;
+        this.difficulte = difficulte;
         this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
         lab.lire_lab(niveau+"");
-        createMonstre();
+        createMonstre(difficulte);
         jeuView = new JeuView(this);
         this.compteurPas = 0;
     }
@@ -120,7 +124,7 @@ public class Jeu {
                     niveau++;
                     lab.lire_lab(niveau + "");
                     this.monstres.clear();
-                    createMonstre();
+                    createMonstre(difficulte);
                     //On repositionne le joueur
                     joueur.setPosX(1);
                     joueur.setPosY(1);
@@ -157,11 +161,33 @@ public class Jeu {
 
     /**
      * Fonction qui créé des nouveaux monstres et les ajoutent à la liste de monstres
+     * @param difficulte
      */
-    private void createMonstre(){
-        this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
-        this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
-        this.monstres.add(new Fantome(1, 9, 10, 2));
+    private void createMonstre(int difficulte){
+        switch (difficulte)
+        {
+            case 1:
+                this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
+                break;
+            case 2:
+                this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
+                this.monstres.add(new MonstreAleatoire(9, 9, 10, 2));
+                break;
+            case 3:
+                this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
+                this.monstres.add(new MonstreAleatoire(8, 8, 10, 2));
+                break;
+            case 4:
+                this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
+                this.monstres.add(new MonstreIntelligent(8, 8, 10, 2));
+                break;
+            case 5:
+                this.monstres.add(new MonstreIntelligent(9, 9, 10, 2));
+                this.monstres.add(new MonstreIntelligent(8, 8, 10, 2));
+                this.monstres.add(new Fantome(1, 9, 10, 2));
+                break;
+        }
+
         for(Monstre m : monstres){
             m.setLabyrinthe(lab);
             m.setJoueurCible(joueur);
