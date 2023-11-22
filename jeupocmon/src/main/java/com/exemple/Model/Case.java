@@ -66,5 +66,14 @@ public abstract class Case {
     public boolean estTeleporteur(){
         return false;
     }
+
+
+    /**
+     * Getter de la taille de la case
+     * @return la taille de la case
+     */
+    public static int getTAILLE() {
+        return TAILLE;
+    }
 }
 

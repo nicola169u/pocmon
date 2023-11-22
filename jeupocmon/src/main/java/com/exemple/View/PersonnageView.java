@@ -17,9 +17,29 @@ import java.util.ArrayList;
  */
 public class PersonnageView extends JPanel {
     /**
-     * Lsite des images du Personnage
+     * Liste des images du Personnage
      */
     private ArrayList<BufferedImage> images = new ArrayList<>();
+    /**
+     * Liste des images vers la gauche
+     */
+    private ArrayList<BufferedImage> imagesGauche = new ArrayList<>();
+    /**
+     * Liste des images vers la droite
+     */
+    private ArrayList<BufferedImage> imagesDroite = new ArrayList<>();
+    /**
+     * Liste des images vers le haut
+     */
+    private ArrayList<BufferedImage> imagesHaut = new ArrayList<>();
+    /**
+     * Liste des images vers le bas
+     */
+    private ArrayList<BufferedImage> imagesBas = new ArrayList<>();
+    /**
+     * Image du perso quand il est mort
+     */
+    private BufferedImage mort;
     /**
      * Le Personnage
      */
@@ -44,22 +64,51 @@ public class PersonnageView extends JPanel {
             }else if(p.estFantome()){
                 images.add(ImageIO.read(getClass().getResourceAsStream("/reaper/idle_g/frame_00_delay-0.08s.gif")));
             }else{ //C'est le joueur
-                BufferedImage bf1 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d1.gif"));
-                BufferedImage bf2 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d2.gif"));
-                BufferedImage bf3 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d3.gif"));
-                BufferedImage bf4 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d4.gif"));
+                BufferedImage bf1 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d1.png"));
+                BufferedImage bf2 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d2.png"));
+                BufferedImage bf3 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d3.png"));
+                BufferedImage bf4 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/d4.png"));
+                //On les ajoutent aux images de base
                 images.add(bf1);
                 images.add(bf2);
                 images.add(bf3);
                 images.add(bf4);
+                imagesDroite.add(bf1);
+                imagesDroite.add(bf2);
+                imagesDroite.add(bf3);
+                imagesDroite.add(bf4);
+                BufferedImage bf5 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/g1.png"));
+                BufferedImage bf6 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/g2.png"));
+                BufferedImage bf7 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/g3.png"));
+                BufferedImage bf8 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/g4.png"));
+                imagesGauche.add(bf5);
+                imagesGauche.add(bf6);
+                imagesGauche.add(bf7);
+                imagesGauche.add(bf8);
+                BufferedImage bf9 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/h1.png"));
+                BufferedImage bf10 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/h2.png"));
+                BufferedImage bf11 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/h3.png"));
+                BufferedImage bf12 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/h4.png"));
+                imagesHaut.add(bf9);
+                imagesHaut.add(bf10);
+                imagesHaut.add(bf11);
+                imagesHaut.add(bf12);
+                BufferedImage bf13 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/b1.png"));
+                BufferedImage bf14 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/b2.png"));
+                BufferedImage bf15 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/b3.png"));
+                BufferedImage bf16 = ImageIO.read(getClass().getResourceAsStream("/spriteperso/b4.png"));
+                imagesBas.add(bf13);
+                imagesBas.add(bf14);
+                imagesBas.add(bf15);
+                imagesBas.add(bf16);
             }
-            images.add(ImageIO.read(getClass().getResourceAsStream("/spriteperso/mort.png")));
+            mort = ImageIO.read(getClass().getResourceAsStream("/spriteperso/mort.png"));
         }catch (Exception e){
             e.printStackTrace();
         }
 
         this.p = p;
-        setPreferredSize(new Dimension(30, 30));
+        setPreferredSize(new Dimension(25, 25));
 
     }
 
@@ -74,10 +123,30 @@ public class PersonnageView extends JPanel {
         compteur = (compteur + 1)%images.size();
         if(images.size() > 0){
             if(p.isVivant()){
-                g.drawImage(images.get(0), 0, 0, getWidth(), getHeight(), this);
+                if(p.estMonstre()) {
+                    g.drawImage(images.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                }else{
+                    switch (p.getDernDirection()){
+                        case DROITE:
+                            g.drawImage(imagesDroite.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            break;
+                        case GAUCHE:
+                            g.drawImage(imagesGauche.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            break;
+                        case BAS:
+                            g.drawImage(imagesBas.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            break;
+                        case HAUT:
+                            g.drawImage(imagesHaut.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            break;
+                        default:
+                            g.drawImage(images.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            break;
+                    }
+                }
 
             }else{
-                g.drawImage(images.get(images.size()-1), 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(mort, 0, 0, getWidth(), getHeight(), this);
             }
 
         }

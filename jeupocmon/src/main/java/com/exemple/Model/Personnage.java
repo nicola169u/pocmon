@@ -37,6 +37,10 @@ public abstract class Personnage {
      * Variable qui indique si le Personnage est invulnérable
      */
     private boolean invulnerable;
+    /**
+     * Derniere direction prise par le joueur
+     */
+    private Direction dernDirection;
 
 
     /**
@@ -52,6 +56,7 @@ public abstract class Personnage {
         this.pv = pv;
         this.invulnerable = false;
         this.pvMax = pv;
+        this.dernDirection = Direction.DROITE;
     }
 
 
@@ -60,6 +65,7 @@ public abstract class Personnage {
      * @param direction la direction
      */
     public void avancer(Direction direction){
+        dernDirection = direction;
         switch (direction){
             case GAUCHE:
                 if(!labyrinthe.getCase(this.posX - 1, this.posY).estMur() && vivant){
@@ -311,4 +317,11 @@ public abstract class Personnage {
     }
 
 
+    /**
+     * Getter de la dernière direction prise par le perso
+     * @return la dernière direction prise par le perso
+     */
+    public Direction getDernDirection() {
+        return dernDirection;
+    }
 }
