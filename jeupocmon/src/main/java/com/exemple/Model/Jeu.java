@@ -56,7 +56,7 @@ public class Jeu {
      * @param difficulte
      */
     public Jeu(int lvl, int difficulte) {
-        this.joueur = new Joueur(1, 1, 20);
+        this.joueur = new Joueur(1, 1, 30);
         this.observateurs = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.niveau = lvl;
@@ -107,6 +107,9 @@ public class Jeu {
         lab.isOnTp(joueur);
         lab.trap(joueur);
         lab.isOnMine(joueur);
+        lab.isOnPotionForce(joueur);
+        lab.isOnPotionVie(joueur);
+        lab.isOnEtoile(joueur);
         for(Monstre m : monstres){
             m.comportement();
             joueur.attaquer(m);
@@ -132,6 +135,7 @@ public class Jeu {
                     joueur.setPosY(1);
                     //On lui redonne ses points de vie
                     joueur.revivre();
+                    joueur.resetDegat();
                     jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");

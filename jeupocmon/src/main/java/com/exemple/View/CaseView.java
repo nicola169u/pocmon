@@ -1,7 +1,6 @@
 package main.java.com.exemple.View;
 
-import main.java.com.exemple.Model.Case;
-import main.java.com.exemple.Model.CaseMine;
+import main.java.com.exemple.Model.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -46,9 +45,18 @@ public class CaseView extends JPanel {
             }else if(c.estPiege()){
                 test = ImageIO.read(getClass().getResourceAsStream("/piege.png"));
 
+            }else if(c.estPotionForce()){
+                test = ImageIO.read(getClass().getResourceAsStream("/potionForce.png"));
+
+            }else if(c.estPotionVie()){
+                test = ImageIO.read(getClass().getResourceAsStream("/potionVie.png"));
+
+            }else if(c.estEtoile()){
+
+                test = ImageIO.read(getClass().getResourceAsStream("/etoile.png"));
+
             }else{
                 test = ImageIO.read(getClass().getResourceAsStream("/sol.png"));
-
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -82,8 +90,29 @@ public class CaseView extends JPanel {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+            }else if(c.estPotionVie() && ((PotionVie) c).isRamasse()){
+                try {
+                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else if(c.estPotionForce() && ((PotionForce) c).isRamasse()){
+                try {
+                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }else if(c.estEtoile() && ((Etoile) c).isRamasse()){
+                try {
+                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }else{
                 g.drawImage(test, 0, 0, getWidth(), getHeight(), this);
+
             }
         }
 //        g.setColor(color);

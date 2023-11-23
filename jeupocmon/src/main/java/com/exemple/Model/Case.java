@@ -83,5 +83,17 @@ public abstract class Case {
     public boolean estPiege(){
         return false;
     }
+
+    public boolean estPotionForce(){
+        return false;
+    }
+
+    public boolean estPotionVie(){
+        return false;
+    }
+
+    public boolean estEtoile(){
+        return false;
+    }
 }
 

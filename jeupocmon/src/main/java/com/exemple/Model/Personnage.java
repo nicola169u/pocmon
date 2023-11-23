@@ -316,6 +316,9 @@ public abstract class Personnage {
         this.invulnerable = a;
     }
 
+    public boolean isInvulnerable() {
+        return invulnerable;
+    }
 
     /**
      * Getter de la dernière direction prise par le perso

@@ -35,6 +35,12 @@ public class Labyrinthe {
 
     private List<CaseMine> mines;
 
+    private List<PotionForce> forces;
+
+    private List<PotionVie> vies;
+
+    private Etoile etoile;
+
 
     /**
      * Constructeur de Labyrinthe en fonction de sa taille
@@ -46,6 +52,9 @@ public class Labyrinthe {
         teleporteurs = new HashMap<>();
         this.pieges = new ArrayList<>();
         this.mines = new ArrayList<>();
+        this.forces = new ArrayList<>();
+        this.vies = new ArrayList<>();
+
     }
 
 
@@ -79,27 +88,41 @@ public class Labyrinthe {
                         char c = l[i];
                         if (c == 35) {
                             cases[i][ligne] = new Mur(i, ligne);
-                        } else if(c == 84){
+                        } else if (c == 84) {
                             tresor = new Tresor(i, ligne);
                             cases[i][ligne] = tresor;
-                        } else if(c == 88){
+                        } else if (c == 88) {
                             Teleporteur teleporteur = new Teleporteur(i, ligne);
                             cases[i][ligne] = teleporteur;
-                            if(tp1 == null){
+                            if (tp1 == null) {
                                 tp1 = teleporteur;
-                            }else{
+                            } else {
                                 tp2 = teleporteur;
                             }
-                        }else if(c == 77){
+                        } else if (c == 77) {
                             CaseMine cm = new CaseMine(i, ligne);
                             this.mines.add(cm);
                             cases[i][ligne] = cm;
-                        }else if(c == 80){
+                        } else if (c == 80) {
                             CasePiege cp = new CasePiege(i, ligne);
                             this.pieges.add(cp);
                             cases[i][ligne] = cp;
+                        } else if (c == 85){
+                            PotionForce pf = new PotionForce(i, ligne);
+                            this.forces.add(pf);
+                            cases[i][ligne] = pf;
+
+                        }else if (c == 86){
+                            PotionVie pv = new PotionVie(i, ligne);
+                            this.vies.add(pv);
+                            cases[i][ligne] = pv;
+                        }else if(c == 69){
+                            this.etoile = new Etoile(i, ligne);
+                            cases[i][ligne] = this.etoile;
+
                         }else{
                             cases[i][ligne] = new CaseVide(i, ligne);
+
                         }
                     }
                     ligne++;
@@ -152,8 +175,22 @@ public class Labyrinthe {
                         this.pieges.add(cp);
 
                         cases[i][ligne] = cp;
+                    }else if (c == 85){
+                        PotionForce pf = new PotionForce(i, ligne);
+                        this.forces.add(pf);
+                        cases[i][ligne] = pf;
+
+                    }else if (c == 86){
+                        PotionVie pv = new PotionVie(i, ligne);
+                        this.vies.add(pv);
+                        cases[i][ligne] = pv;
+                    }else if(c == 69){
+                        this.etoile = new Etoile(i, ligne);
+                        cases[i][ligne] = this.etoile;
+
                     }else{
                         cases[i][ligne] = new CaseVide(i, ligne);
+
                     }
                 }
                 ligne++;
@@ -256,6 +293,46 @@ public class Labyrinthe {
                 mine.setExplosion(true);
             }
         }
+    }
+
+    public void isOnPotionForce(Joueur joueur){
+        ArrayList<PotionForce> del = new ArrayList<>();
+        for(PotionForce pf : this.forces){
+            if(pf.getPosX() == joueur.getPosX() && joueur.getPosY() == pf.getPosY() && !pf.isRamasse()){
+                joueur.setDegat(10);
+                del.add(pf);
+                pf.setRamasse(true);
+            }
+        }
+
+        for(PotionForce pf : del){
+            this.forces.remove(pf);
+        }
+    }
+
+    public void isOnPotionVie(Joueur joueur){
+        ArrayList<PotionVie> del = new ArrayList<>();
+        for(PotionVie pv : this.vies){
+            if(pv.getPosX() == joueur.getPosX() && joueur.getPosY() == pv.getPosY() && !pv.isRamasse()){
+                joueur.soigner(10);
+                del.add(pv);
+                pv.setRamasse(true);
+            }
+        }
+
+        for(PotionVie pv : del){
+            this.vies.remove(pv);
+        }
+    }
+
+    public void isOnEtoile(Joueur joueur){
+        if(this.etoile != null){
+            if(this.etoile.getPosX() == joueur.getPosX() && joueur.getPosY() == this.etoile.getPosY()){
+                this.etoile.setRamasse(true);
+                joueur.setInvulnerable(true);
+            }
+        }
+
     }
 
 }

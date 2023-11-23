@@ -128,16 +128,52 @@ public class PersonnageView extends JPanel {
                 }else{
                     switch (p.getDernDirection()){
                         case DROITE:
-                            g.drawImage(imagesDroite.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            if(p.isInvulnerable()){
+                                Color gold = new Color(255, 215, 0);
+                                int rgb = gold.getRGB();
+                                imagesDroite.get(compteur).setRGB(p.getPosX(),p.getPosY(), rgb);
+                                g.drawImage(imagesDroite.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }else{
+                                g.drawImage(imagesDroite.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }
                             break;
                         case GAUCHE:
-                            g.drawImage(imagesGauche.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            if(p.isInvulnerable()){
+                                Color gold = new Color(255, 215, 0);
+                                int rgb = gold.getRGB();
+                                imagesGauche.get(compteur).setRGB(p.getPosX(),p.getPosY(), rgb);
+                                g.drawImage(imagesGauche.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }else{
+                                g.drawImage(imagesGauche.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }
                             break;
                         case BAS:
-                            g.drawImage(imagesBas.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            if(p.isInvulnerable()){
+                                Color gold = new Color(255, 215, 0);
+                                int rgb = gold.getRGB();
+                                imagesBas.get(compteur).setRGB(p.getPosX(),p.getPosY(), rgb);
+                                g.drawImage(imagesBas.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }else{
+                                g.drawImage(imagesBas.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }
                             break;
                         case HAUT:
-                            g.drawImage(imagesHaut.get(compteur), 0, 0, getWidth(), getHeight(), this);
+                            if(p.isInvulnerable()){
+                                Color gold = new Color(255, 215, 0);
+                                int rgb = gold.getRGB();
+                                imagesHaut.get(compteur).setRGB(p.getPosX(),p.getPosY(), rgb);
+                                g.drawImage(imagesHaut.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }else{
+                                g.drawImage(imagesHaut.get(compteur), 0, 0, getWidth(), getHeight(), this);
+
+                            }
                             break;
                         default:
                             g.drawImage(images.get(compteur), 0, 0, getWidth(), getHeight(), this);

@@ -72,6 +72,11 @@ public class Joueur extends Personnage {
      * Permet de reset les dégâts du Joueur
      */
     public void resetDegat() {
-        this.degat = 1;
+        this.degat = 5;
+    }
+
+
+    public void setDegat(int d){
+        this.degat = d;
     }
 }
