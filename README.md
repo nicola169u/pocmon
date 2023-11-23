@@ -5,6 +5,6 @@ Voici le lien vers le document regroupant ce qui concern les Sprints (spécifica
 # Compilation en ligne de commande MAVEN
 Pour comipler : mvn compile\
 Pour build le jar : mvn package\
-Pour executer le jar : java -cp .\jeupocmon-1.0.jar main.java.com.exemple.Model.Monstre.Jeu\
+Pour executer le jar : java -cp .\jeupocmon-1.0.jar eupocmon-1.0.jar main.java.com.exemple.Main\
 
 ou pour tout faire en même temps (dans le répertoire jeupocmon) : ./launch.sh
