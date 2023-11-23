@@ -56,7 +56,7 @@ public class Jeu {
      * @param difficulte
      */
     public Jeu(int lvl, int difficulte) {
-        this.joueur = new Joueur(1, 1, 10);
+        this.joueur = new Joueur(1, 1, 20);
         this.observateurs = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.niveau = lvl;
@@ -105,6 +105,8 @@ public class Jeu {
     public void boucler(){
         //On verifie si le joueur est sur un teleporteur
         lab.isOnTp(joueur);
+        lab.trap(joueur);
+        lab.isOnMine(joueur);
         for(Monstre m : monstres){
             m.comportement();
             joueur.attaquer(m);
@@ -144,7 +146,7 @@ public class Jeu {
         //On met à jour l'interface graphique
         jeuView.rafraichirAffichage();
         if(joueur.isMort()){
-            fin("Le joueur s'est fait piétiner par le monstre !!");
+            fin("Le joueur est mort..");
             System.exit(0);
         }
     }

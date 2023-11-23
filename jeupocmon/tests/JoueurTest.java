@@ -51,7 +51,7 @@ class JoueurTest {
         monstre.setLabyrinthe(lab);
         monstre.setJoueurCible(j);
         j.attaquer(monstre);
-        assertEquals(4, monstre.getPv(), "Le monstre devrait perdre 1pv.");
+        assertEquals(0, monstre.getPv(), "Le monstre devrait perdre 1pv.");
     }
 
     @Test

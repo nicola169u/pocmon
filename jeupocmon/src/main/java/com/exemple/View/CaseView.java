@@ -1,6 +1,7 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Model.Case;
+import main.java.com.exemple.Model.CaseMine;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -39,8 +40,15 @@ public class CaseView extends JPanel {
                 test = ImageIO.read(getClass().getResourceAsStream("/tresor.png"));
             }else if(c.estTeleporteur()){
                 test = ImageIO.read(getClass().getResourceAsStream("/porte.png"));
+            }else if (c.estMine()){
+                test = ImageIO.read(getClass().getResourceAsStream("/mine.png"));
+
+            }else if(c.estPiege()){
+                test = ImageIO.read(getClass().getResourceAsStream("/piege.png"));
+
             }else{
                 test = ImageIO.read(getClass().getResourceAsStream("/sol.png"));
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -68,7 +76,15 @@ public class CaseView extends JPanel {
         super.paintComponent(g);
         // Dessine l'image au lieu de remplir un rectangle
         if (test != null) {
-            g.drawImage(test, 0, 0, getWidth(), getHeight(), this);
+            if(c.estMine() && ((CaseMine) c).exploded()){
+                try {
+                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/mineDesac.png")), 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                g.drawImage(test, 0, 0, getWidth(), getHeight(), this);
+            }
         }
 //        g.setColor(color);
 //        g.fillRect(0, 0, getWidth(), getHeight());

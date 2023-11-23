@@ -10,7 +10,7 @@ public class MonstreTest {
         Joueur j = new Joueur(6,7, 10);
         MonstreAleatoire m = new MonstreAleatoire(5,5, 5, 1);
         m.setJoueurCible(j);
-        Labyrinthe labyrinthe = new Labyrinthe(10);
+        Labyrinthe labyrinthe = new Labyrinthe(20);
         labyrinthe.lire_lab(1+"");
         m.setLabyrinthe(labyrinthe);
         while(!m.attaquer()){
@@ -40,7 +40,7 @@ public class MonstreTest {
         Monstre m = new MonstreIntelligent(8, 8, 10, 1);
         Joueur j = new Joueur(1, 1, 10);
         m.setJoueurCible(j);
-        Labyrinthe labyrinthe = new Labyrinthe(10);
+        Labyrinthe labyrinthe = new Labyrinthe(20);
         labyrinthe.lire_lab(1+"");
         m.setLabyrinthe(labyrinthe);
         j.setLabyrinthe(labyrinthe);

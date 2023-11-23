@@ -75,5 +75,13 @@ public abstract class Case {
     public static int getTAILLE() {
         return TAILLE;
     }
+
+    public boolean estMine(){
+        return false;
+    }
+
+    public boolean estPiege(){
+        return false;
+    }
 }
 

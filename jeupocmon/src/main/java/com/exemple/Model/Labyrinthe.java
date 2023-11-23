@@ -31,6 +31,11 @@ public class Labyrinthe {
     private HashMap<Teleporteur, Teleporteur> teleporteurs;
 
 
+    private List<CasePiege> pieges;
+
+    private List<CaseMine> mines;
+
+
     /**
      * Constructeur de Labyrinthe en fonction de sa taille
      * @param size la taille du labyrinthe (nombre de case en largeur et hauteur)
@@ -39,6 +44,8 @@ public class Labyrinthe {
         this.size = size;
         cases = new Case[size][size];
         teleporteurs = new HashMap<>();
+        this.pieges = new ArrayList<>();
+        this.mines = new ArrayList<>();
     }
 
 
@@ -83,7 +90,15 @@ public class Labyrinthe {
                             }else{
                                 tp2 = teleporteur;
                             }
-                        }else {
+                        }else if(c == 77){
+                            CaseMine cm = new CaseMine(i, ligne);
+                            this.mines.add(cm);
+                            cases[i][ligne] = cm;
+                        }else if(c == 80){
+                            CasePiege cp = new CasePiege(i, ligne);
+                            this.pieges.add(cp);
+                            cases[i][ligne] = cp;
+                        }else{
                             cases[i][ligne] = new CaseVide(i, ligne);
                         }
                     }
@@ -128,7 +143,16 @@ public class Labyrinthe {
                         }else{
                             tp2 = teleporteur;
                         }
-                    }else {
+                    }else if(c == 77){
+                        CaseMine cm = new CaseMine(i, ligne);
+                        this.mines.add(cm);
+                        cases[i][ligne] = cm;
+                    }else if(c == 80){
+                        CasePiege cp = new CasePiege(i, ligne);
+                        this.pieges.add(cp);
+
+                        cases[i][ligne] = cp;
+                    }else{
                         cases[i][ligne] = new CaseVide(i, ligne);
                     }
                 }
@@ -213,6 +237,23 @@ public class Labyrinthe {
                 joueur.setPosX(x);
                 joueur.setPosY(y);
                 break;
+            }
+        }
+    }
+
+    public void trap(Joueur joueur){
+        for(CasePiege piege : this.pieges){
+            if(joueur.getPosX() == piege.getPosX() && joueur.getPosY() == piege.getPosY()){
+                joueur.subirDegat(5);
+            }
+        }
+    }
+
+    public void isOnMine(Joueur joueur){
+        for(CaseMine mine : this.mines){
+            if(joueur.getPosX() == mine.getPosX() && joueur.getPosY() == mine.getPosY() && !mine.exploded()){
+                joueur.subirDegat(10);
+                mine.setExplosion(true);
             }
         }
     }
