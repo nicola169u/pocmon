@@ -58,13 +58,14 @@ public class JeuView extends JFrame implements Runnable{
             for (int j = 0; j < sizeLab; j++) {
                     Case currentCase = jeu.getLab().getCase(j, i);
                     CaseView panel = new CaseView(currentCase);
+                    if(j == joueur.getPosX() && i == joueur.getPosY()){
+                        panel.add(p);
+                    }
                     for(Monstre m : monstre){
                         if(j == m.getPosX() && i == m.getPosY()){
                             PersonnageView vm = new PersonnageView(m);
                             viewmonstres.add(vm);
                             panel.add(vm);
-                        }else if(j == joueur.getPosX() && i == joueur.getPosY()){
-                            panel.add(p);
                         }
                     }
 

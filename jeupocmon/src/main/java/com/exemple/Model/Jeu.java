@@ -136,6 +136,9 @@ public class Jeu {
                     //On lui redonne ses points de vie
                     joueur.revivre();
                     joueur.resetDegat();
+                    if(joueur.isInvulnerable()){
+                        joueur.setInvulnerable(false);
+                    }
                     jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");
