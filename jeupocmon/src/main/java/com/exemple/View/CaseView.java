@@ -36,7 +36,7 @@ public class CaseView extends JPanel {
             if(c.estMur()){
                 test = ImageIO.read(getClass().getResourceAsStream("/wall.png"));
             }else if (c.estTresor()){
-                test = ImageIO.read(getClass().getResourceAsStream("/amulette.png"));
+                //test = ImageIO.read(getClass().getResourceAsStream("/amulette.png"));
             }else if(c.estTeleporteur()){
                 test = ImageIO.read(getClass().getResourceAsStream("/porte.png"));
             }else if (c.estMine()){

@@ -1,13 +1,12 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.MenuController;
-import main.java.com.exemple.Model.Jeu;
-import main.java.com.exemple.Model.Monstre;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 /**
@@ -39,44 +38,42 @@ public class MenuView extends JFrame {
      */
     private JButton exit = new JButton("Quitter");
     /**
-     * Le conteneur des éléments
-     */
-    private CardLayout layout = new CardLayout();
-    /**
-     * Le panneau des éléments
-     */
-    private JPanel panel = new JPanel();
-    /**
-     * Le panneau du menu
-     */
-    private JPanel menu = new JPanel();
-    /**
      * Le controller du menu
      */
     private MenuController menuController;
 
+    private BufferedImage background;
+
 
     /**
      * Constructeur de MenuView en fonction de la taille et du niveau
+     *
      * @param width
      * @param height
      * @param lvl
      */
-    public MenuView(int width,int height,int lvl)
-    {
+    public MenuView(int width, int height, int lvl) {
         this.niveau = lvl;
-        panel.setLayout(layout);
-        layout.addLayoutComponent(panel, "Menu");
 
+        this.setContentPane(new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                try {
+                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sunset_background.jpg")), 0, 0, getWidth(), getHeight(), null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         menuController = new MenuController(this);
-        addButtons();
-
-
+        addToPane(getContentPane());
+        pack();
         setSize(width, height);
-
     }
 
-    public void startMenu(){
+    public void startMenu() {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -85,22 +82,49 @@ public class MenuView extends JFrame {
         requestFocus();
     }
 
-
     /**
      * Procédure privée qui ajoute les boutons au panneau
      */
-    private void addButtons() {
+    private void addToPane(Container pane) {
+        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+        pane.add(Box.createVerticalStrut(200));
+        addButtons(play, pane, menuController);
+        addButtons(settings, pane, menuController);
+        addButtons(exit, pane, menuController);
 
-        play.addActionListener(menuController);
-        settings.addActionListener(menuController);
-        exit.addActionListener(menuController);
-        menu.add(play);
-        menu.add(settings);
-        menu.add(exit);
-        panel.add(menu,"Menu");
-        add(panel);
-        layout.show(panel,"Menu");
+    }
 
+    /**
+     * Procédure privée pour ajoute des boutons a un conteneur
+     */
+    private void addButtons(JButton button, Container container, MenuController menu) {
+        button.setForeground(Color.WHITE);
+
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+
+        button.setHorizontalAlignment(SwingConstants.RIGHT);
+        button.setHorizontalTextPosition(SwingConstants.RIGHT);
+
+        if (button.getText() == "Jouer") {
+            setButtonIcon(button,"/icon_s.png");
+        } else if (button.getText() == "Option") {
+            setButtonIcon(button,"/settings.png");
+        } else if (button.getText() == "Quitter") {
+            setButtonIcon(button,"/exit.png");
+        }
+
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.addActionListener(menu);
+        container.add(button);
+        container.add(Box.createVerticalStrut(10));
+    }
+
+    private void setButtonIcon(JButton button,String text){
+        button.setIcon(new ImageIcon(getClass().getResource(text)));
+        button.setRolloverIcon(new ImageIcon(getClass().getResource("/money_s.png")));
     }
 
 
@@ -132,7 +156,7 @@ public class MenuView extends JFrame {
      * Procédure qui lance le menu des options
      */
     public void launchOptionView() {
-        optionView = new OptionView(300,200,this);
+        optionView = new OptionView(750,750,this);
     }
 
     /**
