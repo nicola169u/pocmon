@@ -50,6 +50,25 @@ public class Jeu {
     private int compteurPas;
 
 
+    Thread threadMonstres = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while(true){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                for(Monstre m : monstres){
+                    m.comportement();
+                    joueur.attaquer(m);
+                }
+                jeuView.rafraichirAffichage();
+            }
+        }
+    });
+
+
     /**
      * Constructeur de Jeu en fonction du niveau
      * @param lvl le niveau à lancer
@@ -96,6 +115,7 @@ public class Jeu {
     public void lancer() {
         jeuView.afficherMessage("Bienvenue sur Pocmon !");
         jeuView.start();
+        threadMonstres.start();
     }
 
 
@@ -110,10 +130,7 @@ public class Jeu {
         lab.isOnPotionForce(joueur);
         lab.isOnPotionVie(joueur);
         lab.isOnEtoile(joueur);
-        for(Monstre m : monstres){
-            m.comportement();
-            joueur.attaquer(m);
-        }
+
 
         this.compteurPas++;
         if(this.compteurPas > 15){

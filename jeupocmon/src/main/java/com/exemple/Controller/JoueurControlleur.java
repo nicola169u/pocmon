@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import main.java.com.exemple.Model.Joueur;
 import main.java.com.exemple.Tools.Direction;
 import main.java.com.exemple.View.JeuView;
+import main.java.com.exemple.View.PersonnageView;
 
 
 /**
@@ -59,6 +60,7 @@ public class JoueurControlleur extends Observateur implements KeyListener {
             joueur.avancer(Direction.DROITE);
         }
 
+        jeuView.getPJoueur().updateCompteur();
         jeuView.getJeu().boucler();
 
         //jeuView.rafraichirAffichage();

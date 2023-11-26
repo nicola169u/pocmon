@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Classe représentant la vue du Personnage
  */
 public class PersonnageView extends JPanel {
+    public static final int NBSPRITE = 4;
     /**
      * Le Personnage
      */
@@ -22,9 +23,7 @@ public class PersonnageView extends JPanel {
     /**
      * Le compteur pour alterner les sprites
      */
-    private int compteur = 0;
-
-    private static int NBSPRITE = 4;
+    private int compteur = 1;
 
 
 
@@ -54,7 +53,6 @@ public class PersonnageView extends JPanel {
             image = ImageManager.getInstance().getImage(p.getType());
         }else{
             //C'est le joueur donc on implémente le compteur
-            compteur = ((compteur + 1) % NBSPRITE) + 1;
             image = ImageManager.getInstance().getImage(p.getType() + compteur);
             if(p.isInvulnerable()){
                 //Si invulnerable, on met le filtre gold
@@ -138,4 +136,7 @@ public class PersonnageView extends JPanel {
         originalImage.getGraphics().drawImage(filteredImage, 0, 0, null);
     }
 
+    public void updateCompteur() {
+        this.compteur = (compteur%NBSPRITE) + 1;
+    }
 }

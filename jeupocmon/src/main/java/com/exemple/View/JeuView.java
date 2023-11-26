@@ -46,10 +46,7 @@ public class JeuView extends JFrame implements Runnable{
         Joueur joueur = jeu.getJoueur();
         ArrayList<Monstre> monstre = jeu.getMonstre();
 
-         p = new PersonnageView(joueur);
-         //m = new PersonnageView(monstre);
-
-
+        p = new PersonnageView(joueur);
 
         setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,6 +125,7 @@ public class JeuView extends JFrame implements Runnable{
         ArrayList<Monstre> monstre = jeu.getMonstre();
 
 
+
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
                 CaseView caseView = labView.getCase(i,j);
@@ -151,11 +149,14 @@ public class JeuView extends JFrame implements Runnable{
 
             }
         }
+
+
         p.revalidate();
         p.repaint();
 
         this.revalidate();
         this.repaint();
+
     }
 
 
@@ -199,5 +200,9 @@ public class JeuView extends JFrame implements Runnable{
             this.rafraichirAffichage();
 
         }
+    }
+
+    public PersonnageView getPJoueur() {
+        return p;
     }
 }
