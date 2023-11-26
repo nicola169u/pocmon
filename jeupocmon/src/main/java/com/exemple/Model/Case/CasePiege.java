@@ -1,6 +1,8 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
-public class CasePiege extends Case{
+import main.java.com.exemple.Model.Case.Case;
+
+public class CasePiege extends Case {
 
         /**
          * constructeur
@@ -23,5 +25,10 @@ public class CasePiege extends Case{
     @Override
     public boolean estPiege() {
         return true;
+    }
+
+    @Override
+    public String getType() {
+        return "Piege";
     }
 }

@@ -27,6 +27,23 @@ public class Joueur extends Personnage {
         setVitesse(5);
     }
 
+    @Override
+    public String getType() {
+        if(isMort()){
+            return "Mort";
+        }
+        switch (getDernDirection()){
+            case GAUCHE:
+                return "JoueurG";
+            case DROITE:
+                return "JoueurD";
+            case BAS:
+                return "JoueurB";
+            default:
+                return "JoueurH";
+        }
+    }
+
     /**
      * Procédure qui gère l'attaque du joueur contre le monstre m
      * @param m le monstre

@@ -3,7 +3,7 @@ package main.java.com.exemple.Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.java.com.exemple.Model.Joueur;
-import main.java.com.exemple.Model.Direction;
+import main.java.com.exemple.Tools.Direction;
 import main.java.com.exemple.View.JeuView;
 
 

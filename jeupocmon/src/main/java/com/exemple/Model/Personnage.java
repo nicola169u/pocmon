@@ -1,6 +1,8 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.Tools.Direction;
+
 /**
  * Classe représentant un Personnage
  */
@@ -327,4 +329,6 @@ public abstract class Personnage {
     public Direction getDernDirection() {
         return dernDirection;
     }
+
+    public abstract String getType();
 }

@@ -1,6 +1,6 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
-import main.java.com.exemple.Model.Case;
+import main.java.com.exemple.Model.Case.Case;
 
 /**
  * Classe représentant un Mur
@@ -22,5 +22,10 @@ public class Mur extends Case {
     @Override
     public boolean estMur() {
         return true;
+    }
+
+    @Override
+    public String getType() {
+        return "Mur";
     }
 }

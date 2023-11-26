@@ -1,4 +1,4 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Tools;
 
 /**
  * Enumération des différentes directions pouvant être prises par un personnage

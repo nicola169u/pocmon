@@ -1,9 +1,5 @@
 package main.java.com.exemple.View;
 
-import main.java.com.exemple.Model.Case;
-
-import javax.swing.*;
-
 /**
  * Classe qui représente la vue du labyrinthe
  * Plus précisement, elle regroupe les vues de toutes les cases du labyrinthe

@@ -1,6 +1,8 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
-public class PotionVie extends Case{
+import main.java.com.exemple.Model.Case.Case;
+
+public class PotionVie extends Case {
 
     private boolean ramasse;
 
@@ -13,6 +15,14 @@ public class PotionVie extends Case{
     @Override
     public boolean estPotionVie() {
         return true;
+    }
+
+    @Override
+    public String getType() {
+        if(ramasse){
+            return "Default";
+        }
+        return "PotionVie";
     }
 
 

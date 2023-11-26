@@ -144,5 +144,5 @@ public abstract class Monstre extends Personnage implements Runnable{
     }
 
 
-
+    abstract public String getType();
 }

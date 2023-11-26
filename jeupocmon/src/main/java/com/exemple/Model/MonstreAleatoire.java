@@ -1,6 +1,8 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.Tools.Direction;
+
 /**
  * Classe représentant un monstre non-intelligent c'est-à-dire se déplacantde manière aléatoire
  */
@@ -44,6 +46,14 @@ public class MonstreAleatoire extends Monstre{
 //        }
         attaquer();
 
+    }
+
+    @Override
+    public String getType() {
+        if(isMort()){
+            return "Mort";
+        }
+        return "MonstreAleatoire";
     }
 
 

@@ -1,4 +1,6 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
+
+import main.java.com.exemple.Model.Case.Case;
 
 /**
  * Classe représentant une case vide du labyrinthe
@@ -11,5 +13,10 @@ public class CaseVide extends Case {
      */
     public CaseVide(int posX, int posY) {
         super(posX, posY);
+    }
+
+    @Override
+    public String getType() {
+        return "Vide";
     }
 }

@@ -1,6 +1,6 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
-import main.java.com.exemple.Model.Case;
+import main.java.com.exemple.Model.Case.Case;
 
 /**
  * Classe représentant un Tresor
@@ -23,5 +23,10 @@ public class Tresor extends Case {
     @Override
     public boolean estTresor() {
         return true;
+    }
+
+    @Override
+    public String getType() {
+        return "Tresor";
     }
 }

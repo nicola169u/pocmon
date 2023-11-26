@@ -1,4 +1,4 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
 /**
  * Classe abstraite Case
@@ -95,5 +95,11 @@ public abstract class Case {
     public boolean estEtoile(){
         return false;
     }
+
+    /**
+     * Retourne le type d'une case
+     * @return le type d'une case
+     */
+    public abstract String getType();
 }
 

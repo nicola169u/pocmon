@@ -1,6 +1,8 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
-public class Etoile extends Case{
+import main.java.com.exemple.Model.Case.Case;
+
+public class Etoile extends Case {
 
     private boolean ramasse;
 
@@ -16,6 +18,14 @@ public class Etoile extends Case{
 
     public boolean estEtoile(){
         return true;
+    }
+
+    @Override
+    public String getType() {
+        if(ramasse){
+            return "Default";
+        }
+        return "Etoile";
     }
 
     public boolean isRamasse() {

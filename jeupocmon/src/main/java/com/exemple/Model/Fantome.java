@@ -1,5 +1,7 @@
 package main.java.com.exemple.Model;
 
+import main.java.com.exemple.Tools.Direction;
+
 /**
  * Classe représentant un Fantome
  */
@@ -85,4 +87,11 @@ public class Fantome extends MonstreIntelligent {
 
     }
 
+    @Override
+    public String getType() {
+        if(isMort()){
+            return "Mort";
+        }
+        return "Fantome";
+    }
 }

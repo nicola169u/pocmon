@@ -2,6 +2,7 @@ package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.JoueurControlleur;
 import main.java.com.exemple.Model.*;
+import main.java.com.exemple.Model.Case.Case;
 
 import javax.swing.*;
 import java.awt.*;

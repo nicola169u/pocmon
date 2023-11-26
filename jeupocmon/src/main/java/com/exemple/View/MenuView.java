@@ -1,6 +1,7 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.MenuController;
+import main.java.com.exemple.Tools.ImageManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,8 +43,6 @@ public class MenuView extends JFrame {
      */
     private MenuController menuController;
 
-    private BufferedImage background;
-
 
     /**
      * Constructeur de MenuView en fonction de la taille et du niveau
@@ -59,14 +58,10 @@ public class MenuView extends JFrame {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                try {
-                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sunset_background.jpg")), 0, 0, getWidth(), getHeight(), null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                g.drawImage(ImageManager.getInstance().getImage("MenuBackground"), 0, 0, getWidth(), getHeight(), null);
             }
         });
-        setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
+        setIconImage(new ImageIcon(ImageManager.getInstance().getImage("MenuIcon")).getImage());
         menuController = new MenuController(this);
         addToPane(getContentPane());
         pack();

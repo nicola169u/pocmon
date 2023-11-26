@@ -1,7 +1,7 @@
 package main.java.com.exemple.Model;
 
 
-import main.java.com.exemple.Model.Mur;
+import main.java.com.exemple.Model.Case.*;
 
 import java.io.*;
 import java.util.ArrayList;

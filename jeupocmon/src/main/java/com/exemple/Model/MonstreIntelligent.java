@@ -1,6 +1,8 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.Tools.Direction;
+
 /**
  * Classe représentant un MonstreIntelligent c'est-à-dire qui cherche à atteindre le joueur
  */
@@ -88,6 +90,14 @@ public class MonstreIntelligent extends Monstre{
 
         avancer(deplacementEnCours);
         attaquer();
+    }
+
+    @Override
+    public String getType() {
+        if(isMort()){
+            return "Mort";
+        }
+        return "MonstreIntelligent";
     }
 
 

@@ -1,10 +1,12 @@
-package main.java.com.exemple.Model;
+package main.java.com.exemple.Model.Case;
 
+
+import main.java.com.exemple.Model.Case.Case;
 
 /**
  * Classe représentant un Téléporteur
  */
-public class Teleporteur extends Case{
+public class Teleporteur extends Case {
 
     /**
      * Constructeur de Teleporteur en fonction de sa position dans le labyrinthe
@@ -23,6 +25,11 @@ public class Teleporteur extends Case{
     @Override
     public boolean estTeleporteur(){
         return true;
+    }
+
+    @Override
+    public String getType() {
+        return "Teleporteur";
     }
 
 }

@@ -1,12 +1,15 @@
 package main.java.com.exemple.View;
 
-import main.java.com.exemple.Model.*;
+import main.java.com.exemple.Model.Case.*;
+import main.java.com.exemple.Tools.ImageManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -24,7 +27,22 @@ public class CaseView extends JPanel {
     /**
      * L'image de cette case
      */
-    private BufferedImage test;
+    private BufferedImage image;
+    /**
+     * Map des paths des différentes images de case
+     */
+    private static Map<String, String> imagePaths = new HashMap<>();
+    static {
+        imagePaths.put("Mur", "/wall.png");
+        imagePaths.put("Tresor", "/tresor.png");
+        imagePaths.put("Teleporteur", "/porte.png");
+        imagePaths.put("Mine", "/mine.png");
+        imagePaths.put("Piege", "/piege.png");
+        imagePaths.put("PotionForce", "/potionForce.png");
+        imagePaths.put("PotionVie", "/potionVie.png");
+        imagePaths.put("Etoile", "/etoile.png");
+        imagePaths.put("Default", "/sol.png"); // Chemin par défaut
+    }
 
 
     /**
@@ -32,44 +50,7 @@ public class CaseView extends JPanel {
      * @param c
      */
     public CaseView(Case c) {
-        try {
-            if(c.estMur()){
-                test = ImageIO.read(getClass().getResourceAsStream("/wall.png"));
-            }else if (c.estTresor()){
-                //test = ImageIO.read(getClass().getResourceAsStream("/amulette.png"));
-            }else if(c.estTeleporteur()){
-                test = ImageIO.read(getClass().getResourceAsStream("/porte.png"));
-            }else if (c.estMine()){
-                test = ImageIO.read(getClass().getResourceAsStream("/mine.png"));
-
-            }else if(c.estPiege()){
-                test = ImageIO.read(getClass().getResourceAsStream("/piege.png"));
-
-            }else if(c.estPotionForce()){
-                test = ImageIO.read(getClass().getResourceAsStream("/potionForce.png"));
-
-            }else if(c.estPotionVie()){
-                test = ImageIO.read(getClass().getResourceAsStream("/potionVie.png"));
-
-            }else if(c.estEtoile()){
-
-                test = ImageIO.read(getClass().getResourceAsStream("/etoile.png"));
-
-            }else{
-                test = ImageIO.read(getClass().getResourceAsStream("/sol.png"));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-//        if (c.estMur()) {
-//            this.color = Color.black;
-//        } else if (c.estTresor()) {
-//            this.color = Color.yellow;
-//        } else if (c.estTeleporteur()) {
-//            this.color = Color.pink;
-//        } else {
-//            this.color = Color.white;
-//        }
+        image = ImageManager.getInstance().getImage(c.getType());
         this.c = c;
         setPreferredSize(new Dimension(30, 30));
     }
@@ -82,39 +63,17 @@ public class CaseView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Dessine l'image au lieu de remplir un rectangle
-        if (test != null) {
-            if(c.estMine() && ((CaseMine) c).exploded()){
-                try {
-                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/mineDesac.png")), 0, 0, getWidth(), getHeight(), this);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }else if(c.estPotionVie() && ((PotionVie) c).isRamasse()){
-                try {
-                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }else if(c.estPotionForce() && ((PotionForce) c).isRamasse()){
-                try {
-                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
 
-            }else if(c.estEtoile() && ((Etoile) c).isRamasse()){
-                try {
-                    g.drawImage(ImageIO.read(getClass().getResourceAsStream("/sol.png")), 0, 0, getWidth(), getHeight(), this);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }else{
-                g.drawImage(test, 0, 0, getWidth(), getHeight(), this);
-
-            }
+        //Seuls cas où l'image peut changer
+        if(c.estMine() || c.estPotionVie() || c.estPotionForce() || c.estEtoile()){
+            image = ImageManager.getInstance().getImage(c.getType());
         }
+
+        //On redessine l'image
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+
+
+
 //        g.setColor(color);
 //        g.fillRect(0, 0, getWidth(), getHeight());
     }
@@ -126,22 +85,6 @@ public class CaseView extends JPanel {
      */
     public void setC(Case c) {
         this.c = c;
-        try {
-            if (c.estMur()) {
-                //this.color = Color.black;
-                test = ImageIO.read(getClass().getResourceAsStream("/wall.png"));
-            } else if (c.estTresor()) {
-                //this.color = Color.yellow;
-                test = ImageIO.read(getClass().getResourceAsStream("/tresor.png"));
-            } else if (c.estTeleporteur()) {
-                //this.color = Color.pink;
-                test = ImageIO.read(getClass().getResourceAsStream("/porte.png"));
-            } else {
-                this.color = Color.white;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
 
