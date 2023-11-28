@@ -124,14 +124,17 @@ public class JeuView extends JFrame implements Runnable{
         Joueur joueur = jeu.getJoueur();
         ArrayList<Monstre> monstre = jeu.getMonstre();
 
-
+        //On parcourt une copie pour éviter les problèmes de Thread ConcurrentModification
+        ArrayList<PersonnageView> copyMonstres = new ArrayList(viewmonstres);
 
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
                 CaseView caseView = labView.getCase(i,j);
                 caseView.remove(p);
-                for(PersonnageView pv : viewmonstres){
+
+                for (PersonnageView pv : copyMonstres) {
                     caseView.remove(pv);
+                    viewmonstres.remove(pv);
                 }
                 this.remove(caseView);
                 for(Monstre m : monstre){

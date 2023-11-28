@@ -55,7 +55,7 @@ public class Jeu {
         public void run() {
             while(true){
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -140,7 +140,7 @@ public class Jeu {
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
 
-            if (niveau < 2) {
+            if (niveau < 5) {
                 //On demande si le joueur veut continuer ou quitter la partie
                 if (jeuView.ask("Voulez-vous continuer au prochain niveau ?")) {
                     niveau++;
