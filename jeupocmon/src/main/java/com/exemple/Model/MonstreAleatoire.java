@@ -11,10 +11,6 @@ public class MonstreAleatoire extends Monstre{
      * Le déplacement du MonstreAleatoire
      */
     private Direction deplacement;
-    /**
-     * Le timer
-     */
-    private int timer;
 
 
     /**
@@ -27,8 +23,6 @@ public class MonstreAleatoire extends Monstre{
     public MonstreAleatoire(int x, int y, int pv, int degat) {
         super(x,y, pv, degat);
         deplacement = randomDir();
-        timer = (int) (Math.random() * 100);
-
     }
 
 
@@ -37,13 +31,9 @@ public class MonstreAleatoire extends Monstre{
      */
     @Override
     public void comportement() {
-        //timer--;
         avancer(deplacement);
         deplacement = randomDir();
-//        if (timer <= 0) {
-//            deplacement = randomDir();
-//            timer = (int) (Math.random() * 100);
-//        }
+        this.currentNbSprite = (this.currentNbSprite % this.NB_SPRITE) + 1;
         attaquer();
 
     }
@@ -53,7 +43,7 @@ public class MonstreAleatoire extends Monstre{
         if(isMort()){
             return "Mort";
         }
-        return "MonstreAleatoire";
+        return "MonstreAleatoire" + currentNbSprite;
     }
 
 
@@ -91,15 +81,6 @@ public class MonstreAleatoire extends Monstre{
      */
     public Direction getDeplacement(){
         return deplacement;
-    }
-
-
-    /**
-     * Getter du timer du MonstreAleatoire
-     * @return le timer du MonstreAleatoire
-     */
-    public int getTimer() {
-        return timer;
     }
 
     /**

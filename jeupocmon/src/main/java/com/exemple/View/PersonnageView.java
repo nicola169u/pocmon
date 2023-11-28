@@ -35,8 +35,7 @@ public class PersonnageView extends JPanel {
      */
     public PersonnageView(Personnage p) {
         this.p = p;
-        setPreferredSize(new Dimension(25, 25));
-
+        setPreferredSize(new Dimension(30, 30));
     }
 
 

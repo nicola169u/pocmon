@@ -88,6 +88,9 @@ public class MonstreIntelligent extends Monstre{
             }
         }
 
+        this.currentNbSprite = (this.currentNbSprite % this.NB_SPRITE) + 1;
+
+
         avancer(deplacementEnCours);
         attaquer();
     }
@@ -97,7 +100,7 @@ public class MonstreIntelligent extends Monstre{
         if(isMort()){
             return "Mort";
         }
-        return "MonstreIntelligent";
+        return "MonstreIntelligent" + currentNbSprite;
     }
 
 

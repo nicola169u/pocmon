@@ -13,6 +13,14 @@ public abstract class Monstre extends Personnage implements Runnable{
      * Le nombre de dégât infligé par attaque
      */
     protected int degat;
+    /**
+     * Numero actuel de sprite
+     */
+    protected int currentNbSprite = 1;
+    /**
+     * Nombre de sprite
+     */
+    public static int NB_SPRITE = 2;
 
 
     /**

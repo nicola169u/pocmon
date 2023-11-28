@@ -44,8 +44,10 @@ public class ImageManager {
         imagePaths.put("MineDesac", "/mineDesac.png");
 
         //Les personnages
-        imagePaths.put("MonstreIntelligent", "/sa2.gif");
-        imagePaths.put("MonstreAleatoire", "/s2.gif");
+        imagePaths.put("MonstreIntelligent1", "/sa1.png");
+        imagePaths.put("MonstreIntelligent2", "/sa2.png");
+        imagePaths.put("MonstreAleatoire1", "/s1.png");
+        imagePaths.put("MonstreAleatoire2", "/s2.png");
         imagePaths.put("Fantome", "/reaper/idle_g/frame_00_delay-0.08s.gif");
         imagePaths.put("JoueurD1", "/spriteperso/d1.png");
         imagePaths.put("JoueurD2", "/spriteperso/d2.png");
@@ -84,8 +86,10 @@ public class ImageManager {
         loadImage("/etoile.png");
         loadImage("/sol.png");
         loadImage("/mineDesac.png");
-        loadImage("/sa2.gif");
-        loadImage("/s2.gif");
+        loadImage("/sa1.png");
+        loadImage("/s1.png");
+        loadImage("/sa2.png");
+        loadImage("/s2.png");
         loadImage("/reaper/idle_g/frame_00_delay-0.08s.gif");
         loadImage("/spriteperso/d1.png");
         loadImage("/spriteperso/d2.png");

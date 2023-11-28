@@ -28,21 +28,6 @@ public class CaseView extends JPanel {
      * L'image de cette case
      */
     private BufferedImage image;
-    /**
-     * Map des paths des différentes images de case
-     */
-    private static Map<String, String> imagePaths = new HashMap<>();
-    static {
-        imagePaths.put("Mur", "/wall.png");
-        imagePaths.put("Tresor", "/tresor.png");
-        imagePaths.put("Teleporteur", "/porte.png");
-        imagePaths.put("Mine", "/mine.png");
-        imagePaths.put("Piege", "/piege.png");
-        imagePaths.put("PotionForce", "/potionForce.png");
-        imagePaths.put("PotionVie", "/potionVie.png");
-        imagePaths.put("Etoile", "/etoile.png");
-        imagePaths.put("Default", "/sol.png"); // Chemin par défaut
-    }
 
 
     /**
