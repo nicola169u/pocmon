@@ -66,6 +66,10 @@ public class ImageManager {
         imagePaths.put("JoueurB3", "/spriteperso/b3.png");
         imagePaths.put("JoueurB4", "/spriteperso/b4.png");
         imagePaths.put("Mort", "/spriteperso/mort.png");
+        imagePaths.put("EpeeG", "/spriteperso/epeeg.png");
+        imagePaths.put("EpeeD", "/spriteperso/epeed.png");
+        imagePaths.put("EpeeB", "/spriteperso/epeeb.png");
+        imagePaths.put("EpeeH", "/spriteperso/epeeh.png");
 
         //Pour le menu
         imagePaths.put("MenuBackground", "/sunset_background.jpg");
@@ -108,6 +112,10 @@ public class ImageManager {
         loadImage("/spriteperso/b3.png");
         loadImage("/spriteperso/b4.png");
         loadImage("/spriteperso/mort.png");
+        loadImage("/spriteperso/epeeg.png");
+        loadImage("/spriteperso/epeed.png");
+        loadImage("/spriteperso/epeeb.png");
+        loadImage("/spriteperso/epeeh.png");
         loadImage("/sunset_background.jpg");
         loadImage("/icon.png");
     }

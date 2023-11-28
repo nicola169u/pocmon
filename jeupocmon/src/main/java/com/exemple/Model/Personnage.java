@@ -44,6 +44,8 @@ public abstract class Personnage {
      */
     private Direction dernDirection;
 
+    private int compteur;
+
 
     /**
      * Constructeur de Personnage en fonction de sa position initiale et de ses points de vie
@@ -59,6 +61,7 @@ public abstract class Personnage {
         this.invulnerable = false;
         this.pvMax = pv;
         this.dernDirection = Direction.DROITE;
+        this.compteur = 0;
     }
 
 
@@ -97,6 +100,9 @@ public abstract class Personnage {
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
+        }
+        if(this.isInvulnerable()){
+            this.compteur++;
         }
     }
 
@@ -319,6 +325,9 @@ public abstract class Personnage {
     }
 
     public boolean isInvulnerable() {
+        if(this.compteur > 10){
+            this.invulnerable = false;
+        }
         return invulnerable;
     }
 
@@ -331,4 +340,8 @@ public abstract class Personnage {
     }
 
     public abstract String getType();
+
+    public int getCompteur(){
+        return compteur;
+    }
 }

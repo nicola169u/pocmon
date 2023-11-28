@@ -14,6 +14,8 @@ public class Joueur extends Personnage {
      */
     private int degat;
 
+
+
     /**
      * Constructeur de Joueur en fonction de sa position dans le labyrinthe et de ses points de vie
      * @param x la position en x

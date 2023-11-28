@@ -48,11 +48,13 @@ public class PersonnageView extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         BufferedImage image = null;
+        BufferedImage epee = null;
         if(p.estMonstre()) {
             image = ImageManager.getInstance().getImage(p.getType());
         }else{
             //C'est le joueur donc on implémente le compteur
             image = ImageManager.getInstance().getImage(p.getType() + compteur);
+            epee = loadSpriteEpee(p.getType());
             if(p.isInvulnerable()){
                 //Si invulnerable, on met le filtre gold
                 image = filtregold(image);
@@ -61,9 +63,33 @@ public class PersonnageView extends JPanel {
                 resetFiltre(image, image);
             }
         }
+
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        if(!this.p.estMonstre()){
+            g.drawImage(epee, this.p.getPosX(), this.p.getPosY(), getWidth()- 10, getHeight()-10, this);
+        }
+
 
         this.gestionVie(g);
+    }
+
+    private BufferedImage loadSpriteEpee(String type) {
+        BufferedImage res = null;
+        switch(type){
+            case "JoueurG":
+                res = ImageManager.getInstance().getImage("EpeeG");
+                break;
+            case "JoueurD":
+                res = ImageManager.getInstance().getImage("EpeeD");
+                break;
+            case "JoueurH":
+                res = ImageManager.getInstance().getImage("EpeeH");
+                break;
+            case "JoueurB":
+                res = ImageManager.getInstance().getImage("EpeeB");
+                break;
+        }
+        return res;
     }
 
 
