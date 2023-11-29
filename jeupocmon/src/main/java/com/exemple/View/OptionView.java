@@ -23,10 +23,7 @@ public class OptionView extends JFrame {
      * Le controller de la vue des options
      */
     private OptionController optionController;
-    /**
-     * Le panneau principal
-     */
-    private JPanel panel = new JPanel();
+
     /**
      * Le panneau des niveaux
      */
@@ -51,11 +48,6 @@ public class OptionView extends JFrame {
      * Le bouton "sauvegarder"
      */
     private JButton save = new JButton("Sauvegarder");
-    /**
-     * Le conteneur
-     */
-    private LayoutManager layout = new FlowLayout();
-
 
     /**
      * Constructeur de OptionView en fonction de sa taille
@@ -64,14 +56,9 @@ public class OptionView extends JFrame {
      */
     public OptionView(int width,int height , MenuView m) {
         menuView = m;
-        panel.setLayout(layout);
-        addStageLevels();
-        addDifficulty();
         optionController = new OptionController(this,menuView);
-        exit.addActionListener(optionController);
-        save.addActionListener(optionController);
-        panel.add(save,BorderLayout.CENTER);
-        panel.add(exit,BorderLayout.CENTER);
+        addToPane(groupLevels,stages,getContentPane());
+        addToPane(groupDifficulty,difficulty,getContentPane());
         setSize(width, height);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -81,72 +68,35 @@ public class OptionView extends JFrame {
         requestFocus();
     }
 
+    /**
+     * Procédure privée qui ajoute les boutons au panneau
+     */
+    private void addToPane(ButtonGroup group, JPanel panel, Container pane){
+        pane.setLayout(new BoxLayout(pane,BoxLayout.Y_AXIS));
+        addLevels(group,panel,pane);
+        exit.addActionListener(optionController);
+        save.addActionListener(optionController);
+        pane.add(save,BorderLayout.CENTER);
+        pane.add(exit,BorderLayout.CENTER);
+
+    }
 
     /**
-     * Procédure privée qui ajoute les boutons pour choisir le niveau
+     * Procédure privée qui construit les boutons radios pour une option.
      */
-    private void addStageLevels()
+    private void addLevels(ButtonGroup buttonGroup, JPanel panel, Container pane)
     {
         Border blackline = BorderFactory.createTitledBorder("Choix du niveau");
-        JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem("1");
-        groupLevels.add(menuItem);
-        stages.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("2");
-        groupLevels.add(menuItem);
-        stages.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("3");
-        groupLevels.add(menuItem);
-        stages.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("4");
-        groupLevels.add(menuItem);
-        stages.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("5");
-        groupLevels.add(menuItem);
-        stages.add(menuItem);
-
-        stages.setBorder(blackline);
-        panel.add(stages);
-        getContentPane().add(panel,BorderLayout.CENTER);
-
+        JRadioButtonMenuItem menuItem;
+        panel.setSize(pane.getWidth()/100,pane.getHeight()/100);
+        for (int i = 1; i < 6 ; i++) {
+            menuItem = new JRadioButtonMenuItem(""+i);
+            buttonGroup.add(menuItem);
+            panel.add(menuItem);
+        }
+        panel.setBorder(blackline);
+        pane.add(panel,BorderLayout.CENTER);
     }
-
-
-    /**
-     * Procédure privée qui ajoute les boutons pour choisir le niveau de difficulté
-     */
-    private void addDifficulty()
-    {
-        Border blackline = BorderFactory.createTitledBorder("Choix de la difficulte");
-        JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem("1");
-        groupDifficulty.add(menuItem);
-        difficulty.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("2");
-        groupDifficulty.add(menuItem);
-        difficulty.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("3");
-        groupDifficulty.add(menuItem);
-        difficulty.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("4");
-        groupDifficulty.add(menuItem);
-        difficulty.add(menuItem);
-
-        menuItem = new JRadioButtonMenuItem("5");
-        groupDifficulty.add(menuItem);
-        difficulty.add(menuItem);
-
-        difficulty.setBorder(blackline);
-        panel.add(difficulty);
-        getContentPane().add(panel,BorderLayout.CENTER);
-
-    }
-
 
     /**
      * Procédure qui lance la vue du menu en fonction du niveau choisi
@@ -182,7 +132,7 @@ public class OptionView extends JFrame {
                 return button.getText();
             }
         }
-        return null;
+        return "1";
     }
 
 
