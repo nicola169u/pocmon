@@ -98,4 +98,8 @@ public class Joueur extends Personnage {
     public void setDegat(int d){
         this.degat = d;
     }
+
+    public int getDegat(){
+        return degat;
+    }
 }

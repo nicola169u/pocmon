@@ -263,6 +263,9 @@ public abstract class Personnage {
      */
     public void setPv(int pv){
         this.pv = pv;
+        if(pv > pvMax){
+            this.pvMax = pv;
+        }
     }
 
 

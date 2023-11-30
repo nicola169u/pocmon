@@ -335,4 +335,38 @@ public class Labyrinthe {
 
     }
 
+
+
+    public void addMine(CaseMine c){
+        cases[c.getPosX()][c.getPosY()] = c;
+        this.mines.add(c);
+    }
+
+    public void addPiege(CasePiege c){
+        cases[c.getPosX()][c.getPosY()] = c;
+        this.pieges.add(c);
+    }
+
+    public void addPotionVie(PotionVie c){
+        cases[c.getPosX()][c.getPosY()] = c;
+        this.vies.add(c);
+    }
+
+    public void addPotionForce(PotionForce c){
+        cases[c.getPosX()][c.getPosY()] = c;
+        this.forces.add(c);
+    }
+
+    public void addTp(Teleporteur c, Teleporteur a){
+        cases[c.getPosX()][c.getPosY()] = c;
+        cases[a.getPosX()][a.getPosY()] = a;
+        this.teleporteurs.put(c, a);
+
+    }
+
+    public void addEtoile(Etoile c){
+        cases[c.getPosX()][c.getPosY()] = c;
+        this.etoile = c;
+    }
+
 }
