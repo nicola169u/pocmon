@@ -9,6 +9,10 @@ import java.util.Map;
 
 /**
  * Classe qui gère toutes les images du jeu
+ * Pour ajouter une nouvelle image :
+ *      ajouter dans le constructeur de ImageManager votre image en faisant addToManager(typeImage, pathImage)
+ *      avec typeImage le type de l'image (ex: Fantome pour un fantome) et pathImage le chemin vers l'image (on part du module resources)
+ * Pour trouver le type d'image à afficher, il suffit d'appeler la fonction getType() sur une case ou un personnage
  */
 public class ImageManager {
 
@@ -33,93 +37,56 @@ public class ImageManager {
         //On ajoute tous les types d'images
 
         //Les cases
-        imagePaths.put("Mur", "/wall.png");
-        imagePaths.put("Tresor", "/tresor.png");
-        imagePaths.put("Teleporteur", "/porte.png");
-        imagePaths.put("Mine", "/mine.png");
-        imagePaths.put("Piege", "/piege.png");
-        imagePaths.put("PotionForce", "/potionForce.png");
-        imagePaths.put("PotionVie", "/potionVie.png");
-        imagePaths.put("Etoile", "/etoile.png");
-        imagePaths.put("MineDesac", "/mineDesac.png");
+        addToManager("Mur", "/wall.png");
+        addToManager("Tresor", "/tresor.png");
+        addToManager("Teleporteur", "/porte.png");
+        addToManager("Mine", "/mine.png");
+        addToManager("Piege", "/piege.png");
+        addToManager("PotionForce", "/potionForce.png");
+        addToManager("PotionVie", "/potionVie.png");
+        addToManager("Etoile", "/etoile.png");
+        addToManager("MineDesac", "/mineDesac.png");
 
         //Les personnages
-        imagePaths.put("MonstreIntelligent1", "/sa1.png");
-        imagePaths.put("MonstreIntelligent2", "/sa2.png");
-        imagePaths.put("MonstreAleatoire1", "/s1.png");
-        imagePaths.put("MonstreAleatoire2", "/s2.png");
-        imagePaths.put("Fantome", "/reaper/idle_g/frame_00_delay-0.08s.gif");
-        imagePaths.put("JoueurD1", "/spriteperso/d1.png");
-        imagePaths.put("JoueurD2", "/spriteperso/d2.png");
-        imagePaths.put("JoueurD3", "/spriteperso/d3.png");
-        imagePaths.put("JoueurD4", "/spriteperso/d4.png");
-        imagePaths.put("JoueurG1", "/spriteperso/g1.png");
-        imagePaths.put("JoueurG2", "/spriteperso/g2.png");
-        imagePaths.put("JoueurG3", "/spriteperso/g3.png");
-        imagePaths.put("JoueurG4", "/spriteperso/g4.png");
-        imagePaths.put("JoueurH1", "/spriteperso/h1.png");
-        imagePaths.put("JoueurH2", "/spriteperso/h2.png");
-        imagePaths.put("JoueurH3", "/spriteperso/h3.png");
-        imagePaths.put("JoueurH4", "/spriteperso/h4.png");
-        imagePaths.put("JoueurB1", "/spriteperso/b1.png");
-        imagePaths.put("JoueurB2", "/spriteperso/b2.png");
-        imagePaths.put("JoueurB3", "/spriteperso/b3.png");
-        imagePaths.put("JoueurB4", "/spriteperso/b4.png");
-        imagePaths.put("Mort", "/spriteperso/mort.png");
-        imagePaths.put("EpeeG", "/spriteperso/epeeg.png");
-        imagePaths.put("EpeeD", "/spriteperso/epeed.png");
-        imagePaths.put("EpeeB", "/spriteperso/epeeb.png");
-        imagePaths.put("EpeeH", "/spriteperso/epeeh.png");
+        addToManager("MonstreIntelligent1", "/sa1.png");
+        addToManager("MonstreIntelligent2", "/sa2.png");
+        addToManager("MonstreAleatoire1", "/s1.png");
+        addToManager("MonstreAleatoire2", "/s2.png");
+        addToManager("Fantome", "/reaper/idle_g/frame_00_delay-0.08s.gif");
+        addToManager("JoueurD1", "/spriteperso/d1.png");
+        addToManager("JoueurD2", "/spriteperso/d2.png");
+        addToManager("JoueurD3", "/spriteperso/d3.png");
+        addToManager("JoueurD4", "/spriteperso/d4.png");
+        addToManager("JoueurG1", "/spriteperso/g1.png");
+        addToManager("JoueurG2", "/spriteperso/g2.png");
+        addToManager("JoueurG3", "/spriteperso/g3.png");
+        addToManager("JoueurG4", "/spriteperso/g4.png");
+        addToManager("JoueurH1", "/spriteperso/h1.png");
+        addToManager("JoueurH2", "/spriteperso/h2.png");
+        addToManager("JoueurH3", "/spriteperso/h3.png");
+        addToManager("JoueurH4", "/spriteperso/h4.png");
+        addToManager("JoueurB1", "/spriteperso/b1.png");
+        addToManager("JoueurB2", "/spriteperso/b2.png");
+        addToManager("JoueurB3", "/spriteperso/b3.png");
+        addToManager("JoueurB4", "/spriteperso/b4.png");
+        addToManager("Mort", "/spriteperso/mort.png");
+        addToManager("EpeeG", "/spriteperso/epeeg.png");
+        addToManager("EpeeD", "/spriteperso/epeed.png");
+        addToManager("EpeeB", "/spriteperso/epeeb.png");
+        addToManager("EpeeH", "/spriteperso/epeeh.png");
 
         //Pour le menu
-        imagePaths.put("MenuBackground", "/sunset_background.jpg");
-        imagePaths.put("MenuIcon", "/icon.png");
-        imagePaths.put("SettingsIcon","/settings.png");
+        addToManager("MenuBackground", "/sunset_background.jpg");
+        addToManager("MenuIcon", "/icon.png");
+        addToManager("SettingsIcon", "/settings.png");
 
         // Ajouter d'autres types d'objets au besoin
-        imagePaths.put("Default", "/sol.png"); // Chemin par défaut
+        addToManager("Default", "/sol.png"); // Chemin par défaut
+    }
 
-
-        //On charge ici toutes les images
-        loadImage("/wall.png");
-        loadImage("/tresor.png");
-        loadImage("/porte.png");
-        loadImage("/mine.png");
-        loadImage("/piege.png");
-        loadImage("/potionForce.png");
-        loadImage("/potionVie.png");
-        loadImage("/etoile.png");
-        loadImage("/sol.png");
-        loadImage("/mineDesac.png");
-        loadImage("/sa1.png");
-        loadImage("/s1.png");
-        loadImage("/sa2.png");
-        loadImage("/s2.png");
-        loadImage("/reaper/idle_g/frame_00_delay-0.08s.gif");
-        loadImage("/spriteperso/d1.png");
-        loadImage("/spriteperso/d2.png");
-        loadImage("/spriteperso/d3.png");
-        loadImage("/spriteperso/d4.png");
-        loadImage("/spriteperso/g1.png");
-        loadImage("/spriteperso/g2.png");
-        loadImage("/spriteperso/g3.png");
-        loadImage("/spriteperso/g4.png");
-        loadImage("/spriteperso/h1.png");
-        loadImage("/spriteperso/h2.png");
-        loadImage("/spriteperso/h3.png");
-        loadImage("/spriteperso/h4.png");
-        loadImage("/spriteperso/b1.png");
-        loadImage("/spriteperso/b2.png");
-        loadImage("/spriteperso/b3.png");
-        loadImage("/spriteperso/b4.png");
-        loadImage("/spriteperso/mort.png");
-        loadImage("/spriteperso/epeeg.png");
-        loadImage("/spriteperso/epeed.png");
-        loadImage("/spriteperso/epeeb.png");
-        loadImage("/spriteperso/epeeh.png");
-        loadImage("/sunset_background.jpg");
-        loadImage("/icon.png");
-        loadImage("/settings.png");
+    private void addToManager(String type, String path){
+        imagePaths.put(type, path);
+        loadImage(path);
     }
 
     /**
