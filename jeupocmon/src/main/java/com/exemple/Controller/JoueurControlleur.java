@@ -11,7 +11,7 @@ import main.java.com.exemple.View.PersonnageView;
 /**
  * Classe qui permet de gérer les mouvements du joueur
  */
-public class JoueurControlleur extends Observateur implements KeyListener {
+public class JoueurControlleur implements KeyListener {
     /**
      * Le joueur à controler
      */
@@ -73,13 +73,5 @@ public class JoueurControlleur extends Observateur implements KeyListener {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         // Ne rien faire ici
-    }
-
-    /**
-     * Dans le cas où on voudrait implémenter le DP Observer
-     */
-    @Override
-    public void reagir() {
-
     }
 }

@@ -1,6 +1,5 @@
 package main.java.com.exemple.Model;
 
-import main.java.com.exemple.Controller.Observateur;
 import main.java.com.exemple.View.JeuView;
 
 import java.util.ArrayList;
@@ -11,11 +10,6 @@ import java.util.List;
  * Classe principale du projet, qui gère tout ce que doit connaître le jeu
  */
 public class Jeu {
-
-    /**
-     * Liste des observateurs, utile si on voudra implémenter le DP Observer
-     */
-    private List<Observateur> observateurs;
     /**
      * Vue du jeu
      */
@@ -76,7 +70,6 @@ public class Jeu {
      */
     public Jeu(int lvl, int difficulte) {
         this.joueur = new Joueur(1, 1, 30);
-        this.observateurs = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.niveau = lvl;
         this.difficulte = difficulte;
@@ -87,25 +80,6 @@ public class Jeu {
         createMonstre(difficulte);
         jeuView = new JeuView(this);
         this.compteurPas = 0;
-    }
-
-    /**
-     * Fonction permettant d'ajouter un observateur v à la liste d'observateurs, utile si on voudra implémenter le DP Observer
-     * @param v l'observateur
-     */
-    public void ajouterObservateur(Observateur v){
-        for(Observateur ob : observateurs) {
-            observateurs.add(v);
-        }
-    }
-
-    /**
-     * Procédure qui notifie un changement du jeu aux observateurs, utile si on voudra implémenter le DP Observer
-     */
-    public void notifierObservateur(){
-        for(Observateur ob : observateurs){
-            ob.reagir();
-        }
     }
 
 
