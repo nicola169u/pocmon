@@ -6,6 +6,7 @@ import main.java.com.exemple.Tools.ImageManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +67,7 @@ public class OptionView extends JFrame {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(ImageManager.getInstance().getImage("MenuBackground"), 0, 0, 750, 250, null);
+                g.drawImage(ImageManager.getInstance().getImage("MenuBackground"), 0, 0, getWidth(), getHeight(), this);
             }
         });
         optionController = new OptionController(this, menuView);
@@ -94,6 +95,7 @@ public class OptionView extends JFrame {
      */
     private void addButtons(JPanel panel, Container pane){
         panel.setLayout(new FlowLayout());
+        panel.setOpaque(false);
         panel.add(save,BorderLayout.CENTER);
         panel.add(exit,BorderLayout.CENTER);
         exit.addActionListener(optionController);
@@ -106,6 +108,7 @@ public class OptionView extends JFrame {
      */
     private void addToPane(ButtonGroup group, JPanel panel, Container pane){
         pane.setLayout(new BoxLayout(pane,BoxLayout.Y_AXIS));
+        panel.setOpaque(false);
         addLevels(group,panel,pane);
     }
 
@@ -114,15 +117,20 @@ public class OptionView extends JFrame {
      */
     private void addLevels(ButtonGroup buttonGroup, JPanel panel, Container pane)
     {
-        Border blackline = BorderFactory.createTitledBorder("Choix du niveau");
+        String borderName = (panel == stages) ? "Choix du niveau" : "Choix de la difficulte";
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        TitledBorder title = BorderFactory.createTitledBorder(blackline,borderName);
+        title.setTitleFont(new Font("Monaco",Font.ITALIC,10));
         JRadioButtonMenuItem menuItem;
-        panel.setSize(pane.getWidth()/100,pane.getHeight()/100);
         for (int i = 1; i < 6 ; i++) {
-            menuItem = new JRadioButtonMenuItem(new ImageIcon(getClass().getResource("/money_s.png")));
+            String iconPath = (panel == stages) ? "/" + i + "_icon.png" : "/diff" + i + "_icon.png";
+            menuItem = new JRadioButtonMenuItem(new ImageIcon(getClass().getResource(iconPath)));
+            menuItem.setOpaque(false);
+            menuItem.setBorderPainted(false);
             buttonGroup.add(menuItem);
             panel.add(menuItem);
         }
-        panel.setBorder(blackline);
+        panel.setBorder(title);
         pane.add(panel,BorderLayout.CENTER);
     }
 
@@ -154,11 +162,13 @@ public class OptionView extends JFrame {
      * @return le texte du bouton selectionné dans le groupe de boutons buttonGroup
      */
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        int i = 1;
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
-                return button.getText();
+                return Integer.toString(i);
             }
+            i++;
         }
         return "1";
     }
@@ -183,7 +193,7 @@ public class OptionView extends JFrame {
 
     /**
      * Fonction qui retourne le bouton "sauvegarder"
-     * @return
+     * @return le bouton sauvegarder
      */
     public JButton getSave() {
         return save;
