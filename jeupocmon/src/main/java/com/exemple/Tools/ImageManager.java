@@ -74,6 +74,7 @@ public class ImageManager {
         //Pour le menu
         imagePaths.put("MenuBackground", "/sunset_background.jpg");
         imagePaths.put("MenuIcon", "/icon.png");
+        imagePaths.put("SettingsIcon","/settings.png");
 
         // Ajouter d'autres types d'objets au besoin
         imagePaths.put("Default", "/sol.png"); // Chemin par défaut
@@ -118,6 +119,7 @@ public class ImageManager {
         loadImage("/spriteperso/epeeh.png");
         loadImage("/sunset_background.jpg");
         loadImage("/icon.png");
+        loadImage("/settings.png");
     }
 
     /**

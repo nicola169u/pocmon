@@ -2,6 +2,7 @@ package main.java.com.exemple.View;
 
 import main.java.com.exemple.Controller.MenuController;
 import main.java.com.exemple.Controller.OptionController;
+import main.java.com.exemple.Tools.ImageManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,6 +34,10 @@ public class OptionView extends JFrame {
      */
     private JPanel difficulty = new JPanel();
     /**
+     * Le panneau des boutons
+     */
+    private JPanel buttons = new JPanel();
+    /**
      * Le groupe de boutons pour les niveaux
      */
     private ButtonGroup groupLevels = new ButtonGroup();
@@ -51,14 +56,30 @@ public class OptionView extends JFrame {
 
     /**
      * Constructeur de OptionView en fonction de sa taille
+     *
      * @param width
      * @param height
      */
-    public OptionView(int width,int height , MenuView m) {
+    public OptionView(int width, int height, MenuView m) {
         menuView = m;
-        optionController = new OptionController(this,menuView);
-        addToPane(groupLevels,stages,getContentPane());
-        addToPane(groupDifficulty,difficulty,getContentPane());
+        this.setContentPane(new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(ImageManager.getInstance().getImage("MenuBackground"), 0, 0, 750, 250, null);
+            }
+        });
+        optionController = new OptionController(this, menuView);
+        addToPane(groupLevels, stages, getContentPane());
+        addToPane(groupDifficulty, difficulty, getContentPane());
+        addButtons(buttons,getContentPane());
+        optionViewSettings(width,height);
+
+    }
+
+    private void optionViewSettings(int width, int height)
+    {
+        setIconImage(new ImageIcon(ImageManager.getInstance().getImage("SettingsIcon")).getImage());
         setSize(width, height);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -69,16 +90,23 @@ public class OptionView extends JFrame {
     }
 
     /**
+     * Procédure privée qui ajoute les boutons pour revenir au menu
+     */
+    private void addButtons(JPanel panel, Container pane){
+        panel.setLayout(new FlowLayout());
+        panel.add(save,BorderLayout.CENTER);
+        panel.add(exit,BorderLayout.CENTER);
+        exit.addActionListener(optionController);
+        save.addActionListener(optionController);
+        pane.add(panel);
+    }
+
+    /**
      * Procédure privée qui ajoute les boutons au panneau
      */
     private void addToPane(ButtonGroup group, JPanel panel, Container pane){
         pane.setLayout(new BoxLayout(pane,BoxLayout.Y_AXIS));
         addLevels(group,panel,pane);
-        exit.addActionListener(optionController);
-        save.addActionListener(optionController);
-        pane.add(save,BorderLayout.CENTER);
-        pane.add(exit,BorderLayout.CENTER);
-
     }
 
     /**
@@ -90,7 +118,7 @@ public class OptionView extends JFrame {
         JRadioButtonMenuItem menuItem;
         panel.setSize(pane.getWidth()/100,pane.getHeight()/100);
         for (int i = 1; i < 6 ; i++) {
-            menuItem = new JRadioButtonMenuItem(""+i);
+            menuItem = new JRadioButtonMenuItem(new ImageIcon(getClass().getResource("/money_s.png")));
             buttonGroup.add(menuItem);
             panel.add(menuItem);
         }

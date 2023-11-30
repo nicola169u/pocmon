@@ -151,7 +151,7 @@ public class MenuView extends JFrame {
      * Procédure qui lance le menu des options
      */
     public void launchOptionView() {
-        optionView = new OptionView(750,750,this);
+        optionView = new OptionView(750,350,this);
     }
 
     /**
