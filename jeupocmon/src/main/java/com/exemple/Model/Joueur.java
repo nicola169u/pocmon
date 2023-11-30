@@ -1,18 +1,19 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.Tools.Direction;
+
 /**
  * Classe représentant le Joueur
  */
 public class Joueur extends Personnage {
-    /**
-     * Variable qui indique si le joueur est en train d'attaquer
-     */
-    protected boolean attaque;
+
     /**
      * Variable qui indique le nombre de dégât infligé par attaque
      */
     private int degat;
+
+    private Direction directionEpee;
 
 
 
@@ -46,6 +47,8 @@ public class Joueur extends Personnage {
         }
     }
 
+
+
     /**
      * Procédure qui gère l'attaque du joueur contre le monstre m
      * @param m le monstre
@@ -53,7 +56,11 @@ public class Joueur extends Personnage {
     public void attaquer(Monstre m){
         if(vivant && monstreACote(m)){
             m.subirDegat(degat);
+            this.attaque = true;
+        }else{
+            attaque = false;
         }
+
 
     }
 
@@ -65,6 +72,21 @@ public class Joueur extends Personnage {
      */
     public boolean monstreACote(Monstre m){
         double distance = distanceEntite(this.posX, this.posY, m.getPosX(), m.getPosY());
+        if(this.posX == m.getPosX() - 1 && this.posY == m.getPosY()){
+            this.directionEpee = Direction.DROITE;
+        }
+
+        if(this.posX == m.getPosX() + 1 && this.posY == m.getPosY()){
+            this.directionEpee = Direction.GAUCHE;
+        }
+
+        if(this.posX == m.getPosX() && this.posY-1 == m.getPosY()){
+            this.directionEpee = Direction.HAUT;
+        }
+
+        if(this.posX == m.getPosX() && this.posY+1 == m.getPosY()){
+            this.directionEpee = Direction.BAS;
+        }
 
         return (distance<=1);
 
@@ -102,4 +124,10 @@ public class Joueur extends Personnage {
     public int getDegat(){
         return degat;
     }
+
+    public Direction getDirectionEpee(){
+        return directionEpee;
+    }
+
+
 }

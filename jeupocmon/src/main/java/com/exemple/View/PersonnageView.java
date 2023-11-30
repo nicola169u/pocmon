@@ -1,7 +1,9 @@
 package main.java.com.exemple.View;
 
 import main.java.com.exemple.Model.Case.Case;
+import main.java.com.exemple.Model.Joueur;
 import main.java.com.exemple.Model.Personnage;
+import main.java.com.exemple.Tools.Direction;
 import main.java.com.exemple.Tools.ImageManager;
 
 import javax.imageio.ImageIO;
@@ -54,7 +56,7 @@ public class PersonnageView extends JPanel {
         }else{
             //C'est le joueur donc on implémente le compteur
             image = ImageManager.getInstance().getImage(p.getType() + compteur);
-            epee = loadSpriteEpee(p.getType());
+            //epee = loadSpriteEpee(p.getType());
             if(p.isInvulnerable()){
                 //Si invulnerable, on met le filtre gold
                 image = filtregold(image);
@@ -65,7 +67,9 @@ public class PersonnageView extends JPanel {
         }
 
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        if(!this.p.estMonstre()){
+        if(!this.p.estMonstre() && p.getAttaque()){
+            Direction monstre = ((Joueur)p).getDirectionEpee();
+            epee = loadSpriteEpee(monstre);
             g.drawImage(epee, this.p.getPosX(), this.p.getPosY(), getWidth()- 10, getHeight()-10, this);
         }
 
@@ -73,19 +77,19 @@ public class PersonnageView extends JPanel {
         this.gestionVie(g);
     }
 
-    private BufferedImage loadSpriteEpee(String type) {
+    private BufferedImage loadSpriteEpee(Direction type) {
         BufferedImage res = null;
         switch(type){
-            case "JoueurG":
+            case GAUCHE:
                 res = ImageManager.getInstance().getImage("EpeeG");
                 break;
-            case "JoueurD":
+            case DROITE:
                 res = ImageManager.getInstance().getImage("EpeeD");
                 break;
-            case "JoueurH":
+            case HAUT:
                 res = ImageManager.getInstance().getImage("EpeeH");
                 break;
-            case "JoueurB":
+            case BAS:
                 res = ImageManager.getInstance().getImage("EpeeB");
                 break;
         }

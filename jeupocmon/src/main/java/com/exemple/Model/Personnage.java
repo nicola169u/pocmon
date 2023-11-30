@@ -46,6 +46,11 @@ public abstract class Personnage {
 
     private int compteur;
 
+    /**
+     * Variable qui indique si le joueur est en train d'attaquer
+     */
+    protected boolean attaque;
+
 
     /**
      * Constructeur de Personnage en fonction de sa position initiale et de ses points de vie
@@ -347,4 +352,10 @@ public abstract class Personnage {
     public int getCompteur(){
         return compteur;
     }
+
+    public boolean getAttaque(){
+        return attaque;
+    }
+
+
 }
