@@ -3,11 +3,8 @@ package main.java.com.exemple.View;
 import main.java.com.exemple.Controller.MenuController;
 import main.java.com.exemple.Tools.ImageManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 
 /**
@@ -27,6 +24,10 @@ public class MenuView extends JFrame {
      */
     private OptionView optionView;
     /**
+     * La vue du shop
+     */
+    private ShopView shopView;
+    /**
      * Le bouton "jouer"
      */
     private JButton play = new JButton("Jouer");
@@ -34,6 +35,10 @@ public class MenuView extends JFrame {
      * Le bouton "option"
      */
     private JButton settings = new JButton("Option");
+    /**
+     * Le bouton "Shop"
+     */
+    private JButton shop = new JButton("Shop");
     /**
      * Le bouton "quitter"
      */
@@ -82,8 +87,9 @@ public class MenuView extends JFrame {
      */
     private void addToPane(Container pane) {
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        pane.add(Box.createVerticalStrut(200));
+        pane.add(Box.createVerticalStrut(150));
         addButtons(play, pane, menuController);
+        addButtons(shop,pane,menuController);
         addButtons(settings, pane, menuController);
         addButtons(exit, pane, menuController);
 
@@ -109,6 +115,8 @@ public class MenuView extends JFrame {
             setButtonIcon(button,"/settings.png");
         } else if (button.getText() == "Quitter") {
             setButtonIcon(button,"/exit.png");
+        }else if(button.getText() == "Shop") {
+            setButtonIcon(button,"/shop_s.png");
         }
 
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -155,6 +163,13 @@ public class MenuView extends JFrame {
     }
 
     /**
+     * Procédure qui lance le shop
+     */
+    public void launchShopView() {
+        shopView = new ShopView(750,350,this);
+    }
+
+    /**
      * Getter du niveau
      * @return le niveau
      */
@@ -168,6 +183,14 @@ public class MenuView extends JFrame {
      */
     public int getDifficulte() {
         return difficulte;
+    }
+
+    /**
+     * Getter du shop
+     * @return le shop
+     */
+    public JButton getShop() {
+        return shop;
     }
 
     /**

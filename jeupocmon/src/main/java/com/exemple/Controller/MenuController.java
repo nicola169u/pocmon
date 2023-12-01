@@ -44,7 +44,10 @@ public class MenuController implements ActionListener {
         } else if (source == menuView.getSettings()) {
             menuView.setVisible(false);
             menuView.launchOptionView();
-            //TODO Autres options
+            //TODO Autres options0
+        } else if(source == menuView.getShop()) {
+            menuView.setVisible(false);
+            menuView.launchShopView();
         }
     }
 }

@@ -78,7 +78,9 @@ public class ImageManager {
         //Pour le menu
         addToManager("MenuBackground", "/sunset_background.jpg");
         addToManager("MenuIcon", "/icon.png");
+        addToManager("ShopIcon","/shop_s.png");
         addToManager("SettingsIcon", "/settings.png");
+        addToManager("ShopBackground","/shop_background.png");
 
         // Ajouter d'autres types d'objets au besoin
         addToManager("Default", "/sol.png"); // Chemin par défaut
