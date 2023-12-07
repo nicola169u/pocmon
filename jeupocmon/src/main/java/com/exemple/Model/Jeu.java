@@ -1,6 +1,7 @@
 package main.java.com.exemple.Model;
 
 import main.java.com.exemple.View.JeuView;
+import main.java.com.exemple.View.MenuView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,12 @@ public class Jeu {
      * Vue du jeu
      */
     private JeuView jeuView;
+
+    /**
+     * Vue du menu
+     */
+    private MenuView menuView;
+
     /**
      * Le joueur
      */
@@ -70,14 +77,14 @@ public class Jeu {
 
     /**
      * Constructeur de Jeu en fonction du niveau
-     * @param lvl le niveau à lancer
-     * @param difficulte
+     * @param menuView la vue du menu
      */
-    public Jeu(int lvl, int difficulte) {
+    public Jeu(MenuView menuView) {
         this.joueur = new Joueur(1, 1, 30);
+        this.menuView = menuView;
         this.monstres = new ArrayList<>();
-        this.niveau = lvl;
-        this.difficulte = difficulte;
+        this.niveau = menuView.getNiveau();
+        this.difficulte = menuView.getDifficulte();
         this.sizeLab = 20;
         this.lab = new Labyrinthe(sizeLab);
         //On créé le plateau
@@ -122,6 +129,7 @@ public class Jeu {
 
         if(lab.aGagne(joueur)) {
             jeuView.afficherMessage("Félicitations, vous avez gagné et vous êtes riche maintenant !");
+            menuView.setScore(menuView.getScore()+10);
 
             if (niveau < 5) {
                 //On demande si le joueur veut continuer ou quitter la partie
@@ -159,6 +167,7 @@ public class Jeu {
     private void fin(String message){
         jeuView.afficherMessage(message);
         jeuView.dispose();
+        menuView.setVisible(true);
     }
 
 

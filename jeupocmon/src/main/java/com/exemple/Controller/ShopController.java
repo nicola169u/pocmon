@@ -3,6 +3,7 @@ package main.java.com.exemple.Controller;
 import main.java.com.exemple.View.MenuView;
 import main.java.com.exemple.View.ShopView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,6 +33,24 @@ public class ShopController implements ActionListener {
         this.menuView = menuView;
     }
 
+    private int getSwordPrice(int index)
+    {
+        int price = 0;
+        switch (index)
+        {
+            case 1:
+                price = 10;
+                break;
+            case 2:
+                price = 20;
+                break;
+            case 3:
+                price = 30;
+                break;
+        }
+        return  price;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -41,7 +60,14 @@ public class ShopController implements ActionListener {
         }
         else if(source == shopView.getSave())
         {
-            System.out.println("Yes");
+            this.swordIndex = Integer.parseInt(shopView.getSelectedButtonText(shopView.getGroupItems()));
+            if(menuView.getScore() >= getSwordPrice(swordIndex) )
+            {
+                menuView.setScore(menuView.getScore() - getSwordPrice(swordIndex));
+                System.out.println(menuView.getScore());
+            }else{
+                JOptionPane.showMessageDialog(null, "Fonds insuffisant", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }

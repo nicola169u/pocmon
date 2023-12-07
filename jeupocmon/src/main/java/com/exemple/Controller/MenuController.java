@@ -38,13 +38,11 @@ public class MenuController implements ActionListener {
             System.exit(0);
         } else if (source == menuView.getPlay()) {
             menuView.setVisible(false);
-            jeu = new Jeu(menuView.getNiveau(),menuView.getDifficulte());
+            jeu = new Jeu(menuView);
             jeu.lancer();
-            //TODO voir la logique
         } else if (source == menuView.getSettings()) {
             menuView.setVisible(false);
             menuView.launchOptionView();
-            //TODO Autres options0
         } else if(source == menuView.getShop()) {
             menuView.setVisible(false);
             menuView.launchShopView();

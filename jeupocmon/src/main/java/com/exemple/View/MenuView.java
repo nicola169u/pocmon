@@ -20,6 +20,10 @@ public class MenuView extends JFrame {
      */
     private int difficulte = 1;
     /**
+     * Le score du joueur
+     */
+    private int score = 0;
+    /**
      * La vue du menu des options
      */
     private OptionView optionView;
@@ -194,6 +198,14 @@ public class MenuView extends JFrame {
     }
 
     /**
+     * Getter du score
+     * @return le score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
      * Setter du niveau
      * @param niveau
      */
@@ -207,5 +219,13 @@ public class MenuView extends JFrame {
      */
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
+    }
+
+    /**
+     * Setter du score
+     * @param score
+     */
+    public void setScore(int score) {
+        this.score = score;
     }
 }

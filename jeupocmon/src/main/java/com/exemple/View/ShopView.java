@@ -5,6 +5,7 @@ import main.java.com.exemple.Tools.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 
 public class ShopView extends JFrame {
 
@@ -128,5 +129,26 @@ public class ShopView extends JFrame {
 
     public JButton getExit() {
         return exit;
+    }
+
+    public ButtonGroup getGroupItems() {
+        return groupItems;
+    }
+
+    /**
+     * Fonction qui retourne le texte du bouton selectionné dans le groupe de boutons buttonGroup
+     * @param buttonGroup
+     * @return le texte du bouton selectionné dans le groupe de boutons buttonGroup
+     */
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        int i = 1;
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return Integer.toString(i);
+            }
+            i++;
+        }
+        return "1";
     }
 }
