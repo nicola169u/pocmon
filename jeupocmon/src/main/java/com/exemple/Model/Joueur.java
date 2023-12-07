@@ -12,8 +12,16 @@ public class Joueur extends Personnage {
      * Variable qui indique le nombre de dégât infligé par attaque
      */
     private int degat;
-
+    /**
+     * Variable qui indique la direction que doit prendre l'épee
+     */
     private Direction directionEpee;
+    /**
+     * Variable qui indique si le joueur sait nager ou pas
+     */
+    private boolean canSwim;
+
+    private boolean peutAvancer;
 
 
 
@@ -28,6 +36,8 @@ public class Joueur extends Personnage {
         this.attaque=false;
         this.degat = 5;
         setVitesse(5);
+        canSwim = false;
+        peutAvancer = true;
     }
 
     @Override
@@ -129,5 +139,32 @@ public class Joueur extends Personnage {
         return directionEpee;
     }
 
+    public void setCanSwim(boolean swim){
+        canSwim = swim;
+    }
 
+    @Override
+    public boolean canSwim() {
+        return canSwim;
+    }
+
+    public void reset() {
+        //On le remet à la position (0;0)
+        setPosX(1);
+        setPosY(1);
+        //On lui redonne ses points de vie
+        revivre();
+        resetDegat();
+        setInvulnerable(false);
+        //Il ne sait à nouveau pas nager
+        setCanSwim(false);
+    }
+
+    public void setPeutAvancer(boolean b) {
+        peutAvancer = b;
+    }
+
+    public boolean peutAvancer() {
+        return peutAvancer;
+    }
 }

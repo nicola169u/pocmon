@@ -29,17 +29,38 @@ public class Labyrinthe {
      * La liste des téléporteurs
      */
     private HashMap<Teleporteur, Teleporteur> teleporteurs;
-
-
+    /**
+     * La liste des pièges
+     */
     private List<CasePiege> pieges;
-
+    /**
+     * La liste des mines
+     */
     private List<CaseMine> mines;
-
+    /**
+     * La liste des potions de force
+     */
     private List<PotionForce> forces;
-
+    /**
+     * La liste des potions de vie
+     */
     private List<PotionVie> vies;
-
+    /**
+     * L'etoile de la map
+     */
     private Etoile etoile;
+    /**
+     * La case de cours de natation
+     */
+    private SwimmingLesson swimmingLesson;
+    /**
+     * Variable qui sert à mémoriser le temps passé sur la case de cours de natation
+     */
+    private long tempsPasseSurSwimmingLesson;
+    /**
+     * Délai à passer sur la case de cours de natation
+     */
+    private static final long DELAI_APPRENDRE_NAGER = 3000; //Le joueur doit passer au min 3sec
 
 
     /**
@@ -111,7 +132,6 @@ public class Labyrinthe {
                             PotionForce pf = new PotionForce(i, ligne);
                             this.forces.add(pf);
                             cases[i][ligne] = pf;
-
                         }else if (c == 86){
                             PotionVie pv = new PotionVie(i, ligne);
                             this.vies.add(pv);
@@ -119,10 +139,13 @@ public class Labyrinthe {
                         }else if(c == 69){
                             this.etoile = new Etoile(i, ligne);
                             cases[i][ligne] = this.etoile;
-
+                        }else if(c == 87){
+                            cases[i][ligne] = new Eau(i, ligne);
+                        }else if(c == 83){
+                            swimmingLesson = new SwimmingLesson(i, ligne);
+                            cases[i][ligne] = swimmingLesson;
                         }else{
                             cases[i][ligne] = new CaseVide(i, ligne);
-
                         }
                     }
                     ligne++;
@@ -187,7 +210,11 @@ public class Labyrinthe {
                     }else if(c == 69){
                         this.etoile = new Etoile(i, ligne);
                         cases[i][ligne] = this.etoile;
-
+                    }else if(c == 87){
+                        cases[i][ligne] = new Eau(i, ligne);
+                    }else if(c == 83){
+                        swimmingLesson = new SwimmingLesson(i, ligne);
+                        cases[i][ligne] = swimmingLesson;
                     }else{
                         cases[i][ligne] = new CaseVide(i, ligne);
 
@@ -278,6 +305,10 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Procédure qui gère le cas où le joueur est sur un piège
+     * @param joueur le joueur
+     */
     public void trap(Joueur joueur){
         for(CasePiege piege : this.pieges){
             if(joueur.getPosX() == piege.getPosX() && joueur.getPosY() == piege.getPosY()){
@@ -286,6 +317,10 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Procédure qui gère le cas où le joueur est sur une mine
+     * @param joueur le joueur
+     */
     public void isOnMine(Joueur joueur){
         for(CaseMine mine : this.mines){
             if(joueur.getPosX() == mine.getPosX() && joueur.getPosY() == mine.getPosY() && !mine.exploded()){
@@ -295,6 +330,10 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Procédure qui gère le cas où le joueur est sur une potion de force
+     * @param joueur le joueur
+     */
     public void isOnPotionForce(Joueur joueur){
         ArrayList<PotionForce> del = new ArrayList<>();
         for(PotionForce pf : this.forces){
@@ -310,6 +349,10 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Procédure qui gère le cas où le joueur est sur une potion de vie
+     * @param joueur le joueur
+     */
     public void isOnPotionVie(Joueur joueur){
         ArrayList<PotionVie> del = new ArrayList<>();
         for(PotionVie pv : this.vies){
@@ -325,6 +368,10 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Procédure qui gère le cas où le joueur est sur une etoile
+     * @param joueur le joueur
+     */
     public void isOnEtoile(Joueur joueur){
         if(this.etoile != null){
             if(this.etoile.getPosX() == joueur.getPosX() && joueur.getPosY() == this.etoile.getPosY()){
@@ -335,6 +382,23 @@ public class Labyrinthe {
 
     }
 
+
+    /**
+     * Procédure qui gère le cas où le joueur est sur le cours de natation
+     * @param joueur le joueur
+     */
+    public void isOnSwimmingLesson(Joueur joueur) {
+        if (this.swimmingLesson != null) {
+            if (this.swimmingLesson.getPosX() == joueur.getPosX() && joueur.getPosY() == this.swimmingLesson.getPosY()) {
+                if (System.currentTimeMillis() - tempsPasseSurSwimmingLesson >= DELAI_APPRENDRE_NAGER) {
+                    joueur.setCanSwim(true);
+                    System.out.println("Vous pouvez à présent nager !");
+                }
+            } else {
+                tempsPasseSurSwimmingLesson = System.currentTimeMillis(); // Le joueur a quitté la case, réinitialiser le temps
+            }
+        }
+    }
 
 
     public void addMine(CaseMine c){

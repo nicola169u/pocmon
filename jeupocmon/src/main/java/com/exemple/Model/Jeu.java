@@ -58,6 +58,11 @@ public class Jeu {
                     joueur.attaquer(m);
                 }
                 jeuView.rafraichirAffichage();
+
+                //On rajoute la gestion de la temporisation (rien à voir avec les monstres mais ça serait dommage de devoir créer un nouveau thread)
+                if(!joueur.canSwim()){
+                    lab.isOnSwimmingLesson(joueur);
+                }
             }
         }
     });
@@ -87,7 +92,6 @@ public class Jeu {
      * Fonction qui permet de lancer le jeu
      */
     public void lancer() {
-        jeuView.afficherMessage("Bienvenue sur Pocmon !");
         jeuView.start();
         threadMonstres.start();
     }
@@ -105,6 +109,11 @@ public class Jeu {
         lab.isOnPotionVie(joueur);
         lab.isOnEtoile(joueur);
 
+        if(!joueur.canSwim()){
+            lab.isOnSwimmingLesson(joueur);
+        }
+
+
 
         this.compteurPas++;
         if(this.compteurPas > 15){
@@ -121,15 +130,9 @@ public class Jeu {
                     lab.lire_lab(niveau + "");
                     this.monstres.clear();
                     createMonstre(difficulte);
-                    //On repositionne le joueur
-                    joueur.setPosX(1);
-                    joueur.setPosY(1);
-                    //On lui redonne ses points de vie
-                    joueur.revivre();
-                    joueur.resetDegat();
-                    if(joueur.isInvulnerable()){
-                        joueur.setInvulnerable(false);
-                    }
+                    //On remet à 0 le joueur
+                    joueur.reset();
+
                     jeuView.majNiveau();  //Appelle rafraichirAffichage() et maj le numero de niveau
                 } else {
                     fin("Au revoir !");

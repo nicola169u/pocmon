@@ -1,6 +1,7 @@
 package main.java.com.exemple.Model;
 
 
+import main.java.com.exemple.Model.Case.Case;
 import main.java.com.exemple.Tools.Direction;
 
 /**
@@ -76,31 +77,56 @@ public abstract class Personnage {
      */
     public void avancer(Direction direction){
         dernDirection = direction;
+        Case caseToGo = null;
         switch (direction){
             case GAUCHE:
-                if(!labyrinthe.getCase(this.posX - 1, this.posY).estMur() && vivant){
-                    this.posX--;
+                caseToGo = labyrinthe.getCase(this.posX - 1, this.posY);
+                if(!caseToGo.estMur() && vivant){
+                    //On teste si c'est de l'eau et que le joueur peut nager
+                    if(!caseToGo.estEau() || this.canSwim()) {
+                        this.posX--;
+                    }else{
+                        System.out.println("Vous devez d'abord apprendre à nager !");
+                    }
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case DROITE:
-                if(!labyrinthe.getCase(this.posX + 1, this.posY).estMur() && vivant){
-                    this.posX++;
+                caseToGo = labyrinthe.getCase(this.posX + 1, this.posY);
+                if(!caseToGo.estMur() && vivant) {
+                    //On teste si c'est de l'eau et que le joueur peut nager
+                    if (!caseToGo.estEau() || this.canSwim()) {
+                        this.posX++;
+                    } else {
+                        System.out.println("Vous devez d'abord apprendre à nager !");
+                    }
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case BAS:
-                if(!labyrinthe.getCase(this.posX, this.posY + 1).estMur() && vivant){
-                    this.posY++;
+                caseToGo = labyrinthe.getCase(this.posX, this.posY + 1);
+                if(!caseToGo.estMur() && vivant) {
+                    //On teste si c'est de l'eau et que le joueur peut nager
+                    if (!caseToGo.estEau() || this.canSwim()) {
+                        this.posY++;
+                    } else {
+                        System.out.println("Vous devez d'abord apprendre à nager !");
+                    }
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
                 break;
             case HAUT:
-                if(!labyrinthe.getCase(this.posX, this.posY - 1).estMur() && vivant){
-                    this.posY--;
+                caseToGo = labyrinthe.getCase(this.posX, this.posY - 1);
+                if(!caseToGo.estMur() && vivant) {
+                    //On teste si c'est de l'eau et que le joueur peut nager
+                    if (!caseToGo.estEau() || this.canSwim()) {
+                        this.posY--;
+                    } else {
+                        System.out.println("Vous devez d'abord apprendre à nager !");
+                    }
                 }else if(!this.estMonstre()){
                     System.out.println("On fonce droit dans un mur inconscient !!");
                 }
@@ -355,6 +381,10 @@ public abstract class Personnage {
 
     public boolean getAttaque(){
         return attaque;
+    }
+
+    public boolean canSwim(){
+        return true;
     }
 
 

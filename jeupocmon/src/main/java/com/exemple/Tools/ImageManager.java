@@ -46,6 +46,8 @@ public class ImageManager {
         addToManager("PotionVie", "/potionVie.png");
         addToManager("Etoile", "/etoile.png");
         addToManager("MineDesac", "/mineDesac.png");
+        addToManager("Eau", "/water.jpg");
+        addToManager("SwimmingLesson", "/piscine.png");
 
         //Les personnages
         addToManager("MonstreIntelligent1", "/sa1.png");

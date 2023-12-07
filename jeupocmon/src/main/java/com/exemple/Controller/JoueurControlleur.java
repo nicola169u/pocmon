@@ -20,6 +20,10 @@ public class JoueurControlleur implements KeyListener {
      * La vue du jeu
      */
     private JeuView jeuView;
+    /**
+     * Temps que le joueur doit attendre entre chaque déplacement
+     */
+    private static long TIME_BEFORE_MOVING = 100;
 
     /**
      * Constructeur de JoueurController avec le joueur et jeuView
@@ -49,22 +53,39 @@ public class JoueurControlleur implements KeyListener {
     public void keyPressed(KeyEvent keyEvent) {
         int keyCode = keyEvent.getKeyCode();
 
-        // Gérer les mouvements du joueur avec les touches ZQSD
-        if (keyCode == KeyEvent.VK_Z) {
-            joueur.avancer(Direction.HAUT);
-        } else if (keyCode == KeyEvent.VK_Q) {
-            joueur.avancer(Direction.GAUCHE);
-        } else if (keyCode == KeyEvent.VK_S) {
-            joueur.avancer(Direction.BAS);
-        } else if (keyCode == KeyEvent.VK_D) {
-            joueur.avancer(Direction.DROITE);
+        if(joueur.peutAvancer()){
+            // Gérer les mouvements du joueur avec les touches ZQSD
+            if (keyCode == KeyEvent.VK_Z) {
+                joueur.avancer(Direction.HAUT);
+            } else if (keyCode == KeyEvent.VK_Q) {
+                joueur.avancer(Direction.GAUCHE);
+            } else if (keyCode == KeyEvent.VK_S) {
+                joueur.avancer(Direction.BAS);
+            } else if (keyCode == KeyEvent.VK_D) {
+                joueur.avancer(Direction.DROITE);
+            }
+
+            joueur.setPeutAvancer(false);
+
+            jeuView.getPJoueur().updateCompteur();
+            jeuView.getJeu().boucler();
+
+            // Introduire une pause de 200 millisecondes avant de permettre un nouveau déplacement
+            new Thread(() -> {
+                try {
+                    Thread.sleep(TIME_BEFORE_MOVING);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // Réactiver les mouvements après la pause
+                // Vous pouvez également utiliser un mécanisme plus sophistiqué pour gérer l'état du mouvement
+                // afin de ne pas bloquer complètement le joueur pendant la pause.
+                joueur.setPeutAvancer(true);
+            }).start();
         }
 
-        jeuView.getPJoueur().updateCompteur();
-        jeuView.getJeu().boucler();
-
-        //jeuView.rafraichirAffichage();
     }
+
 
     /**
      * Procédure venant de KeyListener, inutilsée ici
