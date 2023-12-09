@@ -90,7 +90,7 @@ public class Jeu {
         //On créé le plateau
         lab.lire_lab(niveau+"");
         createMonstre(difficulte);
-        jeuView = new JeuView(this);
+        jeuView = new JeuView(this,menuView.getSword());
         this.compteurPas = 0;
     }
 

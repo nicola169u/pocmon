@@ -29,6 +29,10 @@ public class JeuView extends JFrame implements Runnable{
      * La liste des vues des monstres
      */
     private ArrayList<PersonnageView> viewmonstres;
+    /**
+     * L'epee du personnage
+     */
+    private int sword = 0;
 
 
     /**
@@ -36,9 +40,9 @@ public class JeuView extends JFrame implements Runnable{
      * @param jeu
      * @throws HeadlessException
      */
-    public JeuView(Jeu jeu) throws HeadlessException {
+    public JeuView(Jeu jeu,int sword) throws HeadlessException {
         this.jeu = jeu;
-
+        this.sword = sword;
         int sizeLab = jeu.getSizeLab();
         this.viewmonstres = new ArrayList<>();
 
@@ -46,7 +50,7 @@ public class JeuView extends JFrame implements Runnable{
         Joueur joueur = jeu.getJoueur();
         ArrayList<Monstre> monstre = jeu.getMonstre();
 
-        p = new PersonnageView(joueur);
+        p = new PersonnageView(joueur,sword);
 
         setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +65,7 @@ public class JeuView extends JFrame implements Runnable{
                     }
                     for(Monstre m : monstre){
                         if(j == m.getPosX() && i == m.getPosY()){
-                            PersonnageView vm = new PersonnageView(m);
+                            PersonnageView vm = new PersonnageView(m,sword);
                             viewmonstres.add(vm);
                             panel.add(vm);
                         }
@@ -139,7 +143,7 @@ public class JeuView extends JFrame implements Runnable{
                 this.remove(caseView);
                 for(Monstre m : monstre){
                     if(j == m.getPosX() && i == m.getPosY()){
-                        PersonnageView vm = new PersonnageView(m);
+                        PersonnageView vm = new PersonnageView(m,sword);
                         viewmonstres.add(vm);
                         caseView.add(vm);
                     }else if(j == joueur.getPosX() && i == joueur.getPosY()){

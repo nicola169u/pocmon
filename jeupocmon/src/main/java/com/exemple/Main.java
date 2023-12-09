@@ -15,12 +15,17 @@ public class Main {
      * @param args les arguments (vides ici)
      */
     public static void main(String[] args)  {
-        //Jeu jeu = new Jeu(1);
-        //jeu.lancer();
-        //Thread JeuViewThread = new Thread(jeu.getJeuView());
-        //Thread MonstreThread = new Thread(jeu.getMonstre());
-        //MonstreThread.start();
-        //JeuViewThread.start();
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         MenuView menuView = new MenuView(750,750,1);
         menuView.startMenu();
     }

@@ -26,8 +26,10 @@ public class PersonnageView extends JPanel {
      * Le compteur pour alterner les sprites
      */
     private int compteur = 1;
-
-
+    /**
+     * L'epee du personnage
+     */
+    private int sword = 0;
 
 
     /**
@@ -35,8 +37,9 @@ public class PersonnageView extends JPanel {
      *
      * @param p
      */
-    public PersonnageView(Personnage p) {
+    public PersonnageView(Personnage p,int sword) {
         this.p = p;
+        this.sword = sword;
         setPreferredSize(new Dimension(30, 30));
     }
 
@@ -81,21 +84,43 @@ public class PersonnageView extends JPanel {
         BufferedImage res = null;
         switch(type){
             case GAUCHE:
-                res = ImageManager.getInstance().getImage("EpeeG");
+                res = ImageManager.getInstance().getImage(choixEpee()+"G");
                 break;
             case DROITE:
-                res = ImageManager.getInstance().getImage("EpeeD");
+                res = ImageManager.getInstance().getImage(choixEpee()+"D");
                 break;
             case HAUT:
-                res = ImageManager.getInstance().getImage("EpeeH");
+                res = ImageManager.getInstance().getImage(choixEpee()+"H");
                 break;
             case BAS:
-                res = ImageManager.getInstance().getImage("EpeeB");
+                res = ImageManager.getInstance().getImage(choixEpee()+"B");
                 break;
         }
         return res;
     }
 
+    /**
+     * Procédure qui recupere la bonne epee a afficher
+     */
+    private String choixEpee(){
+        String res = new String();
+        switch (this.sword){
+            case 0:
+                res = "Epee_0";
+                break;
+            case 1:
+                res = "Epee_1";
+                break;
+            case 2:
+                res = "Epee_2";
+                break;
+            case 3:
+                res = "Epee_3";
+                break;
+        }
+
+        return res;
+    }
 
     /**
      * Procédure qui gère l'affichage de la vie (points de vie) du Personnage

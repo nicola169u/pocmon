@@ -72,10 +72,23 @@ public class ImageManager {
         addToManager("JoueurB3", "/spriteperso/b3.png");
         addToManager("JoueurB4", "/spriteperso/b4.png");
         addToManager("Mort", "/spriteperso/mort.png");
-        addToManager("EpeeG", "/spriteperso/epeeg.png");
-        addToManager("EpeeD", "/spriteperso/epeed.png");
-        addToManager("EpeeB", "/spriteperso/epeeb.png");
-        addToManager("EpeeH", "/spriteperso/epeeh.png");
+        //Pour les eppee
+        addToManager("Epee_0G", "/spriteperso/epee0g.png");
+        addToManager("Epee_0D", "/spriteperso/epee0d.png");
+        addToManager("Epee_0B", "/spriteperso/epee0b.png");
+        addToManager("Epee_0H", "/spriteperso/epee0h.png");
+        addToManager("Epee_1G", "/spriteperso/epee1g.png");
+        addToManager("Epee_1D", "/spriteperso/epee1d.png");
+        addToManager("Epee_1B", "/spriteperso/epee1b.png");
+        addToManager("Epee_1H", "/spriteperso/epee1h.png");
+        addToManager("Epee_2G", "/spriteperso/epee2g.png");
+        addToManager("Epee_2D", "/spriteperso/epee2d.png");
+        addToManager("Epee_2B", "/spriteperso/epee2b.png");
+        addToManager("Epee_2H", "/spriteperso/epee2h.png");
+        addToManager("Epee_3G", "/spriteperso/epee3g.png");
+        addToManager("Epee_3D", "/spriteperso/epee3d.png");
+        addToManager("Epee_3B", "/spriteperso/epee3b.png");
+        addToManager("Epee_3H", "/spriteperso/epee3h.png");
 
         //Pour le menu
         addToManager("MenuBackground", "/sunset_background.jpg");

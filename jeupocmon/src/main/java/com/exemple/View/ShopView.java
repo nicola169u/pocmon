@@ -71,6 +71,10 @@ public class ShopView extends JFrame {
      */
     private void addToPane(ButtonGroup group, JPanel panel, Container pane){
         pane.setLayout(new BoxLayout(pane,BoxLayout.Y_AXIS));
+        JLabel scoreLabel = new JLabel("Score : " + menuView.getScore() + " GC");
+        pane.add(scoreLabel);
+        scoreLabel.setBorder(BorderFactory.createEmptyBorder(0,500,0,0));
+        pane.add(panel);
         panel.setOpaque(false);
         addItems(group,items,pane);
     }
@@ -94,8 +98,6 @@ public class ShopView extends JFrame {
         }
         pane.add(Box.createVerticalGlue());
         panel.setBorder(BorderFactory.createEmptyBorder(100,325,0,0));
-        pane.add(panel,BorderLayout.CENTER);
-
     }
     private void shopViewSettings(int width, int height)
     {

@@ -64,7 +64,7 @@ public class ShopController implements ActionListener {
             if(menuView.getScore() >= getSwordPrice(swordIndex) )
             {
                 menuView.setScore(menuView.getScore() - getSwordPrice(swordIndex));
-                System.out.println(menuView.getScore());
+                menuView.setSword(swordIndex);
             }else{
                 JOptionPane.showMessageDialog(null, "Fonds insuffisant", "Message", JOptionPane.INFORMATION_MESSAGE);
             }

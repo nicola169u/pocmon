@@ -24,6 +24,10 @@ public class MenuView extends JFrame {
      */
     private int score = 0;
     /**
+     * L'epee du joueur
+     */
+    private int sword = 0;
+    /**
      * La vue du menu des options
      */
     private OptionView optionView;
@@ -118,6 +122,7 @@ public class MenuView extends JFrame {
         } else if (button.getText() == "Option") {
             setButtonIcon(button,"/settings.png");
         } else if (button.getText() == "Quitter") {
+            button.setForeground(Color.BLACK);
             setButtonIcon(button,"/exit.png");
         }else if(button.getText() == "Shop") {
             setButtonIcon(button,"/shop_s.png");
@@ -227,5 +232,19 @@ public class MenuView extends JFrame {
      */
     public void setScore(int score) {
         this.score = score;
+    }
+
+    /**
+     * Setter de l'epee
+     * @param sword
+     */
+    public void setSword(int sword) {
+        this.sword = sword;
+    }
+    /**
+     * Getter de l'epee
+     */
+    public int getSword() {
+        return sword;
     }
 }
