@@ -16,6 +16,11 @@ public class CaseVide extends Case {
     }
 
     @Override
+    public boolean estCaseVide() {
+        return true;
+    }
+
+    @Override
     public String getType() {
         return "Vide";
     }

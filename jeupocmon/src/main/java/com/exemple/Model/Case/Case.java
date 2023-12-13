@@ -96,6 +96,7 @@ public abstract class Case {
         return false;
     }
 
+    public boolean estCaseVide(){return false;}
     /**
      * Retourne le type d'une case
      * @return le type d'une case

@@ -1,11 +1,10 @@
 package main.java.com.exemple.Model;
 
-import main.java.com.exemple.Model.Case.Case;
-import main.java.com.exemple.Model.Case.CaseVide;
-import main.java.com.exemple.Model.Case.Mur;
-import main.java.com.exemple.Model.Case.Tresor;
+import main.java.com.exemple.Model.Case.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GenerateurDeNivAlt {
@@ -85,19 +84,22 @@ public class GenerateurDeNivAlt {
         while(nbMurs !=0){
             randCol = random.nextInt(colonnes-2) + 1;
             randLigne = random.nextInt(lignes-2) + 1;
-            System.out.println("rand Col = "+randCol+" et randLigne = "+randLigne);
-            if(!niv[randCol][randLigne].estMur() && !(randCol == 1 && randLigne == 1) && !(randCol == colonnes-2 && randLigne == lignes - 2)){
-                randmur = new Mur(randCol,randLigne);
+            if(!niv[randCol][randLigne].estMur() && !(randCol == 1 && randLigne == 1) && !(randCol == colonnes-2 && randLigne == lignes - 2)) {
+                randmur = new Mur(randCol, randLigne);
                 niv[randCol][randLigne] = randmur;
                 solveur();
-                if(faisable) {
+                if (faisable) {
                     nbMurs--;
-                }else{
-                    niv[randCol][randLigne] = new CaseVide(randCol,randLigne);
+                } else {
+                    niv[randCol][randLigne] = new CaseVide(randCol, randLigne);
                 }
             }
-            System.out.println("On a "+nbMurs+" murs à mettre pour l'instant");
         }
+        ajouterEtoile(1,random);
+        ajouterPotionVie(1,random);
+        ajouterPiege(1,random);
+        ajouterTeleporteur(random);
+        ajouterPotionForce(1,random);
         //Une fois qu'on a notre niveau correcte, on va l'écrire dans un fichier
         //Déjà on compte combien on a de niveau dispo pour les ajouter en plus
         int nbNivAct = getNbNiveau() + 1;
@@ -119,6 +121,24 @@ public class GenerateurDeNivAlt {
                     }
                     else if(niv[i][j].estTresor()){
                         bw.write(84);
+                    }
+                    else if(niv[i][j].estTeleporteur()){
+                        bw.write(88);
+                    }
+                    else if(niv[i][j].estEtoile()){
+                        bw.write(69);
+                    }
+                    else if(niv[i][j].estPiege()){
+                        bw.write(80);
+                    }
+                    else if(niv[i][j].estMine()){
+                        bw.write(77);
+                    }
+                    else if(niv[i][j].estPotionForce()){
+                        bw.write(85);
+                    }
+                    else if(niv[i][j].estPotionVie()){
+                        bw.write(86);
                     }
                 }
                 bw.newLine();
@@ -157,6 +177,89 @@ public class GenerateurDeNivAlt {
                 }
             }
             System.out.println("");
+        }
+    }
+
+    public void ajouterMines(int nbMine , Random rand){
+        int xMines = rand.nextInt(colonnes-2) + 1;
+        int yMines = rand.nextInt(lignes-2) + 1;
+        while(nbMine != 0){
+            if(niv[xMines][yMines].estCaseVide() && !(xMines == 1 && yMines == 1) && !(xMines == colonnes-2 && yMines == lignes - 2)){
+                CaseMine mine = new CaseMine(xMines,yMines);
+                niv[xMines][yMines] = mine;
+                ajouterMines(nbMine-1 , rand);
+            }
+        }
+    }
+
+    public void ajouterPiege(int nbPiege , Random rand){
+        int xPiege = rand.nextInt(colonnes-2) + 1;
+        int yPiege = rand.nextInt(lignes-2) + 1;
+        while(nbPiege != 0){
+            if(niv[xPiege][yPiege].estCaseVide() && !(xPiege == 1 && yPiege == 1) && !(xPiege == colonnes-2 && yPiege == lignes - 2)){
+                CasePiege piege = new CasePiege(xPiege,yPiege);
+                niv[xPiege][yPiege] = piege;
+                ajouterPiege(nbPiege-1 , rand);
+            }
+        }
+    }
+
+    public void ajouterPotionForce(int nbPotionForce , Random rand){
+        int xPotionForce = rand.nextInt(colonnes-2) + 1;
+        int yPotionForce = rand.nextInt(lignes-2) + 1;
+        while(nbPotionForce != 0){
+            if(niv[xPotionForce][yPotionForce].estCaseVide() && !(xPotionForce == 1 && yPotionForce == 1) && !(xPotionForce == colonnes-2 && yPotionForce == lignes - 2)){
+                PotionForce potionForce = new PotionForce(xPotionForce,yPotionForce);
+                niv[xPotionForce][yPotionForce] = potionForce;
+                ajouterPotionForce(nbPotionForce-1 , rand);
+            }
+        }
+    }
+
+    public void ajouterPotionVie(int nbPotionVie , Random rand){
+        int xPotionVie = rand.nextInt(colonnes-2) + 1;
+        int yPotionVie = rand.nextInt(lignes-2) + 1;
+        while(nbPotionVie != 0){
+            if(niv[xPotionVie][yPotionVie].estCaseVide() && !(xPotionVie == 1 && yPotionVie == 1) && !(xPotionVie == colonnes-2 && yPotionVie == lignes - 2)){
+                PotionVie potionVie = new PotionVie(xPotionVie,yPotionVie);
+                niv[xPotionVie][yPotionVie] = potionVie;
+                ajouterPotionVie(nbPotionVie-1 , rand);
+            }
+        }
+    }
+
+    public void ajouterTeleporteur(Random rand){
+        int xTp1 = rand.nextInt(colonnes-2) + 1;
+        int yTp1 = rand.nextInt(lignes-2) + 1;
+        Boolean Tp1 = false;
+        Boolean Tp2 = false;
+        while(Tp1 == false){
+            if(niv[xTp1][yTp1].estCaseVide() && !(xTp1 == 1 && yTp1 == 1) && !(xTp1 == colonnes-2 && yTp1 == lignes - 2)){
+                Teleporteur tp1 = new Teleporteur(xTp1,yTp1);
+                niv[xTp1][yTp1] = tp1;
+                Tp1 = true;
+            }
+        }
+        int xTp2 = rand.nextInt(colonnes-2) + 1;
+        int yTp2 = rand.nextInt(lignes-2) + 1;
+        while(Tp2 == false){
+            if(niv[xTp2][yTp2].estCaseVide() && !(xTp2 == 1 && yTp2 == 1) && !(xTp2 == colonnes-2 && yTp2 == lignes - 2)){
+                Teleporteur tp2 = new Teleporteur(xTp2,yTp2);
+                niv[xTp2][yTp2] = tp2;
+                Tp2 = true;
+            }
+        }
+    }
+
+    public void ajouterEtoile(int nbEtoile , Random rand){
+        int xEtoile = rand.nextInt(colonnes-2) + 1;
+        int yEtoile = rand.nextInt(lignes-2) + 1;
+        while(nbEtoile != 0){
+            if(niv[xEtoile][yEtoile].estCaseVide() && !(xEtoile == 1 && yEtoile == 1) && !(xEtoile == colonnes-2 && yEtoile == lignes - 2)){
+                Etoile Etoile = new Etoile(xEtoile,yEtoile);
+                niv[xEtoile][yEtoile] = Etoile;
+                ajouterEtoile(nbEtoile-1 , rand);
+            }
         }
     }
 
