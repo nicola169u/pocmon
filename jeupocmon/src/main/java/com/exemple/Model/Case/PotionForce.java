@@ -4,6 +4,9 @@ import main.java.com.exemple.Model.Case.Case;
 
 public class PotionForce extends Case {
 
+    /**
+     * attribut pour savoir si la potion force a été ramassée
+     */
     private boolean ramasse;
     public PotionForce(int x, int y) {
         super(x, y);

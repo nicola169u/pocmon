@@ -5,6 +5,9 @@ import main.java.com.exemple.Model.Case.Case;
 public class CaseMine extends Case {
 
 
+    /**
+     * attribut pour savoir si la mine a explosé ou non
+     */
     private boolean exploded;
     /**
      * Constructeur de Case en fonction de ses coordonnées posX et posY

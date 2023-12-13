@@ -148,6 +148,9 @@ public class Joueur extends Personnage {
         return canSwim;
     }
 
+    /**
+     * à chaque fois qu'on change de niveau on reset le joueur
+     */
     public void reset() {
         //On le remet à la position (0;0)
         setPosX(1);

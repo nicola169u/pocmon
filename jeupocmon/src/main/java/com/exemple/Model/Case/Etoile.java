@@ -4,6 +4,9 @@ import main.java.com.exemple.Model.Case.Case;
 
 public class Etoile extends Case {
 
+    /**
+     * attribut pour savoir si l'étoile a été ramassée
+     */
     private boolean ramasse;
 
     /**

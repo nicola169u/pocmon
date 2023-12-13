@@ -401,26 +401,47 @@ public class Labyrinthe {
     }
 
 
+    /**
+     * ajouter la mine à la liste des Mines
+     * @param c
+     */
     public void addMine(CaseMine c){
         cases[c.getPosX()][c.getPosY()] = c;
         this.mines.add(c);
     }
 
+    /**
+     * ajoute le piège  à la liste des pièges
+     * @param c
+     */
     public void addPiege(CasePiege c){
         cases[c.getPosX()][c.getPosY()] = c;
         this.pieges.add(c);
     }
 
+    /**
+     * ajoute la potion de vie à la liste des potions de vie
+     * @param c
+     */
     public void addPotionVie(PotionVie c){
         cases[c.getPosX()][c.getPosY()] = c;
         this.vies.add(c);
     }
 
+    /**
+     * ajoute la potion de force à la liste des potions de force
+     * @param c
+     */
     public void addPotionForce(PotionForce c){
         cases[c.getPosX()][c.getPosY()] = c;
         this.forces.add(c);
     }
 
+    /**
+     * ajoute les deux téléporteurs et les relie dans la map
+     * @param c
+     * @param a
+     */
     public void addTp(Teleporteur c, Teleporteur a){
         cases[c.getPosX()][c.getPosY()] = c;
         cases[a.getPosX()][a.getPosY()] = a;
@@ -428,6 +449,10 @@ public class Labyrinthe {
 
     }
 
+    /**
+     * ajoute l'étoile au labyrinthe
+     * @param c
+     */
     public void addEtoile(Etoile c){
         cases[c.getPosX()][c.getPosY()] = c;
         this.etoile = c;

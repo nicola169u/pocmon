@@ -45,6 +45,9 @@ public abstract class Personnage {
      */
     private Direction dernDirection;
 
+    /**
+     * Attribut qui sert comme compteur pour l'invulnérabilité du personnage
+     */
     private int compteur;
 
     /**
