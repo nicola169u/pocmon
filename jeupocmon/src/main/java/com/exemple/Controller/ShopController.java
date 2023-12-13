@@ -51,6 +51,11 @@ public class ShopController implements ActionListener {
         return  price;
     }
 
+    /**
+     * Procédure héritée de ActionListener
+     * Permet de gérér les événements du shop
+     * @param e l'événement
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();

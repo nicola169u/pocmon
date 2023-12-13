@@ -38,7 +38,7 @@ public class OptionController implements ActionListener {
 
     /**
      * Procédure héritée de ActionListener
-     * Permet de gérér les événements du menu
+     * Permet de gérér les événements des options
      * @param actionEvent l'événement
      */
     @Override

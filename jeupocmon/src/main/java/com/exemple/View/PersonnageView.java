@@ -34,24 +34,24 @@ public class PersonnageView extends JPanel {
 
     /**
      * Constructeur de PersonnageView en fonction du Personnage p
-     *
      * @param p
      */
     public PersonnageView(Personnage p,int sword) {
         this.p = p;
         this.sword = sword;
+        setOpaque(false);
         setPreferredSize(new Dimension(30, 30));
     }
 
 
     /**
      * procédure permettant d'afficher le Personnage
-     *
      * @param g
      */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        setOpaque(false);
         BufferedImage image = null;
         BufferedImage epee = null;
         if(p.estMonstre()) {
@@ -124,7 +124,6 @@ public class PersonnageView extends JPanel {
 
     /**
      * Procédure qui gère l'affichage de la vie (points de vie) du Personnage
-     *
      * @param g
      */
     public void gestionVie(Graphics g) {

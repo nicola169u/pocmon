@@ -78,6 +78,9 @@ public class OptionView extends JFrame {
 
     }
 
+    /**
+     * Procédure privée pour parametrer la vue.
+     */
     private void optionViewSettings(int width, int height)
     {
         setIconImage(new ImageIcon(ImageManager.getInstance().getImage("SettingsIcon")).getImage());

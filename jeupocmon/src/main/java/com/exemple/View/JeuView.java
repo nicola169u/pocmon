@@ -45,7 +45,6 @@ public class JeuView extends JFrame implements Runnable{
         this.sword = sword;
         int sizeLab = jeu.getSizeLab();
         this.viewmonstres = new ArrayList<>();
-
         labView = new LabyrintheView(sizeLab);
         Joueur joueur = jeu.getJoueur();
         ArrayList<Monstre> monstre = jeu.getMonstre();
@@ -55,7 +54,6 @@ public class JeuView extends JFrame implements Runnable{
         setTitle("Jeu Pocmon - Niveau " + jeu.getNiveau());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridLayout(sizeLab, sizeLab));
-
         for (int i = 0; i < sizeLab; i++) {
             for (int j = 0; j < sizeLab; j++) {
                     Case currentCase = jeu.getLab().getCase(j, i);

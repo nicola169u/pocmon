@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Enumeration;
 
+/**
+ * Classe représentant la vue du shop
+ */
 public class ShopView extends JFrame {
 
     /**
@@ -30,7 +33,7 @@ public class ShopView extends JFrame {
     private JPanel items = new JPanel();
 
     /**
-     * Le groupe de boutons pour les niveaux
+     * Le groupe de boutons pour les items
      */
     private ButtonGroup groupItems = new ButtonGroup();
 
@@ -48,6 +51,7 @@ public class ShopView extends JFrame {
      *
      * @param width
      * @param height
+     * @param m la vue du menu
      */
     public ShopView(int width, int height, MenuView m){
         menuView = m;
@@ -99,6 +103,10 @@ public class ShopView extends JFrame {
         pane.add(Box.createVerticalGlue());
         panel.setBorder(BorderFactory.createEmptyBorder(100,325,0,0));
     }
+
+    /**
+     * Procédure privée pour parametrer la vue.
+     */
     private void shopViewSettings(int width, int height)
     {
         setIconImage(new ImageIcon(ImageManager.getInstance().getImage("ShopIcon")).getImage());
@@ -125,14 +133,27 @@ public class ShopView extends JFrame {
         pane.add(panel);
     }
 
+
+    /**
+     * Fonction qui retourne le bouton "sauvegarder"
+     * @return le bouton sauvegarder
+     */
     public JButton getSave() {
         return save;
     }
 
+    /**
+     * Fonction qui retourne le bouton "quitter"
+     * @return le bouton sauvegarder
+     */
     public JButton getExit() {
         return exit;
     }
 
+    /**
+     * Fonction qui retourne le groupe de boutons pour le choix des items
+     * @return le groupe de boutons pour le choix des items
+     */
     public ButtonGroup getGroupItems() {
         return groupItems;
     }
