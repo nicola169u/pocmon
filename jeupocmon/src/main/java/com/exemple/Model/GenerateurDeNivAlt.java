@@ -7,13 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Classe permettant de créer des niveaux aléatoire
+ */
 public class GenerateurDeNivAlt {
-    private int colonnes , lignes , nbMurs; //dimension de notre niveau
+    /**
+     * Dimension de notre labyrinthe ainsi que le nombre de murs intérieur de notre labyrinthe
+     */
+    private int colonnes , lignes , nbMurs; //dimension de notre niveaureprésentant le labyrinthe du jeu
+
+    /**
+     * Les cases de notre niveau aléatoire
+     */
     private Case[][] niv; //notre niveau qui va être generé
+
+    /**
+     * Tableau permettant de vérifier que notre labyrinthe est faisable
+     */
     private boolean[][] visite; //tableau nous permettant de vérifier que le niveau est faisable
 
+    /**
+     * Flag permettant de savoir si notre labyrinthe est faisable ou non
+     */
     private boolean faisable;
 
+    /**
+     * Constructeur de niveau aléatoire en fonction du nombre de murs intérieur voulu
+     * @param murs nombre de murs intérieur à notre labyrinthe
+     */
     public GenerateurDeNivAlt(int murs){
         //pour nous facilité la tâche, on va limiter le nombre de murs max à 100
         this.nbMurs = (murs > 100) ? 100 : murs;
@@ -21,10 +42,13 @@ public class GenerateurDeNivAlt {
         this.lignes = 20;
         this.niv = new Case[colonnes][lignes];
         this.visite = new boolean[colonnes][lignes];
-        this.faisable = false;
     }
 
+    /**
+     * Procédure permettant de mettre en place les éléments commun à tout les labyrinthes
+     */
     public void init(){
+        this.faisable = false;
         //nous allons déjà placer les murs extérieus
         for(int colonne = 0 ; colonne < colonnes ; colonne++){
             niv[colonne][0] = new Mur(colonne,0);
@@ -50,6 +74,11 @@ public class GenerateurDeNivAlt {
         niv[colonnes-2][lignes-2] = new Tresor(colonnes - 2 , lignes - 2);
     }
 
+    /**
+     * Procédure permettant de savoir si notre labyrinthe est faisable (aucun mur ne nos gêne on pet arriver au trésor)
+     * @param col Coordonnées x permettant de navigués dans le labyrinthe
+     * @param ligne Coordonnées y permettant de navigués dans le labyrinthe
+     */
     //Fonction qui permet de savoir si notre niv est faisable (si on peut aller au trésor)
     public void solveur(int col , int ligne){
         if(faisable) return;
@@ -75,6 +104,9 @@ public class GenerateurDeNivAlt {
         solveur(1,1);
     }
 
+    /**
+     * Procédure permettant de créer un niveau complet et correcte
+     */
     public void nivCorrecte(){
         init();
         //On va maintenant, faire créer un niveau faisable
@@ -100,8 +132,12 @@ public class GenerateurDeNivAlt {
         ajouterPiege(1,random);
         ajouterTeleporteur(random);
         ajouterPotionForce(1,random);
-        //Une fois qu'on a notre niveau correcte, on va l'écrire dans un fichier
-        //Déjà on compte combien on a de niveau dispo pour les ajouter en plus
+    }
+
+    /**
+     * Procédure permettant d'écrire dans un fichier txt notre niveau correcte
+     */
+    void ecrireNiveauCorrecte(){
         int nbNivAct = getNbNiveau() + 1;
         try {
             String pathname = "jeupocmon//src//main//resources//niv" + nbNivAct + ".txt";
@@ -149,7 +185,9 @@ public class GenerateurDeNivAlt {
         }
     }
 
-    //Fonction qui retourne le nombre de niveau dans notre dossier ressources
+    /**
+     * Fonction qui retourne le nombre de niveau dans notre dossier ressources
+     */
     public int getNbNiveau() {
         File dossier = new File("jeupocmon/src/main/resources");
 
@@ -164,22 +202,11 @@ public class GenerateurDeNivAlt {
         return fichiers.length;
     }
 
-    public void printLab(){
-        for(int i=0; i<colonnes; i++){
-            for(int j=0; j<lignes; j++){
-                if(niv[i][j].estMur()) {
-                    System.out.print(" # ");
-                }else if(niv[i][j].estTresor()){
-                    System.out.print(" € ");
-                }
-                else{
-                    System.out.print("   ");
-                }
-            }
-            System.out.println("");
-        }
-    }
-
+    /**
+     * Procedure qui permettant d'ajouter des mines dans notre niveau
+     * @param nbMine nombre de mines voulu
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterMines(int nbMine , Random rand){
         int xMines = rand.nextInt(colonnes-2) + 1;
         int yMines = rand.nextInt(lignes-2) + 1;
@@ -192,6 +219,11 @@ public class GenerateurDeNivAlt {
         }
     }
 
+    /**
+     * Procedure qui permettant d'ajouter des piege dans notre niveau
+     * @param nbPiege nombre de pieges voulu
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterPiege(int nbPiege , Random rand){
         int xPiege = rand.nextInt(colonnes-2) + 1;
         int yPiege = rand.nextInt(lignes-2) + 1;
@@ -204,6 +236,11 @@ public class GenerateurDeNivAlt {
         }
     }
 
+    /**
+     * Procedure qui permettant d'ajouter des potion de force dans notre niveau
+     * @param nbPotionForce nombre de potion de force voulu
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterPotionForce(int nbPotionForce , Random rand){
         int xPotionForce = rand.nextInt(colonnes-2) + 1;
         int yPotionForce = rand.nextInt(lignes-2) + 1;
@@ -216,6 +253,11 @@ public class GenerateurDeNivAlt {
         }
     }
 
+    /**
+     * Procedure qui permettant d'ajouter des potion de vie dans notre niveau
+     * @param nbPotionVie nombre de potion de vie voulu
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterPotionVie(int nbPotionVie , Random rand){
         int xPotionVie = rand.nextInt(colonnes-2) + 1;
         int yPotionVie = rand.nextInt(lignes-2) + 1;
@@ -228,6 +270,10 @@ public class GenerateurDeNivAlt {
         }
     }
 
+    /**
+     * Procedure qui permettant d'ajouter 2 téléporteurs dans notre niveau
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterTeleporteur(Random rand){
         int xTp1 = rand.nextInt(colonnes-2) + 1;
         int yTp1 = rand.nextInt(lignes-2) + 1;
@@ -251,6 +297,11 @@ public class GenerateurDeNivAlt {
         }
     }
 
+    /**
+     * Procedure qui permettant d'ajouter des étoiles dans notre niveau
+     * @param nbEtoile nombre d'étoiles voulu
+     * @param rand notre générateur de nombre aléatoire
+     */
     public void ajouterEtoile(int nbEtoile , Random rand){
         int xEtoile = rand.nextInt(colonnes-2) + 1;
         int yEtoile = rand.nextInt(lignes-2) + 1;
