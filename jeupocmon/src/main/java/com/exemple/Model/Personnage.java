@@ -94,7 +94,7 @@ public abstract class Personnage {
                         JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case DROITE:
@@ -107,7 +107,7 @@ public abstract class Personnage {
                         JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case BAS:
@@ -120,7 +120,7 @@ public abstract class Personnage {
                         JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case HAUT:
@@ -133,7 +133,7 @@ public abstract class Personnage {
                         JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
         }

@@ -147,7 +147,7 @@ public class Jeu {
                 }
             } else {
                 fin("Vous avez terminé tous les niveaux !\nAu revoir !");
-                System.exit(0);
+                //System.exit(0);
             }
         }
 
@@ -156,7 +156,7 @@ public class Jeu {
         jeuView.rafraichirAffichage();
         if(joueur.isMort()){
             fin("Le joueur est mort..");
-            System.exit(0);
+            //System.exit(0);
         }
     }
 

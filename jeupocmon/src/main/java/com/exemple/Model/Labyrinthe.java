@@ -287,6 +287,8 @@ public class Labyrinthe {
     private void clearLab(){
         cases = new Case[size][size];
         teleporteurs.clear();
+        mines.clear();
+        pieges.clear();
     }
 
 
