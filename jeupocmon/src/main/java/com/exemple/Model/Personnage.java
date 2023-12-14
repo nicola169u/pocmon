@@ -4,6 +4,8 @@ package main.java.com.exemple.Model;
 import main.java.com.exemple.Model.Case.Case;
 import main.java.com.exemple.Tools.Direction;
 
+import javax.swing.*;
+
 /**
  * Classe représentant un Personnage
  */
@@ -89,10 +91,10 @@ public abstract class Personnage {
                     if(!caseToGo.estEau() || this.canSwim()) {
                         this.posX--;
                     }else{
-                        System.out.println("Vous devez d'abord apprendre à nager !");
+                        JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    System.out.println("On fonce droit dans un mur inconscient !!");
+                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case DROITE:
@@ -102,10 +104,10 @@ public abstract class Personnage {
                     if (!caseToGo.estEau() || this.canSwim()) {
                         this.posX++;
                     } else {
-                        System.out.println("Vous devez d'abord apprendre à nager !");
+                        JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    System.out.println("On fonce droit dans un mur inconscient !!");
+                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case BAS:
@@ -115,10 +117,10 @@ public abstract class Personnage {
                     if (!caseToGo.estEau() || this.canSwim()) {
                         this.posY++;
                     } else {
-                        System.out.println("Vous devez d'abord apprendre à nager !");
+                        JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    System.out.println("On fonce droit dans un mur inconscient !!");
+                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             case HAUT:
@@ -128,10 +130,10 @@ public abstract class Personnage {
                     if (!caseToGo.estEau() || this.canSwim()) {
                         this.posY--;
                     } else {
-                        System.out.println("Vous devez d'abord apprendre à nager !");
+                        JOptionPane.showMessageDialog(null, "Vous devez d'abord apprendre à nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else if(!this.estMonstre()){
-                    System.out.println("On fonce droit dans un mur inconscient !!");
+                    JOptionPane.showMessageDialog(null, "On fonce droit dans un mur inconscient !!", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
         }

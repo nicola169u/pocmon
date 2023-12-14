@@ -3,6 +3,7 @@ package main.java.com.exemple.Model;
 
 import main.java.com.exemple.Model.Case.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -392,7 +393,7 @@ public class Labyrinthe {
             if (this.swimmingLesson.getPosX() == joueur.getPosX() && joueur.getPosY() == this.swimmingLesson.getPosY()) {
                 if (System.currentTimeMillis() - tempsPasseSurSwimmingLesson >= DELAI_APPRENDRE_NAGER) {
                     joueur.setCanSwim(true);
-                    System.out.println("Vous pouvez à présent nager !");
+                    JOptionPane.showMessageDialog(null, "Vous pouvez à présent nager !", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 tempsPasseSurSwimmingLesson = System.currentTimeMillis(); // Le joueur a quitté la case, réinitialiser le temps

@@ -77,7 +77,7 @@ public class ShopView extends JFrame {
         pane.setLayout(new BoxLayout(pane,BoxLayout.Y_AXIS));
         JLabel scoreLabel = new JLabel("Score : " + menuView.getScore() + " GC");
         pane.add(scoreLabel);
-        scoreLabel.setBorder(BorderFactory.createEmptyBorder(0,500,0,0));
+        scoreLabel.setBorder(BorderFactory.createEmptyBorder(0,480,0,0));
         pane.add(panel);
         panel.setOpaque(false);
         addItems(group,items,pane);
