@@ -289,6 +289,8 @@ public class Labyrinthe {
         teleporteurs.clear();
         mines.clear();
         pieges.clear();
+        etoile = null;
+        vies.clear();
     }
 
 
